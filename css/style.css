@@ -1,0 +1,386 @@
+.h-scroll {
+	min-width: 1140px;
+	overflow-x: auto;
+	display: relative;
+}
+p.error {
+	text-align: center;
+	color: white;
+    z-index: 5;
+    background-color: red;
+    border-radius: 5px;
+	font-size: 15px;
+	font-family: roboto;
+    box-shadow: 0px 1px 5px grey;
+}
+td.red-border{
+	border: 2px solid red;
+} 
+.divspace {
+	margin-top: 50px;
+	display: inline-block;
+}
+.table-wrapper-2 {
+    display: block;
+    max-height: 500px;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+.modalbody-height {
+	max-height: 400px;
+	overflow-y: auto;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+    width: 11px;
+}
+/* Track */
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #007bff;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+   background: #007bff;
+}
+
+/*For Horizontal Loader*/
+/*<div id="fountainG">
+	<div id="fountainG_1" class="fountainG"></div>
+	<div id="fountainG_2" class="fountainG"></div>
+	<div id="fountainG_3" class="fountainG"></div>
+	<div id="fountainG_4" class="fountainG"></div>
+	<div id="fountainG_5" class="fountainG"></div>
+	<div id="fountainG_6" class="fountainG"></div>
+	<div id="fountainG_7" class="fountainG"></div>
+	<div id="fountainG_8" class="fountainG"></div>
+</div>*/
+#fountainG{
+	position:relative;
+	width:300px;
+	height:36px;
+	margin:auto;
+}
+
+.fountainG{
+	position:absolute;
+	top:0;
+	background-color:rgba(255,255,255,0.95);
+	width:36px;
+	height:36px;
+	animation-name:bounce_fountainG;
+		-o-animation-name:bounce_fountainG;
+		-ms-animation-name:bounce_fountainG;
+		-webkit-animation-name:bounce_fountainG;
+		-moz-animation-name:bounce_fountainG;
+	animation-duration:2.08s;
+		-o-animation-duration:2.08s;
+		-ms-animation-duration:2.08s;
+		-webkit-animation-duration:2.08s;
+		-moz-animation-duration:2.08s;
+	animation-iteration-count:infinite;
+		-o-animation-iteration-count:infinite;
+		-ms-animation-iteration-count:infinite;
+		-webkit-animation-iteration-count:infinite;
+		-moz-animation-iteration-count:infinite;
+	animation-direction:normal;
+		-o-animation-direction:normal;
+		-ms-animation-direction:normal;
+		-webkit-animation-direction:normal;
+		-moz-animation-direction:normal;
+	transform:scale(.3);
+		-o-transform:scale(.3);
+		-ms-transform:scale(.3);
+		-webkit-transform:scale(.3);
+		-moz-transform:scale(.3);
+	border-radius:24px;
+		-o-border-radius:24px;
+		-ms-border-radius:24px;
+		-webkit-border-radius:24px;
+		-moz-border-radius:24px;
+}
+
+#fountainG_1{
+	left:0;
+	animation-delay:0.83s;
+		-o-animation-delay:0.83s;
+		-ms-animation-delay:0.83s;
+		-webkit-animation-delay:0.83s;
+		-moz-animation-delay:0.83s;
+}
+
+#fountainG_2{
+	left:38px;
+	animation-delay:1.04s;
+		-o-animation-delay:1.04s;
+		-ms-animation-delay:1.04s;
+		-webkit-animation-delay:1.04s;
+		-moz-animation-delay:1.04s;
+}
+
+#fountainG_3{
+	left:75px;
+	animation-delay:1.25s;
+		-o-animation-delay:1.25s;
+		-ms-animation-delay:1.25s;
+		-webkit-animation-delay:1.25s;
+		-moz-animation-delay:1.25s;
+}
+
+#fountainG_4{
+	left:113px;
+	animation-delay:1.46s;
+		-o-animation-delay:1.46s;
+		-ms-animation-delay:1.46s;
+		-webkit-animation-delay:1.46s;
+		-moz-animation-delay:1.46s;
+}
+
+#fountainG_5{
+	left:150px;
+	animation-delay:1.66s;
+		-o-animation-delay:1.66s;
+		-ms-animation-delay:1.66s;
+		-webkit-animation-delay:1.66s;
+		-moz-animation-delay:1.66s;
+}
+
+#fountainG_6{
+	left:188px;
+	animation-delay:1.87s;
+		-o-animation-delay:1.87s;
+		-ms-animation-delay:1.87s;
+		-webkit-animation-delay:1.87s;
+		-moz-animation-delay:1.87s;
+}
+
+#fountainG_7{
+	left:225px;
+	animation-delay:2.08s;
+		-o-animation-delay:2.08s;
+		-ms-animation-delay:2.08s;
+		-webkit-animation-delay:2.08s;
+		-moz-animation-delay:2.08s;
+}
+
+#fountainG_8{
+	left:263px;
+	animation-delay:2.29s;
+		-o-animation-delay:2.29s;
+		-ms-animation-delay:2.29s;
+		-webkit-animation-delay:2.29s;
+		-moz-animation-delay:2.29s;
+}
+
+
+
+@keyframes bounce_fountainG{
+	0%{
+	transform:scale(1);
+		background-color:rgb(0,91,189);
+	}
+
+	100%{
+	transform:scale(.3);
+		background-color:rgb(255,255,255);
+	}
+}
+
+@-o-keyframes bounce_fountainG{
+	0%{
+	-o-transform:scale(1);
+		background-color:rgb(0,91,189);
+	}
+
+	100%{
+	-o-transform:scale(.3);
+		background-color:rgb(255,255,255);
+	}
+}
+
+@-ms-keyframes bounce_fountainG{
+	0%{
+	-ms-transform:scale(1);
+		background-color:rgb(0,91,189);
+	}
+
+	100%{
+	-ms-transform:scale(.3);
+		background-color:rgb(255,255,255);
+	}
+}
+
+@-webkit-keyframes bounce_fountainG{
+	0%{
+	-webkit-transform:scale(1);
+		background-color:rgb(0,91,189);
+	}
+
+	100%{
+	-webkit-transform:scale(.3);
+		background-color:rgb(255,255,255);
+	}
+}
+
+@-moz-keyframes bounce_fountainG{
+	0%{
+	-moz-transform:scale(1);
+		background-color:rgb(0,91,189);
+	}
+
+	100%{
+	-moz-transform:scale(.3);
+		background-color:rgb(255,255,255);
+	}
+}
+/*End of Horizontal Loader*/
+
+/*For Spinner Loader*/
+/*<div class="cssload-container">
+	<div class="cssload-speeding-wheel"></div>
+</div>*/
+
+.cssload-container {
+	width: 100%;
+	height: 49px;
+	text-align: center;
+}
+
+.cssload-speeding-wheel {
+	width: 49px;
+	height: 49px;
+	margin: 0 auto;
+	border: 3px solid rgb(151,166,168);
+	border-radius: 50%;
+	border-left-color: transparent;
+	border-right-color: transparent;
+	animation: cssload-spin 1100ms infinite linear;
+		-o-animation: cssload-spin 1100ms infinite linear;
+		-ms-animation: cssload-spin 1100ms infinite linear;
+		-webkit-animation: cssload-spin 1100ms infinite linear;
+		-moz-animation: cssload-spin 1100ms infinite linear;
+}
+
+
+
+@keyframes cssload-spin {
+	100%{ transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+@-o-keyframes cssload-spin {
+	100%{ -o-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+@-ms-keyframes cssload-spin {
+	100%{ -ms-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+@-webkit-keyframes cssload-spin {
+	100%{ -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+@-moz-keyframes cssload-spin {
+	100%{ -moz-transform: rotate(360deg); transform: rotate(360deg); }
+}
+/*End of Spinner Loader*/
+
+/*
+body.login{
+	background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url("../img/custom/backdrop.png"); 
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position:bottom;
+	height: 50vh;
+	background-size: cover;
+}
+*/
+body.login {
+    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url("../img/custom/backdrop.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+    overflow: hidden;
+}
+.switch label input[type=checkbox]:checked+.lever {
+    background-color: #dccfe2;
+}
+.switch label .lever {
+    content: "";
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 15px;
+    background-color: #818181;
+    border-radius: 15px;
+    margin-right: 10px;
+    -webkit-transition: background .3s ease;
+    transition: background .3s ease;
+    vertical-align: middle;
+    margin: 0 16px;
+}
+
+.switch, .switch * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+.switch label {
+    cursor: pointer;
+}
+.switch, .switch * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+}
+label {
+    cursor: default;
+}
+.switch, .switch * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+.switch label input[type=checkbox]:checked+.lever:after {
+    background-color: #a6c;
+    left: 24px;
+}
+.switch label .lever:after {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    width: 21px;
+    height: 21px;
+    background-color: #f1f1f1;
+    border-radius: 21px;
+    box-shadow: 0 1px 3px 1px rgba(0,0,0,.4);
+    left: -5px;
+    top: -3px;
+    -webkit-transition: left .3s ease,background .3s ease,box-shadow .1s ease;
+    transition: left .3s ease,background .3s ease,box-shadow .1s ease;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
