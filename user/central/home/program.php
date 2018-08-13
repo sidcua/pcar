@@ -38,7 +38,7 @@
 		</div>
 
 		<input type="hidden" id="programidholder" value="">
-
+		<input id="programholder" type="hidden" value="<?php echo $_GET['program']; ?>">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
@@ -138,8 +138,8 @@
 					<select class="form-control" id="slctprogram">
 					</select>
 				</div>
-				<div class="form-group p-3" id="report">
-				</div>
+				<!-- <div class="form-group p-3" id="report">
+				</div> -->
 				<div class="form-group" id="status">
 					<i class="fa fa-info" aria-hidden="true"></i>
 					<label for="slctstatus">Status for Input</label>

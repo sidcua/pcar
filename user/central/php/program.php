@@ -1,7 +1,7 @@
 <?php  
-	session_start();
-	include '../../../php/connect.php';
-	$action = $_POST['action'];
+    session_start();
+    include '../../../php/connect.php';
+    $action = $_POST['action'];
     function checkprogram_assign($programid){
         $region = $_SESSION['region'];
         $sql = mysql_query("SELECT assignID FROM assign INNER JOIN account ON assign.accID = account.accID WHERE programID = '$programid' AND regionID = '$region'");
@@ -13,213 +13,265 @@
         }
     }
     if($action == "programlist"){
+        $reportid = mysql_escape_string($_POST['program']);
         $output .= "";
 	   // level 1
-        $sql = mysql_query("SELECT * FROM program WHERE level = 1 AND state = 1 ORDER BY level ASC");
-        while($fetch = mysql_fetch_assoc($sql)){
-            $programid = $fetch['programID'];
-            $title = $fetch['title'];
-            $under = $fetch['under'];
-            $level = $fetch['level'];
-            $status = $fetch['status'];
-            $state = $fetch['state'];
-            if($status == 1){
-                $status = "Active";
-            }
-            else{
-                $status = "Inactive";
-            }
-            if($state == 1){
-                $state = "Active";
-            }
-            else{
-                $state = "Inactive";
-            }
-            $output .= '<tr ';
-            if($_SESSION['level'] == 2){
-                if(checkprogram_assign($programid) == false){
-                    $output .= 'class="red lighten-4" ';
+        $sql = mysql_query("SELECT * FROM program WHERE level = 1 AND state = 1 AND reportID = '$reportid' ORDER BY level ASC");
+        if(mysql_num_rows($sql) != 0){
+            while($fetch = mysql_fetch_assoc($sql)){
+                $programid = $fetch['programID'];
+                $title = $fetch['title'];
+                $under = $fetch['under'];
+                $level = $fetch['level'];
+                $status = $fetch['status'];
+                $state = $fetch['state'];
+                if($status == 1){
+                    $status = "Active";
                 }
-            }
-            $output .= 'data-id="'.$programid.'">
-            <td class="under" hidden>'.$under.'</td>
-            <td class="level" hidden>'.$level.'</td>
-            <td width="70%" class="title">'.$title.'</td>
-            <td class="status">'.$status.'</td>
-            <td class="state">'.$state.'</td>'; 
-            if($_SESSION['level'] < 2){
-                $output .= 
-                '<td><a><span data-toggle="modal" data-target="#modaleditprogram" class="badge badge-warning editprogram"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></span></a> <a><span data-toggle="modal" data-target="#modaldeleteprogram" class="badge badge-danger"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></i></i></span></a></td>';
-            }
-            $output .= '</tr>';
-            // level 2
-            $sql2 = mysql_query("SELECT * FROM program WHERE under = '$programid' AND state = 1");
-            if(mysql_num_rows($sql2) != 0){
-                while($fetch2 = mysql_fetch_assoc($sql2)){
-                    $programid = $fetch2['programID'];
-                    $title = $fetch2['title'];
-                    $under = $fetch2['under'];
-                    $level = $fetch2['level'];
-                    $status = $fetch2['status'];
-                    $state = $fetch2['state'];
-                    if($status == 1){
-                        $status = "Active";
+                else{
+                    $status = "Inactive";
+                }
+                if($state == 1){
+                    $state = "Active";
+                }
+                else{
+                    $state = "Inactive";
+                }
+                $output .= '<tr ';
+                if($_SESSION['level'] == 2){
+                    if(checkprogram_assign($programid) == false){
+                        $output .= 'class="red lighten-4" ';
                     }
-                    else{
-                        $status = "Inactive";
-                    }
-                    if($state == 1){
-                        $state = "Active";
-                    }
-                    else{
-                        $state = "Inactive";
-                    }
-                    $output .= '<tr ';
-                    if($_SESSION['level'] == 2){
-                        if(checkprogram_assign($programid) == false){
-                            $output .= 'class="red lighten-4" ';
+                }
+                $output .= 'data-id="'.$programid.'">
+                <td class="under" hidden>'.$under.'</td>
+                <td class="level" hidden>'.$level.'</td>
+                <td width="70%" class="title">'.$title.'</td>
+                <td class="status">'.$status.'</td>
+                <td class="state">'.$state.'</td>'; 
+                if($_SESSION['level'] < 2){
+                    $output .= 
+                    '<td><a><span data-toggle="modal" data-target="#modaleditprogram" class="badge badge-warning editprogram"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></span></a> <a><span data-toggle="modal" data-target="#modaldeleteprogram" class="badge badge-danger"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></i></i></span></a></td>';
+                }
+                $output .= '</tr>';
+                // level 2
+                $sql2 = mysql_query("SELECT * FROM program WHERE under = '$programid' AND state = 1 AND reportID = '$reportid'");
+                if(mysql_num_rows($sql2) != 0){
+                    while($fetch2 = mysql_fetch_assoc($sql2)){
+                        $programid = $fetch2['programID'];
+                        $title = $fetch2['title'];
+                        $under = $fetch2['under'];
+                        $level = $fetch2['level'];
+                        $status = $fetch2['status'];
+                        $state = $fetch2['state'];
+                        if($status == 1){
+                            $status = "Active";
                         }
-                    }
-                    $output .= 'data-id="'.$programid.'">
-                    <td class="under" hidden>'.$under.'</td>
-                    <td class="level" hidden>'.$level.'</td>
-                    <td width="70%" class="title" style="padding-left: 20px;">'.$title.'</td>
-                    <td class="status">'.$status.'</td>
-                    <td class="state">'.$state.'</td>'; 
-                    if($_SESSION['level'] < 2){
-                        $output .= 
-                        '<td><a><span data-toggle="modal" data-target="#modaleditprogram" class="badge badge-warning editprogram"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></span></a> <a><span data-toggle="modal" data-target="#modaldeleteprogram" class="badge badge-danger"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></i></i></span></a></td>';
-                    }
-                    $output .= '</tr>';
-                    // level 3
-                    $sql3 = mysql_query("SELECT * FROM program WHERE under = '$programid' AND state = 1");
-                    if(mysql_num_rows($sql3) != 0){
-                        while($fetch3 = mysql_fetch_assoc($sql3)){
-                            $programid = $fetch3['programID'];
-                            $title = $fetch3['title'];
-                            $under = $fetch3['under'];
-                            $level = $fetch3['level'];
-                            $status = $fetch3['status'];
-                            $state = $fetch3['state'];
-                            if($status == 1){
-                                $status = "Active";
+                        else{
+                            $status = "Inactive";
+                        }
+                        if($state == 1){
+                            $state = "Active";
+                        }
+                        else{
+                            $state = "Inactive";
+                        }
+                        $output .= '<tr ';
+                        if($_SESSION['level'] == 2){
+                            if(checkprogram_assign($programid) == false){
+                                $output .= 'class="red lighten-4" ';
                             }
-                            else{
-                                $status = "Inactive";
-                            }
-                            if($state == 1){
-                                $state = "Active";
-                            }
-                            else{
-                                $state = "Inactive";
-                            }
-                            $output .= '<tr ';
-                            if($_SESSION['level'] == 2){
-                                if(checkprogram_assign($programid) == false){
-                                    $output .= 'class="red lighten-4" ';
+                        }
+                        $output .= 'data-id="'.$programid.'">
+                        <td class="under" hidden>'.$under.'</td>
+                        <td class="level" hidden>'.$level.'</td>
+                        <td width="70%" class="title" style="padding-left: 20px;">'.$title.'</td>
+                        <td class="status">'.$status.'</td>
+                        <td class="state">'.$state.'</td>'; 
+                        if($_SESSION['level'] < 2){
+                            $output .= 
+                            '<td><a><span data-toggle="modal" data-target="#modaleditprogram" class="badge badge-warning editprogram"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></span></a> <a><span data-toggle="modal" data-target="#modaldeleteprogram" class="badge badge-danger"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></i></i></span></a></td>';
+                        }
+                        $output .= '</tr>';
+                        // level 3
+                        $sql3 = mysql_query("SELECT * FROM program WHERE under = '$programid' AND state = 1 AND reportID = '$reportid'");
+                        if(mysql_num_rows($sql3) != 0){
+                            while($fetch3 = mysql_fetch_assoc($sql3)){
+                                $programid = $fetch3['programID'];
+                                $title = $fetch3['title'];
+                                $under = $fetch3['under'];
+                                $level = $fetch3['level'];
+                                $status = $fetch3['status'];
+                                $state = $fetch3['state'];
+                                if($status == 1){
+                                    $status = "Active";
                                 }
-                            }
-                            $output .= 'data-id="'.$programid.'">
-                            <td class="under" hidden>'.$under.'</td>
-                            <td class="level" hidden>'.$level.'</td>
-                            <td width="70%" class="title" style="padding-left: 40px;">'.$title.'</td>
-                            <td class="status">'.$status.'</td>
-                            <td class="state">'.$state.'</td>'; 
-                            if($_SESSION['level'] < 2){
-                                $output .= 
-                                '<td><a><span data-toggle="modal" data-target="#modaleditprogram" class="badge badge-warning editprogram"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></span></a> <a><span data-toggle="modal" data-target="#modaldeleteprogram" class="badge badge-danger"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></i></i></span></a></td>';
-                            }
-                            $output .= '</tr>';
-                                // level 4
-                            $sql4 = mysql_query("SELECT * FROM program WHERE under = '$programid' AND state = 1");
-                            if(mysql_num_rows($sql4) != 0){
-                                while($fetch4 = mysql_fetch_assoc($sql4)){
-                                    $programid = $fetch4['programID'];
-                                    $title = $fetch4['title'];
-                                    $under = $fetch4['under'];
-                                    $level = $fetch4['level'];
-                                    $status = $fetch4['status'];
-                                    $state = $fetch4['state'];
-                                    if($status == 1){
-                                        $status = "Active";
+                                else{
+                                    $status = "Inactive";
+                                }
+                                if($state == 1){
+                                    $state = "Active";
+                                }
+                                else{
+                                    $state = "Inactive";
+                                }
+                                $output .= '<tr ';
+                                if($_SESSION['level'] == 2){
+                                    if(checkprogram_assign($programid) == false){
+                                        $output .= 'class="red lighten-4" ';
                                     }
-                                    else{
-                                        $status = "Inactive";
-                                    }
-                                    if($state == 1){
-                                        $state = "Active";
-                                    }
-                                    else{
-                                        $state = "Inactive";
-                                    }
-                                    $output .= '<tr ';
-                                    if($_SESSION['level'] == 2){
-                                        if(checkprogram_assign($programid) == false){
-                                            $output .= 'class="red lighten-4" ';
+                                }
+                                $output .= 'data-id="'.$programid.'">
+                                <td class="under" hidden>'.$under.'</td>
+                                <td class="level" hidden>'.$level.'</td>
+                                <td width="70%" class="title" style="padding-left: 40px;">'.$title.'</td>
+                                <td class="status">'.$status.'</td>
+                                <td class="state">'.$state.'</td>'; 
+                                if($_SESSION['level'] < 2){
+                                    $output .= 
+                                    '<td><a><span data-toggle="modal" data-target="#modaleditprogram" class="badge badge-warning editprogram"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></span></a> <a><span data-toggle="modal" data-target="#modaldeleteprogram" class="badge badge-danger"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></i></i></span></a></td>';
+                                }
+                                $output .= '</tr>';
+                                    // level 4
+                                $sql4 = mysql_query("SELECT * FROM program WHERE under = '$programid' AND state = 1 AND reportID = '$reportid'");
+                                if(mysql_num_rows($sql4) != 0){
+                                    while($fetch4 = mysql_fetch_assoc($sql4)){
+                                        $programid = $fetch4['programID'];
+                                        $title = $fetch4['title'];
+                                        $under = $fetch4['under'];
+                                        $level = $fetch4['level'];
+                                        $status = $fetch4['status'];
+                                        $state = $fetch4['state'];
+                                        if($status == 1){
+                                            $status = "Active";
                                         }
-                                    }
-                                    $output .= 'data-id="'.$programid.'">
-                                    <td class="under" hidden>'.$under.'</td>
-                                    <td class="level" hidden>'.$level.'</td>
-                                    <td width="70%" class="title" style="padding-left: 60px;">'.$title.'</
-                                    <td></td>
-                                    <td class="status">'.$status.'</td>
-                                    <td class="state">'.$state.'</td>'; 
-                                    if($_SESSION['level'] < 2){
-                                        $output .= 
-                                        '<td><a><span data-toggle="modal" data-target="#modaleditprogram" class="badge badge-warning editprogram"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></span></a> <a><span data-toggle="modal" data-target="#modaldeleteprogram" class="badge badge-danger"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></i></i></span></a></td>';
-                                    }
-                                    $output .= '</tr>';
-                                    $sql5 = mysql_query("SELECT * FROM program WHERE under = '$programid' AND state = 1");
-                                    if(mysql_num_rows($sql5) != 0){
-                                        while($fetch5 = mysql_fetch_assoc($sql5)){
-                                            $programid = $fetch5['programID'];
-                                            $title = $fetch5['title'];
-                                            $under = $fetch5['under'];
-                                            $level = $fetch5['level'];
-                                            $status = $fetch5['status'];
-                                            $state = $fetch5['state'];
-                                            if($status == 1){
-                                                $status = "Active";
+                                        else{
+                                            $status = "Inactive";
+                                        }
+                                        if($state == 1){
+                                            $state = "Active";
+                                        }
+                                        else{
+                                            $state = "Inactive";
+                                        }
+                                        $output .= '<tr ';
+                                        if($_SESSION['level'] == 2){
+                                            if(checkprogram_assign($programid) == false){
+                                                $output .= 'class="red lighten-4" ';
                                             }
-                                            else{
-                                                $status = "Inactive";
-                                            }
-                                            if($state == 1){
-                                                $state = "Active";
-                                            }
-                                            else{
-                                                $state = "Inactive";
-                                            }
-                                            $output .= '<tr ';
-                                            if($_SESSION['level'] == 2){
-                                                if(checkprogram_assign($programid) == false){
-                                                    $output .= 'class="red lighten-4" ';
+                                        }
+                                        $output .= 'data-id="'.$programid.'">
+                                        <td class="under" hidden>'.$under.'</td>
+                                        <td class="level" hidden>'.$level.'</td>
+                                        <td width="70%" class="title" style="padding-left: 60px;">'.$title.'</
+                                        <td></td>
+                                        <td class="status">'.$status.'</td>
+                                        <td class="state">'.$state.'</td>'; 
+                                        if($_SESSION['level'] < 2){
+                                            $output .= 
+                                            '<td><a><span data-toggle="modal" data-target="#modaleditprogram" class="badge badge-warning editprogram"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></span></a> <a><span data-toggle="modal" data-target="#modaldeleteprogram" class="badge badge-danger"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></i></i></span></a></td>';
+                                        }
+                                        $output .= '</tr>';
+                                        //level 5
+                                        $sql5 = mysql_query("SELECT * FROM program WHERE under = '$programid' AND state = 1 AND reportID = '$reportid'");
+                                        if(mysql_num_rows($sql5) != 0){
+                                            while($fetch5 = mysql_fetch_assoc($sql5)){
+                                                $programid = $fetch5['programID'];
+                                                $title = $fetch5['title'];
+                                                $under = $fetch5['under'];
+                                                $level = $fetch5['level'];
+                                                $status = $fetch5['status'];
+                                                $state = $fetch5['state'];
+                                                if($status == 1){
+                                                    $status = "Active";
+                                                }
+                                                else{
+                                                    $status = "Inactive";
+                                                }
+                                                if($state == 1){
+                                                    $state = "Active";
+                                                }
+                                                else{
+                                                    $state = "Inactive";
+                                                }
+                                                $output .= '<tr ';
+                                                if($_SESSION['level'] == 2){
+                                                    if(checkprogram_assign($programid) == false){
+                                                        $output .= 'class="red lighten-4" ';
+                                                    }
+                                                }
+                                                $output .= 'data-id="'.$programid.'">
+                                                <td class="under" hidden>'.$under.'</td>
+                                                <td class="level" hidden>'.$level.'</td>
+                                                <td width="70%" class="title" style="padding-left: 80px;">'.$title.'</td>
+                                                <td class="status">'.$status.'</td>
+                                                <td class="state">'.$state.'</td>'; 
+                                                if($_SESSION['level'] < 2){
+                                                    $output .= 
+                                                    '<td><a><span data-toggle="modal" data-target="#modaleditprogram" class="badge badge-warning editprogram"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></span></a> <a><span data-toggle="modal" data-target="#modaldeleteprogram" class="badge badge-danger"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></i></i></span></a></td>';
+                                                }
+                                                $output .= '</tr>';
+                                                //level 6
+                                                $sql6 = mysql_query("SELECT * FROM program WHERE under = '$programid' AND state = 1 AND reportID = '$reportid'");
+                                                if(mysql_num_rows($sql6) != 0){
+                                                    while($fetch6 = mysql_fetch_assoc($sql6)){
+                                                        $programid = $fetch6['programID'];
+                                                        $title = $fetch6['title'];
+                                                        $under = $fetch6['under'];
+                                                        $level = $fetch6['level'];
+                                                        $status = $fetch6['status'];
+                                                        $state = $fetch6['state'];
+                                                        if($status == 1){
+                                                            $status = "Active";
+                                                        }
+                                                        else{
+                                                            $status = "Inactive";
+                                                        }
+                                                        if($state == 1){
+                                                            $state = "Active";
+                                                        }
+                                                        else{
+                                                            $state = "Inactive";
+                                                        }
+                                                        $output .= '<tr ';
+                                                        if($_SESSION['level'] == 2){
+                                                            if(checkprogram_assign($programid) == false){
+                                                                $output .= 'class="red lighten-4" ';
+                                                            }
+                                                        }
+                                                        $output .= 'data-id="'.$programid.'">
+                                                        <td class="under" hidden>'.$under.'</td>
+                                                        <td class="level" hidden>'.$level.'</td>
+                                                        <td width="70%" class="title" style="padding-left: 100px;">'.$title.'</td>
+                                                        <td class="status">'.$status.'</td>
+                                                        <td class="state">'.$state.'</td>'; 
+                                                        if($_SESSION['level'] < 2){
+                                                            $output .= 
+                                                            '<td><a><span data-toggle="modal" data-target="#modaleditprogram" class="badge badge-warning editprogram"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></span></a> <a><span data-toggle="modal" data-target="#modaldeleteprogram" class="badge badge-danger"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></i></i></span></a></td>';
+                                                        }
+                                                        $output .= '</tr>';
+                                                    }
                                                 }
                                             }
-                                            $output .= 'data-id="'.$programid.'">
-                                            <td class="under" hidden>'.$under.'</td>
-                                            <td class="level" hidden>'.$level.'</td>
-                                            <td width="70%" class="title" style="padding-left: 80px;">'.$title.'</td>
-                                            <td class="status">'.$status.'</td>
-                                            <td class="state">'.$state.'</td>'; 
-                                            if($_SESSION['level'] < 2){
-                                                $output .= 
-                                                '<td><a><span data-toggle="modal" data-target="#modaleditprogram" class="badge badge-warning editprogram"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></span></a> <a><span data-toggle="modal" data-target="#modaldeleteprogram" class="badge badge-danger"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></i></i></span></a></td>';
-                                            }
-                                            $output .= '</tr>';
                                         }
                                     }
                                 }
                             }
-                        }
-                    }	
+                        }	
+                    }
                 }
             }
         }
-    echo json_encode($output);
+        else{
+            $output .= 
+			"<tr>
+				<td colspan='6'><p class='h1-responsive text-center'>No Programs/Projects found</p></td>
+			</tr>";
+        }
+        echo json_encode($output);
     }
 	if($action == "addprogram"){
+        $reportid = mysql_escape_string($_POST['reportid']);
 		$title = htmlentities(mysql_escape_string($_POST['title']));
 		$level = mysql_escape_string($_POST['level']);
 		$under = mysql_escape_string($_POST['under']);
@@ -240,12 +292,13 @@
 		if($under == ""){
 			$under = 0;
 		}
-		mysql_query("INSERT INTO program (title, level, under, status, state, percentage) VALUES ('$title', '$level', '$under', '$status', '$state', '0')");
+		mysql_query("INSERT INTO program (title, level, under, status, state, percentage, reportID) VALUES ('$title', '$level', '$under', '$status', '$state', '0', '$reportid')");
 	}
 	if($action == "selectprogram"){
+        $reportid = mysql_escape_string($_POST['reportid']);
 		$level = mysql_escape_string($_POST['level']) - 1;
 		$output = "";
-		$sql = mysql_query("SELECT programID, title FROM program WHERE level = '$level'");
+		$sql = mysql_query("SELECT programID, title FROM program WHERE level = '$level' AND reportID = '$reportid'");
 		if(mysql_num_rows($sql) != 0){
 			while($fetch = mysql_fetch_assoc($sql)){
 				$programid = $fetch['programID'];
@@ -292,6 +345,7 @@
 		}
 	}
 	if($action == "editselectprogram"){
+        $reportid = mysql_escape_string($_POST['reportid']);
 		$level = mysql_escape_string($_POST['level']) - 1;
 		$output = "";
 		$sql = mysql_query("SELECT programID, title FROM program WHERE level = '$level'");
@@ -365,21 +419,17 @@
 		}
 		echo json_encode($output);
     }
-    if($action == "initreport"){
-        $sql = mysql_query("SELECT * FROM report WHERE status = 1");
-        $output = "";
-        if(mysql_num_rows($sql) != 0){
-            while($fetch = mysql_fetch_assoc($sql)){
-                $reportid = $fetch['reportID'];
-                $report = $fetch['report'];
-                $output .= '<div class="custom-control custom-checkbox custom-control-inline"><input type="checkbox" class="custom-control-input" id="'.$reportid.'">
-                <label class="custom-control-label" for="'.$reportid.'">'.$report.'</label></div>';
-            }
-        }
-        echo json_encode($output);
-    }
-    if($action == "initeditreport"){
-        $programid = mysql_escape_strings($_POST['programid']);
-        $output = "";
-    }
+    // if($action == "initreport"){
+    //     $sql = mysql_query("SELECT * FROM report WHERE status = 1");
+    //     $output = "";
+    //     if(mysql_num_rows($sql) != 0){
+    //         while($fetch = mysql_fetch_assoc($sql)){
+    //             $reportid = $fetch['reportID'];
+    //             $report = $fetch['report'];
+    //             $output .= '<div class="custom-control custom-checkbox custom-control-inline"><input type="checkbox" class="custom-control-input" id="'.$reportid.'">
+    //             <label class="custom-control-label" for="'.$reportid.'">'.$report.'</label></div>';
+    //         }
+    //     }
+    //     echo json_encode($output);
+    // }
 ?>

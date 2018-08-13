@@ -10,46 +10,13 @@
                 <li class="nav-item">
                     <a class="nav-link waves-effect waves-light" href="."><i class="fa fa-home" aria-hidden="true"></i> Home<span class="sr-only"></span></a>
                 </li>
-                <?php
-                    if($_SESSION['level'] <= 2){
-                        echo 
-                        '<li class="nav-item">
-                            <a class="nav-link waves-effect waves-light" href="./account.php"><i class="fa fa-users" aria-hidden="true"></i> Accounts<span class="sr-only"></span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link waves-effect waves-light" href="./program.php"><i class="fa fa-book" aria-hidden="true"></i> Programs/Projects<span class="sr-only"></span></a>
-                        </li>';
-                        if($_SESSION['level'] <= 1){
-                            echo 
-                            '<li class="nav-item">
-                                <a class="nav-link waves-effect waves-light" href="./weight.php"><i class="fa fa-pie-chart" aria-hidden="true"></i> Weight Percentage<span class="sr-only"></span></a>
-                            </li>';
-                        }
-                    }
-                    else{
-                        if($_SESSION['level'] != 4){
-                            echo 
-                            '
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PCAR</a>    
-                                <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="./target.php"><i class="fa fa-calendar-o" aria-hidden="true"></i> Targets<span class="sr-only"></span></a>
-                                    <a class="dropdown-item" href="./accomplishment.php"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Accomplishment<span class="sr-only"></span></a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">IPCR</a>    
-                                <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="#!"><i class="fa fa-calendar-o" aria-hidden="true"></i> Targets<span class="sr-only"></span></a>
-                                    <a class="dropdown-item" href="#!.php"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Accomplishment<span class="sr-only"></span></a>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link waves-effect waves-light" href="./milestone.php"><i class="fa fa-archive" aria-hidden="true"></i> Milestone<span class="sr-only"></span></a>
-                            </li>';
-                        }
-                    }
-                ?>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-book" aria-hidden="true"></i> Programs/Projects</a>  
+                    <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink"> 
+                        <a class="dropdown-item" href="./program.php?program=1">PCAR</a>
+                        <a class="dropdown-item" href="./program.php?program=2">IPCR</a>
+                        <a class="dropdown-item" href="./program.php?program=3">DBM</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-desktop" aria-hidden="true"></i> Reports</a>  
                     <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink"> 
