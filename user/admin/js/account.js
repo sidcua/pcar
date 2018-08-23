@@ -183,10 +183,11 @@ function editaccount(){
 }
 function loadprogram(level){
 	var accid = document.getElementById("accidholder");
+	var reportid = $("#slctreport").val();
 	$.ajax({
 		url: url(),
 		method: "post",
-		data: {accid: accid.value, level: level, action: "loadprogram"},
+		data: {reportid: reportid, accid: accid.value, level: level, action: "loadprogram"},
 		beforeSend: function(){
 			$("#listavailableprogram").html("");
 			$("#listassignedprogram").html("");
@@ -210,8 +211,7 @@ function loadmodalassign(){
 		$("#assignheader").html('<b>Name: ' + name + '</b>');
 	});
 	$("#modalassignprogram").on('show.bs.modal', function(){
-		loadtab();
-		loadprogram(1);
+		loadreport();
 	});
 }
 function assign(programid){
@@ -388,4 +388,26 @@ function unlockaccount(){
             fetchdata();
         }
     })
+}
+function loadreport(){
+	$.ajax({
+		url: url(),
+		method: "post",
+		data: {action: "initreport"},
+		success: function(data){
+			data = $.parseJSON(data);
+			$("#slctreport").html(data);
+			$("#programholder").val(1);
+		},
+		complete: function(){
+			loadtab();
+			loadprogram(1);
+		}
+	})
+}
+function changereport(reportid, report){
+	$(".dropdownbtn").text(report);
+	loadprogram(1);
+	$("#tablevel>li>.active").removeClass("active");
+	$("[onclick='loadprogram(1)']").addClass("active");
 }

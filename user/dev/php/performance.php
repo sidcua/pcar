@@ -13,7 +13,8 @@
 	if($action == "change"){
         $accid = $_SESSION['accID'];
 		$year = mysql_escape_string($_POST['year']);
-        $region = mysql_escape_string($_POST['region']);
+		$region = mysql_escape_string($_POST['region']);
+		$report = mysql_escape_string($_POST['report']);
         if($region != 0){
             $sub = " AND regionID = ".$region;
         }
@@ -47,7 +48,7 @@
             $sql = mysql_query("SELECT assignID, program.programID AS programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE assign.accID = '$accid' AND level = 1 AND state = 1 ORDER BY title ASC");
         }
         else{
-            $sql = mysql_query("SELECT programID, title, status FROM program WHERE level = 1 AND state = 1 ORDER BY title ASC");
+            $sql = mysql_query("SELECT programID, title, status FROM program WHERE level = 1 AND state = 1 AND reportID = '$report' ORDER BY title ASC");
         }
 		while($fetch = mysql_fetch_assoc($sql)){
 			$programid = $fetch['programID'];
@@ -120,7 +121,7 @@
                 $sql2 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' ORDER BY title ASC");
             }
             else{
-                $sql2 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
+                $sql2 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 AND reportID = '$report' ORDER BY title ASC");
             }
 			if(mysql_num_rows($sql2) != 0){
 				while($fetch2 = mysql_fetch_assoc($sql2)){
@@ -194,7 +195,7 @@
                         $sql3 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' ORDER BY title ASC");
                     }
                     else{
-                        $sql3 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
+                        $sql3 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 AND reportID = '$report' ORDER BY title ASC");
                     }
 					if(mysql_num_rows($sql3) != 0){
 						while($fetch3 = mysql_fetch_assoc($sql3)){
@@ -268,7 +269,7 @@
                                 $sql4 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' ORDER BY title ASC");
                             }
                             else{
-                                $sql4 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
+                                $sql4 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 AND reportID = '$report' ORDER BY title ASC");
                             }
 							if(mysql_num_rows($sql4) != 0){
 								while($fetch4 = mysql_fetch_assoc($sql4)){
@@ -342,7 +343,7 @@
                                         $sql5 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' ORDER BY title ASC");
                                     }
                                     else{
-                                        $sql5 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
+                                        $sql5 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 AND reportID = '$report' ORDER BY title ASC");
                                     }
 									if(mysql_num_rows($sql5) != 0){
 										while($fetch5 = mysql_fetch_assoc($sql5)){
@@ -411,6 +412,82 @@
 												}
 											}
 											$output .= '</tr>';
+											//level 6
+											if($_SESSION['level'] == 3){
+												$sql6 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' ORDER BY title ASC");
+											}
+											else{
+												$sql6 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 AND reportID = '$report' ORDER BY title ASC");
+											}
+											if(mysql_num_rows($sql6) != 0){
+												while($fetch6 = mysql_fetch_assoc($sql6)){
+													$programid = $fetch6['programID'];
+													$title = $fetch6['title'];
+													$status = $fetch6['status'];
+													$output .= 
+													'<tr>
+														<td style="padding-left: 120px;">'.$title.'</td>';
+													if($status == 0){
+														$output .= '<td colspan="12" class="grey lighten-2"></td>';
+													}
+													else{
+														$limit = 3;
+														for ($i = 1; $i <= 12 ; $i = $i + 3) { 
+															if($_SESSION['level'] == 3){
+																$query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month = '$i' AND year = '$year' AND program.programID = '$programid' AND assign.accID = '$accid'");
+															}
+															else{
+																$query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month = '$i' AND year = '$year' AND program.programID = '$programid'".$sub);    
+															}
+															$get = mysql_fetch_assoc($query);
+															$target = $get['target'];
+															$accomplish = $get['accomplish'];
+															if($target != 0 && $accomplish != 0){	
+																$remark = round((((($accomplish - $target)/$target)*100)+100), 1);
+																if($remark >= 130){
+																	$rating = 5;
+																}
+																else if($remark <= 129 && $remark >= 115){
+																	$rating = 4;
+																}
+																else if($remark <= 114 && $remark >= 100){
+																	$rating = 3;
+																}
+																else if($remark <= 99 && $remark >= 85){
+																	$rating = 2;
+																}
+																else{
+																	$rating = 1;
+																}
+																if($rating >= 4.8){
+																	$adj = "Outstanding";
+																}
+																else if($rating <= 4.79 && $rating >= 4){
+																	$adj = "Very Satisfactory";
+																}
+																else if($rating <= 3.99 && $rating >= 3){
+																	$adj = "Satisfactory";
+																}
+																else if($rating <= 2.99 && $rating >= 0){
+																	$adj = "Unsatisfactory";
+																}
+																$output .= 
+																	'<td class="text-center">'.$remark.'</td>
+																	<td class="text-center">'.$rating.'</td>
+																	<td class="text-center">'.$adj.'</td>';
+															}
+															else{
+																$output .=
+																'<td class="text-center">-</td>
+																<td class="text-center">-</td>
+																<td class="text-center">-</td>';
+															}
+															$limit = $limit + 3;
+														}
+													}
+													$output .= '</tr>';
+												}
+											}
 										}
 									}
 								}
@@ -438,5 +515,15 @@
             $obj['level'] = false;
         }
         echo json_encode($obj);
-    }
+	}
+	if($action == "initreport"){
+		$sql = mysql_query("SELECT * FROM report WHERE status = 1");
+		$output = "";
+		while($fetch = mysql_fetch_assoc($sql)){
+			$reportid = $fetch['reportID'];
+			$report = $fetch['report'];
+			$output .= '<option value="'.$reportid.'">'.$report.'</option>';
+		}
+		echo json_encode($output);
+	}
 ?>

@@ -12,7 +12,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <meta name="description" content="">
 	    <meta name="author" content="">
-		<title>Accounts</title>
+		<title>Milestone</title>
 		<link rel="icon" href="../../../img/custom/CHED LOGO WITH WHITE BACKGROUND.png" type="image/x-icon" />
 		<link rel="stylesheet" type="text/css" href="../../../css/bootstrap.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/mdb.css" />
@@ -77,7 +77,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="divspace"></div>
+		<div class="divspace" style="margin-bottom: 100px;"></div>
 		<div>
 			<?php include '../view/footer.php'; ?>
 		</div>

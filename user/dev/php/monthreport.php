@@ -908,6 +908,53 @@
                                                         $output .= '<td class="text-center">'.$accomplish.'</td>';
                                                     }
                                                     $output .= '</tr>';
+                                                    //level 6
+                                                    $sql6 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
+                                                    if(mysql_num_rows($sql6) != 0){
+                                                        while($fetch6 = mysql_fetch_assoc($sql6)){
+                                                            $programid = $fetch6['programID'];
+                                                            $title = $fetch6['title'];
+                                                            $status = $fetch6['status'];
+                                                            $output .= 
+                                                            '<tr>
+                                                                <td style="padding-left: 100px;">'.$title.'</td>';
+                                                            if($status == 0){
+                                                                $output .= '<td colspan="4" class="grey lighten-2"></td>';
+                                                            }
+                                                            else{
+                                                                $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month <= 3 AND year = '$year' AND program.programID = '$programid'");
+                                                                $get = mysql_fetch_assoc($query);
+                                                                $target = $get['target'];
+                                                                if($target == 0){
+                                                                    $output .= '<td class="text-center">-</td>';
+                                                                }
+                                                                else{
+                                                                    $output .= '<td class="text-center">'.$target.'</td>';;
+                                                                }
+                                                                $accomplish = $get['accomplish'];
+                                                                if($accomplish == 0){
+                                                                    $output .= '<td class="text-center">-</td>';
+                                                                }
+                                                                else{
+                                                                    $output .= '<td class="text-center">'.$accomplish.'</td>';
+                                                                }
+                                                                if($target == 0){
+                                                                    $output .= '<td class="text-center">-</td>';
+                                                                }
+                                                                else{
+                                                                    $output .= '<td class="text-center">'.$target.'</td>';;
+                                                                }
+                                                                $accomplish = $get['accomplish'];
+                                                                if($accomplish == 0){
+                                                                    $output .= '<td class="text-center">-</td>';
+                                                                }
+                                                                else{
+                                                                    $output .= '<td class="text-center">'.$accomplish.'</td>';
+                                                                }
+                                                                $output .= '</tr>';
+                                                            }
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }

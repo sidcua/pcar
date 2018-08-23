@@ -43,7 +43,7 @@ function inityear(){
             $("#slctyear").show();
         },
         complete: function(){
-            mode("month");
+            mode($("#slctmode").val());
         }
     })
 }

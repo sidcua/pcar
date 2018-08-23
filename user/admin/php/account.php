@@ -179,12 +179,13 @@
 		$obj['assignedprogram'] = "";
 		$accid = mysql_escape_string($_POST['accid']);
 		$level = mysql_escape_string($_POST['level']);
+		$reportid = mysql_escape_string($_POST['reportid']);
 		if($level > 1){
-			$sql = mysql_query("SELECT assign.programID, title FROM assign INNER JOIN program ON assign.programID = program.programID WHERE assign.accID = '$accid' AND program.level = '$level' - 1");
+			$sql = mysql_query("SELECT assign.programID, title FROM assign INNER JOIN program ON assign.programID = program.programID WHERE assign.accID = '$accid' AND program.level = '$level' - 1 AND reportID = '$reportid'");
 			while($fetch = mysql_fetch_assoc($sql)){
 				$programid = $fetch['programID'];
                 $title = $fetch['title'];
-				$sql2 = mysql_query("SELECT programID, title FROM program WHERE programID != ALL (SELECT programID FROM assign WHERE accID = '$accid') AND under = '$programid' AND state = 1");
+				$sql2 = mysql_query("SELECT programID, title FROM program WHERE programID != ALL (SELECT programID FROM assign WHERE accID = '$accid') AND under = '$programid' AND state = 1 AND reportID = '$reportid'");
                 if(mysql_num_rows($sql2) != 0){
                     $obj['availableprogram'] .= '<div><i class="fa fa-circle" aria-hidden="true"></i> '.$title.'</div>';
                     while($fetch2 = mysql_fetch_assoc($sql2)){
@@ -196,7 +197,7 @@
 			}
 		}
 		else{
-			$sql = mysql_query("SELECT programID, title FROM program WHERE programID != ALL (SELECT programID FROM assign WHERE accID = '$accid') AND state = 1 AND level = '$level'");
+			$sql = mysql_query("SELECT programID, title FROM program WHERE programID != ALL (SELECT programID FROM assign WHERE accID = '$accid') AND state = 1 AND level = '$level' AND reportID = '$reportid'");
 			while($fetch = mysql_fetch_assoc($sql)){
 				$programid = $fetch['programID'];
 				$title = $fetch['title'];
@@ -205,11 +206,11 @@
 			}
 		}
         if($level > 1){
-            $sql = mysql_query("SELECT assign.programID, title FROM assign INNER JOIN program ON assign.programID = program.programID WHERE assign.accID = '$accid' AND program.level = '$level' - 1");
+            $sql = mysql_query("SELECT assign.programID, title FROM assign INNER JOIN program ON assign.programID = program.programID WHERE assign.accID = '$accid' AND program.level = '$level' - 1 AND reportID = '$reportid'");
 			while($fetch = mysql_fetch_assoc($sql)){
 				$programid = $fetch['programID'];
                 $title = $fetch['title'];
-				$sql2 = mysql_query("SELECT programID, title FROM program WHERE programID = ANY (SELECT programID FROM assign WHERE accID = '$accid') AND under = '$programid' AND state = 1");
+				$sql2 = mysql_query("SELECT programID, title FROM program WHERE programID = ANY (SELECT programID FROM assign WHERE accID = '$accid') AND under = '$programid' AND state = 1 AND reportID = '$reportid'");
                 if(mysql_num_rows($sql2) != 0){
                     $obj['assignedprogram'] .= '<div><i class="fa fa-circle red-text" aria-hidden="true"></i> '.$title.'</div>';
                     while($fetch2 = mysql_fetch_assoc($sql2)){
@@ -221,7 +222,7 @@
 			}
         }
         else{
-            $sql = mysql_query("SELECT assign.programID, title FROM assign INNER JOIN program ON assign.programID = program.programID WHERE assign.accID = '$accid' AND level = '$level'");
+            $sql = mysql_query("SELECT assign.programID, title FROM assign INNER JOIN program ON assign.programID = program.programID WHERE assign.accID = '$accid' AND level = '$level' AND reportID = '$reportid'");
             while($fetch = mysql_fetch_assoc($sql)){
                 $programid = $fetch['programID'];
                 $title = $fetch['title'];
@@ -407,5 +408,14 @@
     if($action == "unlockaccount"){
         $accid = mysql_escape_string($_POST['accid']);
         mysql_query("UPDATE account SET status = 1 WHERE accID = '$accid'");
-    }
+	}
+	if($action == "initreport"){
+		$sql = mysql_query("SELECT * FROM report WHERE status = 1");
+		while($fetch = mysql_fetch_assoc($sql)){
+			$reportid = $fetch['reportID'];
+			$report = $fetch['report'];
+			$output .= '<option value="'.$reportid.'">'.$report.'</option>';
+		}
+		echo json_encode($output);
+	}
 ?>

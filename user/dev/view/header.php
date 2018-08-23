@@ -16,8 +16,12 @@
                         '<li class="nav-item">
                             <a class="nav-link waves-effect waves-light" href="./account.php"><i class="fa fa-users" aria-hidden="true"></i> Accounts<span class="sr-only"></span></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link waves-effect waves-light" href="./program.php"><i class="fa fa-book" aria-hidden="true"></i> Programs/Projects<span class="sr-only"></span></a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-book" aria-hidden="true"></i> Programs/Projects</a>  
+                            <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink"> 
+                                <a class="dropdown-item" href="./program.php?program=1"><i class="fa fa-circle" aria-hidden="true"></i> PCAR</a>
+                                <a class="dropdown-item" href="./program.php?program=2"><i class="fa fa-circle" aria-hidden="true"></i> IPCR</a>
+                                <a class="dropdown-item" href="./program.php?program=3"><i class="fa fa-circle" aria-hidden="true"></i> DBM</a>
                         </li>';
                         if($_SESSION['level'] <= 1){
                             echo 

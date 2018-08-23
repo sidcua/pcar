@@ -3,7 +3,7 @@
 	include '../../../php/connect.php';
 	$action = $_POST['action'];
 
-	function arrangeprogram($mode, $year, $region){
+	function arrangeprogram($mode, $year, $region, $reportid){
 	$output .= "";
     $accid = $_SESSION['accID'];
     if($region != 0){
@@ -11,7 +11,7 @@
     }
 	// level 1
     if($_SESSION['level'] == 3){
-        $sql = mysql_query("SELECT assignID, program.programID AS programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE assign.accID = '$accid' AND level = 1 AND state = 1 ORDER BY title ASC");
+        $sql = mysql_query("SELECT assignID, program.programID AS programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE assign.accID = '$accid' AND level = 1 AND state = 1 AND reportID = '$reportid' ORDER BY title ASC");
     }
 	else{
         $sql = mysql_query("SELECT programID, title, status FROM program WHERE level = 1 AND state = 1 ORDER BY title ASC");
@@ -90,7 +90,7 @@
 		$output .= '</tr>';
 		// level 2
         if($_SESSION['level'] == 3){
-            $sql2 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' ORDER BY title ASC");
+            $sql2 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' AND reportID = '$reportid' ORDER BY title ASC");
         }
         else{
             $sql2 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
@@ -170,7 +170,7 @@
 				$output .= '</tr>';
 				// level 3
 				if($_SESSION['level'] == 3){
-                    $sql3 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' ORDER BY title ASC");
+                    $sql3 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' AND reportID = '$reportid' ORDER BY title ASC");
                 }
                 else{
                     $sql3 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
@@ -250,7 +250,7 @@
 						$output .= '</tr>';
 						// level 4
 						if($_SESSION['level'] == 3){
-                            $sql4 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' ORDER BY title ASC");
+                            $sql4 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' AND reportID = '$reportid' ORDER BY title ASC");
                         }
                         else{
                             $sql4 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
@@ -330,7 +330,7 @@
 								$output .= '</tr>';
 //                                level 5
 								if($_SESSION['level'] == 3){
-                                    $sql5 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' ORDER BY title ASC");
+                                    $sql5 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' AND reportID = '$reportid' ORDER BY title ASC");
                                 }
                                 else{
                                     $sql5 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
@@ -422,7 +422,8 @@
 	if($action == "changemode"){
 		$mode = mysql_escape_string($_POST['mode']);
 		$year = mysql_escape_string($_POST['year']);
-        $region = mysql_escape_string($_POST['region']);
+		$region = mysql_escape_string($_POST['region']);
+		$reportid = mysql_escape_string($_POST['reportid']);
 		$output = "";
 		if($mode == "monthly"){
 			$output .= 
@@ -497,7 +498,7 @@
 							<td class="bg-danger">T</td>
 							<td class="bg-success">A</td>
 						</tr>';
-			$output .= arrangeprogram($mode, $year, $region);
+			$output .= arrangeprogram($mode, $year, $region, $reportid);
 			$output .= '</tbody>';
 		}
 		echo json_encode($output);
@@ -524,5 +525,14 @@
             $obj['level'] = false;
         }
         echo json_encode($obj);
-    }
+	}
+	if($action == "initreport"){
+		$sql = mysql_query("SELECT * FROM report WHERE status = 1");
+		while($fetch = mysql_fetch_assoc($sql)){
+			$reportid = $fetch['reportID'];
+			$report = $fetch['report'];
+			$output .= '<option value="'.$reportid.'">'.$report.'</option>';
+		}
+		echo json_encode($output);
+	}
 ?>

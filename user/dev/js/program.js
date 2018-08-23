@@ -10,10 +10,11 @@ function url(){
 	return "../php/program.php";
 }
 function fetchdata(){
+	var program = $("#programholder").val();
 	$.ajax({
 		url: url(),
 		method: "post",
-		data: {action: "programlist"},
+		data: {program: program, action: "programlist"},
 		beforeSend: function(){
 			$("#program").html("");
 			$(".cssload-container").show();
@@ -34,10 +35,11 @@ function selectprogram(){
         $("#slctstatus").val("Inactive");
 	}
 	else{
+		var reportid = $("#programholder").val();
 		$.ajax({
 			url: url(),
 			method: "post",
-			data: {level: level.value, action: "selectprogram"},
+			data: {reportid: reportid, level: level.value, action: "selectprogram"},
             beforeSend: function(){
                 $("#slctstatus").val("Active");
                 $("#status").show()
@@ -56,10 +58,11 @@ function editselectprogram(level, under, bool){
         $("#editslctstatus").val("Inactive");
 	}
 	else{
+		var reportid = $("#programholder").val();
 		$.ajax({
 			url: url(),
 			method: "post",
-			data: {level: level, action: "editselectprogram"},
+			data: {reportid: reportid, level: level, action: "editselectprogram"},
             beforeSend: function(){
                 $("#editslctstatus").val("Active");
                 $("#editstatus").show();
@@ -134,17 +137,18 @@ function addprogram(){
 	else if(!title.value.trim()){
 		$("#errormsgaddprogram").html("<strong>Please enter the title</strong");
 	}
-    else if(level.value > 5){
-        $("#errormsgaddprogram").html("<strong>Maximum level is 5</strong");
+    else if(level.value > 6){
+        $("#errormsgaddprogram").html("<strong>Maximum level is 6</strong");
     }
 	else if(!level.value.trim()){
 		$("#errormsgaddprogram").html("<strong>Please enter the level</strong");
 	}
 	else{
+		var reportid = $("#programholder").val();
 		$.ajax({
 			url: url(),
 			method: "post",
-			data: {title: title.value, level: level.value, under: under.value, status: status.value, state: state.value, action: "addprogram"},
+			data: {reportid: reportid, title: title.value, level: level.value, under: under.value, status: status.value, state: state.value, action: "addprogram"},
 			beforeSend: function(){
 			},
 			success: function(data){
@@ -230,3 +234,25 @@ function searchprogram(event){
         }
     }
 }
+// function initreport(){
+// 	$.ajax({
+// 		url: url(),
+// 		method: "post",
+// 		data: {action: "initreport"},
+// 		success: function(data){
+// 			data = $.parseJSON(data);
+// 			$("#report").html(data);
+// 		}
+// 	})
+// }
+// function initeditreport(programid){
+// 	$.ajax({
+// 		url: url(),
+// 		method: "post",
+// 		data: {programid: programid, action: "initeditreport"},
+// 		success: function(data){
+// 			data = $.parseJSON(data);
+// 			$("#editreport").html(data);
+// 		}
+// 	})
+// }

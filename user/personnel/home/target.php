@@ -28,7 +28,19 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="jumbotron grey lighten-5">
-					    <h1 class="h1-responsive">Targets</h1>
+					    <h1 class="h1-responsive">Targets 
+						<?php
+							if($_GET['program'] == 1){
+								echo "(PCAR)";
+							}
+							else if($_GET['program'] == 2){
+								echo "(IPCR)";
+							}
+							else if($_GET['program'] == 3){
+								echo "(DBM)";
+							}
+						?>
+						</h1>
 					    <hr class="my-2">
 					    <p><i>Target Record</i></p>
 					</div>
@@ -52,6 +64,7 @@
 			</div>
             <div class="row" id="txtnotice">
             </div>
+			<input type="hidden" id="programholder" value="<?php echo $_GET['program']; ?>">
 			<div class="row">
 				<table class="table table-bordered table-striped">
 					<thead class="mdb-color darken-3">
@@ -74,6 +87,7 @@
 				</div>
 			</div>
 		</div>
+		<div class="divspace" style="margin-bottom: 100px;"></div>
 		<div>
 			<?php include '../view/footer.php'; ?>
 		</div>

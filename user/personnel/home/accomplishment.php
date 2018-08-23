@@ -13,7 +13,7 @@
 	    <meta name="description" content="">
 	    <meta name="author" content="">
 		<title>Accomplishment</title>
-		<link rel="icon" href="../img/custom/CHED LOGO WITH WHITE BACKGROUND.png" type="image/x-icon" />
+		<link rel="icon" href="../../../img/custom/CHED LOGO WITH WHITE BACKGROUND.png" type="image/x-icon" />
 		<link rel="stylesheet" type="text/css" 	href="../../../css/bootstrap.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/mdb.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/font-awesome.css" />
@@ -52,6 +52,7 @@
 			</div>
             <div class="row" id="txtnotice">
             </div>
+			<input type="hidden" id="programholder" value="<?php echo $_GET['program']; ?>">
 			<div class="row">
 				<table class="table table-bordered table-striped">
 					<thead class="mdb-color darken-3">
@@ -82,6 +83,7 @@
 				</div>
 			</div>
 		</div>
+		<div class="divspace" style="margin-bottom: 100px;"></div>
 		<div>
 			<?php include '../view/footer.php'; ?>
 		</div>

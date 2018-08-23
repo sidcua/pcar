@@ -11,7 +11,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <meta name="description" content="">
 	    <meta name="author" content="">
-		<title>Reports</title>
+		<title>Performance</title>
 		<link rel="icon" href="../../../img/custom/CHED LOGO WITH WHITE BACKGROUND.png" type="image/x-icon" />
 		<link rel="stylesheet" type="text/css" href="../../../css/bootstrap.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/mdb.css" />
@@ -36,33 +36,36 @@
 		</div>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="offset-1 col-sm-5">
-					<div class="d-flex">
-                        <?php
-                            if($_SESSION['level'] < 2){
-                                echo '<div class="form-group d-flex flex-row"><label for="slctregion" style="margin-right: 15px; margin-top: 10px;">Region</label>
-                                <select onchange="change();" class="form-control" id="slctregion" style="margin-right: 10px;">
-                                </select></div>';
-                            }
-                            else{
-                                echo '<div class="form-group d-flex flex-row"><label for="slctregion" style="margin-right: 15px; margin-top: 10px;" hidden>Region</label>
-                                <select class="form-control" id="slctregion" style="margin-right: 10px;" hidden>
-                                <option value="'.$_SESSION['region'].'"></option>
-                                </select></div>';
-                            }
-                        ?>
-					    <div class="form-group d-flex flex-row">
-					        <label for="slctyear" style="margin-right: 15px; margin-top: 10px;">Year</label>
-                            <select onchange="change();" class="form-control" id="slctyear">
-                            </select>
-					    </div>
+				<div class="col-sm-10 d-flex justify-content-start">
+					<?php
+						if($_SESSION['level'] < 2){
+							echo '<div class="form-group d-flex flex-row"><label for="slctregion" style="margin-right: 15px; margin-top: 10px;">Region</label>
+							<select onchange="change();" class="form-control" id="slctregion" style="margin-right: 10px;">
+							</select></div>';
+						}
+						else{
+							echo '<div class="form-group d-flex flex-row"><label for="slctregion" style="margin-right: 15px; margin-top: 10px;" hidden>Region</label>
+							<select class="form-control" id="slctregion" style="margin-right: 10px;" hidden>
+							<option value="'.$_SESSION['region'].'"></option>
+							</select></div>';
+						}
+					?>
+					<div class="form-group d-flex flex-row">
+						<label for="slctyear" style="margin-right: 15px; margin-top: 10px;">Year</label>
+						<select onchange="change();" class="form-control" id="slctyear">
+						</select>
+					</div>
+					<div class="form-group d-flex flex-row">
+						<label for="slctreport" style="margin-right: 15px; margin-top: 10px; margin-left: 20px;">Report</label>
+						<select onchange="change();" class="form-control" id="slctreport">
+						</select>
 					</div>
 				</div>
-				<div class="col-sm-6 d-flex flex-row-reverse">
-                    <div class="form-group">
+				<div class="col-sm-2 d-flex justify-content-end">
+					<div class="form-group">
                         <button type="button" onclick="print(<?php echo $_SESSION['accID']; ?>)" class="btn btn-outline-primary waves-effect"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
                     </div>
-                </div>
+				</div>
 			</div>
 			<div class="row">
 				<div id="fountainG" style="margin-top: 100px; margin-bottom: 20px;">
@@ -80,6 +83,7 @@
 				</table>
 			</div>
 		</div>
+		<div class="divspace" style="margin-bottom: 100px;"></div>
 		<div>
 			<?php include '../view/footer.php'; ?>
 		</div>

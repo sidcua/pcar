@@ -6,12 +6,18 @@ function login(){
 	var password = document.getElementById("txtpassword");
 	if(!email.value.trim() && !password.value.trim()){
 		$("#errormsglogin").html("<strong>Please enter your account details");
+		$('#modallogin').modal('show');
+		$(".close-btn").focus();
 	}
 	else if(!email.value.trim()){
 		$("#errormsglogin").html("<strong>Please enter your email");
+		$('#modallogin').modal('show');
+		$(".close-btn").focus();
 	}
 	else if(!password.value.trim()){
 		$("#errormsglogin").html("<strong>Please enter your password");
+		$('#modallogin').modal('show');
+		$(".close-btn").focus();
 	}
 	else{
 		$.ajax({
@@ -27,9 +33,15 @@ function login(){
                     window.location = "notice.php";
                 }
 				else{
-					$("#errormsglogin").html("<strong>Invalid email and passwords");
+					$("#errormsglogin").html("<strong>Invalid email and password</strong>");
+					$('#modallogin').modal('show');
+					$(".close-btn").focus();
 				}
 			}
 		});
 	}
 }
+$('#modallogin').on('hidden.bs.modal', function (e) {
+	$("#errormsglogin").html("");
+	$("#txtemail").focus();
+})

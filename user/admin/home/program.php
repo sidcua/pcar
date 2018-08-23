@@ -64,7 +64,7 @@
 			</div>
 
 			<input type="hidden" id="accidholder" value="">
-
+			<input type="hidden" id="programholder" value="<?php echo $_GET['program']; ?>">
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="table-wrapper-2">

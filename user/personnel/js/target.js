@@ -6,10 +6,11 @@ function url(){
 	return "../php/target.php";
 }
 function fetchdata(year){
+	var program = $("#programholder").val();
 	$.ajax({
 		url: url(),
 		method: "post",
-		data: {year: year, action: "listassignedprogram"},
+		data: {reportid: program, year: year, action: "listassignedprogram"},
 		beforeSend: function(){
 			$("#tbltargets").html("");
 			$("#targetloader").show();
@@ -67,6 +68,7 @@ function canceledit(td){
 }
 function savevalues(td){
 	var assignid = td;
+	var program = $("#programholder").val();
 	var error = 0; 
 	if(!Number.isInteger(parseInt($("#assign" + td).closest('tr').find('.q1-' + td).text())) && $("#assign" + td).closest('tr').find('.q1-' + td).text() != ""){
 		$("#assign" + td + ">.q1-" + td).addClass("red-border");
@@ -99,7 +101,7 @@ function savevalues(td){
 		$.ajax({
 			url: url(),
 			method: "post",
-			data: {data: JSON.stringify(data), assignid: assignid, year: year.value, remark: remark, action: "savevalues"},
+			data: {reportid: program, data: JSON.stringify(data), assignid: assignid, year: year.value, remark: remark, action: "savevalues"},
 			beforeSend: function(){
 
 			},

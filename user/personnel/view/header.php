@@ -31,17 +31,24 @@
                             echo 
                             '
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PCAR</a>    
-                                <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="./target.php"><i class="fa fa-calendar-o" aria-hidden="true"></i> Targets<span class="sr-only"></span></a>
-                                    <a class="dropdown-item" href="./accomplishment.php"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Accomplishment<span class="sr-only"></span></a>
+                                <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bookmark" aria-hidden="true"></i> PCAR</a>    
+                                <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink1">
+                                    <a class="dropdown-item" href="./target.php?program=1"><i class="fa fa-calendar-o" aria-hidden="true"></i> Targets<span class="sr-only"></span></a>
+                                    <a class="dropdown-item" href="./accomplishment.php?program=1"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Accomplishment<span class="sr-only"></span></a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">IPCR</a>    
-                                <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="#!"><i class="fa fa-calendar-o" aria-hidden="true"></i> Targets<span class="sr-only"></span></a>
-                                    <a class="dropdown-item" href="#!.php"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Accomplishment<span class="sr-only"></span></a>
+                                <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bookmark" aria-hidden="true"></i> IPCR</a>    
+                                <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink2">
+                                    <a class="dropdown-item" href="./target.php?program=2"><i class="fa fa-calendar-o" aria-hidden="true"></i> Targets<span class="sr-only"></span></a>
+                                    <a class="dropdown-item" href="./accomplishment.php?program=2"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Accomplishment<span class="sr-only"></span></a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bookmark" aria-hidden="true"></i> DBM</a>    
+                                <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink3">
+                                    <a class="dropdown-item" href="./target.php?program=3"><i class="fa fa-calendar-o" aria-hidden="true"></i> Targets<span class="sr-only"></span></a>
+                                    <a class="dropdown-item" href="./accomplishment.php?program=3"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Accomplishment<span class="sr-only"></span></a>
                                 </div>
                             </li>
                             <li class="nav-item">

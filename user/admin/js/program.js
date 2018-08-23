@@ -10,10 +10,11 @@ function url(){
 	return "../php/program.php";
 }
 function fetchdata(){
+	var program = $("#programholder").val();
 	$.ajax({
 		url: url(),
 		method: "post",
-		data: {action: "programlist"},
+		data: {reportid: program, action: "programlist"},
 		beforeSend: function(){
 			$("#program").html("");
 			$(".cssload-container").show();

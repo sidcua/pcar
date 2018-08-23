@@ -2,7 +2,7 @@
 	session_start();
 	include '../../../php/connect.php';
 	$action = $_POST['action'];
-	function arrangeprogram($year){
+	function arrangeprogram($year, $reportid){
 		$accid = $_SESSION['accID'];
 		$output = "";
         $sql = mysql_query("SELECT accomplish FROM locked WHERE year = '$year'");
@@ -18,7 +18,8 @@
                 $input = true;
             }
         }
-        $sql = mysql_query("SELECT assignID, program.programID AS programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE accID = '$accid' AND level = 1 ORDER BY title ASC");
+        //level 1
+        $sql = mysql_query("SELECT assignID, program.programID AS programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE accID = '$accid' AND level = 1 AND reportID = '$reportid' ORDER BY title ASC");
         if(mysql_num_rows($sql) != 0){
             while($fetch = mysql_fetch_assoc($sql)){
                 $programid = $fetch['programID'];
@@ -90,8 +91,9 @@
                         $output .= '<td></td>';
                     }
                 }
-				$output .= '</tr>';
-                $sql2 = mysql_query("SELECT assignID, program.programID AS programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE accID = '$accid' AND under = '$programid' ORDER BY title ASC");
+                $output .= '</tr>';
+                //level 2
+                $sql2 = mysql_query("SELECT assignID, program.programID AS programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE accID = '$accid' AND under = '$programid' AND reportID = '$reportid' ORDER BY title ASC");
                 if(mysql_num_rows($sql2) != 0){
                     while($fetch2 = mysql_fetch_assoc($sql2)){
                         $programid = $fetch2['programID'];
@@ -164,7 +166,8 @@
                             }
                         }
                         $output .= '</tr>';
-                        $sql3 = mysql_query("SELECT assignID, program.programID AS programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE accID = '$accid' AND under = '$programid' ORDER BY title ASC");
+                        //level 3
+                        $sql3 = mysql_query("SELECT assignID, program.programID AS programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE accID = '$accid' AND under = '$programid' AND reportID = '$reportid' ORDER BY title ASC");
                         if(mysql_num_rows($sql3) != 0){
                             while($fetch3 = mysql_fetch_assoc($sql3)){
                                 $programid = $fetch3['programID'];
@@ -237,7 +240,8 @@
                                     }
                                 }
                                 $output .= '</tr>';
-                                $sql4 = mysql_query("SELECT assignID, program.programID AS programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE accID = '$accid' AND under = '$programid' ORDER BY title ASC");
+                                //level 4
+                                $sql4 = mysql_query("SELECT assignID, program.programID AS programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE accID = '$accid' AND under = '$programid' AND reportID = '$reportid' ORDER BY title ASC");
                                 if(mysql_num_rows($sql4) != 0){
                                     while($fetch4 = mysql_fetch_assoc($sql4)){
                                         $programid = $fetch4['programID'];
@@ -310,7 +314,8 @@
                                             }
                                         }
                                         $output .= '</tr>';
-                                        $sql5 = mysql_query("SELECT assignID, program.programID AS programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE accID = '$accid' AND under = '$programid' ORDER BY title ASC");
+                                        //level 5
+                                        $sql5 = mysql_query("SELECT assignID, program.programID AS programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE accID = '$accid' AND under = '$programid' AND reportID = '$reportid' ORDER BY title ASC");
                                         if(mysql_num_rows($sql5) != 0){
                                             while($fetch5 = mysql_fetch_assoc($sql5)){
                                                 $programid = $fetch5['programID'];
@@ -383,6 +388,82 @@
                                                     }
                                                 }
                                                 $output .= '</tr>';
+                                                //level 6
+                                                $sql6 = mysql_query("SELECT assignID, program.programID AS programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE accID = '$accid' AND under = '$programid' AND reportID = '$reportid' ORDER BY title ASC");
+                                                if(mysql_num_rows($sql6) != 0){
+                                                    while($fetch6 = mysql_fetch_assoc($sql6)){
+                                                        $programid = $fetch6['programID'];
+                                                        $assignid = $fetch6['assignID'];
+                                                        $title = $fetch6['title'];
+                                                        $status = $fetch6['status'];
+                                                        $output .= 
+                                                        '<tr id="assign'.$assignid.'">
+                                                            <td for="title" style="padding-left: 80px;">'.$title.'</td>';
+                                                        if($status == 0){
+                                                            $output .= 
+                                                            '<td colspan="13" class="grey lighten-2"></td>';
+                                                        }
+                                                        else{
+                                                            for ($i = 1; $i <= 4 ; $i++) {
+                                                                $sql_target = mysql_query("SELECT target FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
+                                                                $output .= '<td class="text-center _target">';
+                                                                if(mysql_num_rows($sql_target) != 0) {
+                                                                    $fetch = mysql_fetch_assoc($sql_target);
+                                                                    if($fetch['target'] != 0){
+                                                                        $output .= $fetch['target'];
+                                                                    }
+                                                                    else{
+                                                                        $output .= "-";
+                                                                    }
+                                                                }
+                                                                $output .= '</td>';
+                                                            }
+                                                            for ($i = 1; $i <= 4 ; $i++) { 
+                                                                switch($i){
+                                                                    case 1:
+                                                                        $output .= '<td class="text-center q1-'.$assignid.'">';
+                                                                        break;
+                                                                    case 2:
+                                                                        $output .= '<td class="text-center q2-'.$assignid.'">';
+                                                                        break;
+                                                                    case 3:
+                                                                        $output .= '<td class="text-center q3-'.$assignid.'">';
+                                                                        break;
+                                                                    case 4:
+                                                                        $output .= '<td class="text-center q4-'.$assignid.'">';
+                                                                        break;
+                                                                }
+                                                                $sql_accomplish = mysql_query("SELECT target, accomplish FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
+                                                                if(mysql_num_rows($sql_accomplish) != 0){
+                                                                    $fetch = mysql_fetch_assoc($sql_accomplish);
+                                                                    if($fetch['accomplish'] != 0){
+                                                                        $target = $fetch['target'] * 1.3;
+                                                                        if($target > $fetch['accomplish']){
+                                                                            $output .= '<p class="red-text">'.$fetch['accomplish'].'</p>';
+                                                                        }
+                                                                        else{
+                                                                            $output .= $fetch['accomplish'];
+                                                                        }
+                                                                    }
+                                                                    else{
+                                                                        $output .= "-";
+                                                                    }
+                                                                }
+                                                                $output .= '</td>';
+                                                            }
+                                                            $sql_remark = mysql_query("SELECT remark FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
+                                                            $fetch_remark = mysql_fetch_assoc($sql_remark);
+                                                            $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
+                                                            if($input == true && $status == 1){
+                                                                $output .= '<td for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>';
+                                                            }		
+                                                            else{
+                                                                $output .= '<td></td>';
+                                                            }
+                                                        }
+                                                        $output .= '</tr>';
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -394,11 +475,18 @@
                 
             }
         }
+        else{
+            $output .= 
+			"<tr>
+				<td colspan='11'><p class='h1-responsive text-center'>No Programs/Projects found</p></td>
+			</tr>";
+        }
 		return $output;
 	}
 	if($action == "listassignedprogram"){
-		$year = mysql_escape_string($_POST['year']);
-		echo json_encode(arrangeprogram($year));
+        $year = mysql_escape_string($_POST['year']);
+        $reportid = mysql_escape_string($_POST['reportid']);
+		echo json_encode(arrangeprogram($year, $reportid));
 	}
 	if($action == "savevalues"){
 		$values = json_decode($_POST['data']);
@@ -423,6 +511,10 @@
                         mysql_query("INSERT INTO targetaccomplish (assignID, accomplish, month, year, accomplish_added, remark) VALUES ('$assignid', '$accomplish', '$i', '$year', '$date_added', '$remark')");
                     }
                 }
+            }
+            $sql = mysql_query("SELECT assignID FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
+            if(mysql_num_rows($sql) == 0 && $remark != ""){
+                mysql_query("INSERT INTO targetaccomplish (assignID, accomplish, month, year, accomplish_added, remark) VALUES ('$assignid', '0', '1', '$year', '$date_added', '$remark')");
             }
         }
 	}

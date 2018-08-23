@@ -43,7 +43,6 @@
                             <div class="form-group d-flex flex-row">
                                 <label for="slctmode" style="margin-right: 10px; margin-top: 10px;">Mode</label>
                                 <select onchange="mode(this.value)" class="form-control" id="slctmode">
-                                    <option value="month">Monthly</option>
                                     <option value="quarter">Quarterly</option>
                                 </select>
                             </div>

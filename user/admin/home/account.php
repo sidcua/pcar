@@ -53,7 +53,6 @@
 			</div>
 
 			<input type="hidden" id="accidholder" value="">
-
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="table-wrapper-2">
@@ -299,6 +298,13 @@
             <!--Body-->
             <div class="modal-body">
             	<div class="container-fluid">
+					<div class="row d-flex justify-content-center">
+						<div class="form-group d-flex flex-row" id="region">
+							<label for="slctregion" style="margin-top: 5px; margin-right: 15px;"><big>Report</big></label>
+							<select class="form-control" id="slctreport" onchange="loadprogram(1);">
+							</select>
+						</div>
+					</div>
             		<div class="row">
         				<div class="col-sm-12 d-flex justify-content-center" style="margin-bottom: 0px;">
         					<ul id="tablevel" class="nav nav-pills">

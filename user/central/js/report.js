@@ -7,11 +7,12 @@ function url(){
 function changemode(){
 	var year = document.getElementById("slctyear");
 	var mode = document.getElementById("slctmode");
-    var region = document.getElementById("slctregion");
+	var region = document.getElementById("slctregion");
+	var report = document.getElementById("slctreport");
 	$.ajax({
 		url: url(),
 		method: "post",
-		data: {region: region.value, year: year.value, mode: mode.value, action: "changemode"},
+		data: {region: region.value, year: year.value, mode: mode.value, report: report.value, action: "changemode"},
 		beforeSend: function(){
 			$("#tblreport").empty();
 			$("#fountainG").show();
@@ -36,8 +37,8 @@ function inityear(){
 			$("#slctyear").html(data);
 		},
 		complete: function(){
-            $("#slctyear").show();
-			changemode();
+			$("#slctyear").show();
+			initreport();
 		}
 	})
 }
@@ -53,9 +54,23 @@ function initregion(){
             }
         },
         complete: function(){
-            inityear();
+			inityear();
         }
     })
+}
+function initreport(){
+	$.ajax({
+		url: url(),
+		method: "post",
+		data: {action: "initreport"},
+		success: function(data){
+			data = $.parseJSON(data);
+			$("#slctreport").html(data)
+		},
+		complete: function(){
+			changemode();
+		}
+	})
 }
 function print(){
     var region = $("#slctregion").val();

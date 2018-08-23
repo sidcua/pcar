@@ -6,10 +6,11 @@ function url(){
 	return "../php/accomplish.php";
 }
 function fetchdata(year){
+	var program = $("#programholder").val();
 	$.ajax({
 		url: url(),
 		method: "post",
-		data: {year: year, action: "listassignedprogram"},
+		data: {reportid: program, year: year, action: "listassignedprogram"},
 		beforeSend: function(){
 			$("#tblaccomplish").html("");
 			$("#accomplishloader").show();
