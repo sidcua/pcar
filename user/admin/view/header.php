@@ -1,7 +1,7 @@
 <header>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark primary-color">
         <img src="../../../img/custom/chedlogo2.png" style="height: 40px; margin-left: -20px;">
-        <a class="navbar-brand" href="." style="margin-left: -10px;"><strong>CHED PCAR - <?php echo $_SESSION['region_code']; ?> (Admin)</strong></a>
+        <a class="navbar-brand" href="." style="margin-left: -10px;"><strong>CHED OPCARS - <?php echo $_SESSION['region_code']; ?> (Admin)</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -10,56 +10,22 @@
                 <li class="nav-item">
                     <a class="nav-link waves-effect waves-light" href="."><i class="fa fa-home" aria-hidden="true"></i> Home<span class="sr-only"></span></a>
                 </li>
-                <?php
-                    if($_SESSION['level'] <= 2){
-                        echo 
-                        '<li class="nav-item">
-                            <a class="nav-link waves-effect waves-light" href="./account.php"><i class="fa fa-users" aria-hidden="true"></i> Accounts<span class="sr-only"></span></a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-book" aria-hidden="true"></i> Programs/Projects</a>  
-                            <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink"> 
-                                <a class="dropdown-item" href="./program.php?program=1">
-                                <i class="fa fa-circle" aria-hidden="true"></i>
-                                 PCAR</a>
-                                <a class="dropdown-item" href="./program.php?program=2">
-                                <i class="fa fa-circle" aria-hidden="true"></i>
-                                 IPCR</a>
-                                <a class="dropdown-item" href="./program.php?program=3">
-                                <i class="fa fa-circle" aria-hidden="true"></i>
-                                 DBM</a>
-                        </li>';
-                        if($_SESSION['level'] <= 1){
-                            echo 
-                            '<li class="nav-item">
-                                <a class="nav-link waves-effect waves-light" href="./weight.php"><i class="fa fa-pie-chart" aria-hidden="true"></i> Weight Percentage<span class="sr-only"></span></a>
-                            </li>';
-                        }
-                    }
-                    else{
-                        if($_SESSION['level'] != 4){
-                            echo 
-                            '
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PCAR</a>    
-                                <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="./target.php"><i class="fa fa-calendar-o" aria-hidden="true"></i> Targets<span class="sr-only"></span></a>
-                                    <a class="dropdown-item" href="./accomplishment.php"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Accomplishment<span class="sr-only"></span></a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">IPCR</a>    
-                                <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="#!"><i class="fa fa-calendar-o" aria-hidden="true"></i> Targets<span class="sr-only"></span></a>
-                                    <a class="dropdown-item" href="#!.php"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Accomplishment<span class="sr-only"></span></a>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link waves-effect waves-light" href="./milestone.php"><i class="fa fa-archive" aria-hidden="true"></i> Milestone<span class="sr-only"></span></a>
-                            </li>';
-                        }
-                    }
-                ?>
+                <li class="nav-item">
+                    <a class="nav-link waves-effect waves-light" href="./account.php"><i class="fa fa-users" aria-hidden="true"></i> Accounts<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-book" aria-hidden="true"></i> Programs/Projects</a>  
+                    <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink"> 
+                        <a class="dropdown-item" href="./program.php?program=1">
+                        <i class="fa fa-bookmark" aria-hidden="true"></i>
+                            PCAR</a>
+                        <a class="dropdown-item" href="./program.php?program=2">
+                        <i class="fa fa-bookmark" aria-hidden="true"></i>
+                            IPCR</a>
+                        <a class="dropdown-item" href="./program.php?program=3">
+                        <i class="fa fa-bookmark" aria-hidden="true"></i>
+                            DBM</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-desktop" aria-hidden="true"></i> Reports</a>  
                     <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink"> 
@@ -67,10 +33,15 @@
                         <a class="dropdown-item" href="./performance.php"><i class="fa fa-dot-circle-o" aria-hidden="true"></i> Performance<span class="sr-only"></span></a>
                         <?php
                             if($_SESSION['level'] < 3 || $_SESSION['level'] == 4){
+                                /*
                                 echo '<a class="dropdown-item" href="./assign.php"><i class="fa fa-asterisk" aria-hidden="true"></i> Assigns<span class="sr-only"></span></a>
                                 <a class="dropdown-item" href="./percentage.php"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Percentage Accomplishment<span class="sr-only"></span></a>
                                 <a class="dropdown-item" href="./monthreport.php"><i class="fa fa-line-chart" aria-hidden="true"></i> Monthly Report<span class="sr-only"></span></a>
                                 <a class="dropdown-item" href="./opcr.php"><i class="fa fa-area-chart" aria-hidden="true"></i> OPCR <span class="sr-only"></span></a>';
+                                */
+                                echo '<a class="dropdown-item" href="./assign.php"><i class="fa fa-asterisk" aria-hidden="true"></i> Assigns<span class="sr-only"></span></a>
+                                <a class="dropdown-item" href="./percentage.php"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Percentage Accomplishment<span class="sr-only"></span></a>
+                                <a class="dropdown-item" href="./monthreport.php"><i class="fa fa-line-chart" aria-hidden="true"></i> Monthly Report<span class="sr-only"></span></a>';
                             }
                             else{
                                 if($_SESSION['level'] != 4){

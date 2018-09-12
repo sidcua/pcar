@@ -8,7 +8,16 @@
 			$output .= '<option value="'.$i.'">'.$i.'</option>';
 		}
 		echo json_encode($output);
-	}
+    }
+    if($action == "initreport"){
+        $sql = mysql_query("SELECT * FROM report WHERE status = 1");
+        while($fetch = mysql_fetch_assoc($sql)){
+            $reportid = $fetch['reportID'];
+            $report = $fetch['report'];
+            $output .= '<option value="'.$reportid.'">'.$report.'</option>';
+        }
+        echo json_encode($output);
+    }
     if($action == "month"){
         $year = mysql_escape_string($_POST['year']);
         $month = mysql_escape_string($_POST['value']);
@@ -588,7 +597,7 @@
                                             }
                                         }
                                         $output .= '</tr>';
-//                                                level 5
+                                        //level 5
                                         $sql5 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
                                         if(mysql_num_rows($sql5) != 0){
                                             while($fetch5 = mysql_fetch_assoc($sql5)){
@@ -654,6 +663,74 @@
                                                     }
                                                 }
                                                 $output .= '</tr>';
+                                                //level 6
+                                                $sql6 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
+                                                if(mysql_num_rows($sql6) != 0){
+                                                    while($fetch6 = mysql_fetch_assoc($sql6)){
+                                                        $programid = $fetch6['programID'];
+                                                        $title = $fetch6['title'];
+                                                        $status = $fetch6['status'];
+                                                        $output .= 
+                                                        '<tr>
+                                                            <td style="padding-left: 100px;">'.$title.'</td>';
+                                                        if($status == 0){
+                                                            $output .= '<td colspan="6" class="grey lighten-2"></td>';
+                                                        }
+                                                        else{
+                                                            $totaltarget = 0;
+                                                            $totalaccomplish = 0;
+                                                            $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month <= '$before' AND year = '$year' AND program.programID = '$programid'");
+                                                            $get = mysql_fetch_assoc($query);
+                                                            $target = $get['target'];
+                                                            if($target == 0){
+                                                                $output .= '<td class="text-center">-</td>';
+                                                            }
+                                                            else{
+                                                                $output .= '<td class="text-center">'.$target.'</td>';
+                                                                $totaltarget += $target;
+                                                            }
+                                                            $accomplish = $get['accomplish'];
+                                                            if($accomplish == 0){
+                                                                $output .= '<td class="text-center">-</td>';
+                                                            }
+                                                            else{
+                                                                $output .= '<td class="text-center">'.$accomplish.'</td>';
+                                                                $totalaccomplish += $accomplish;
+                                                            }
+                                                            $query2 = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month = '$month' AND year = '$year' AND program.programID = '$programid'");
+                                                            $get2 = mysql_fetch_assoc($query2);
+                                                            $target2 = $get2['target'];
+                                                            if($target2 == 0){
+                                                                $output .= '<td class="text-center">-</td>';
+                                                            }
+                                                            else{
+                                                                $output .= '<td class="text-center">'.$target2.'</td>';
+                                                                $totaltarget += $target2;
+                                                            }
+                                                            $accomplish2 = $get2['accomplish'];
+                                                            if($accomplish2 == 0){
+                                                                $output .= '<td class="text-center">-</td>';
+                                                            }
+                                                            else{
+                                                                $output .= '<td class="text-center">'.$accomplish2.'</td>';
+                                                                $totalaccomplish += $accomplish2;
+                                                            }
+                                                            if($totaltarget == 0){
+                                                                $output .= '<td class="text-center">-</td>';
+                                                            }
+                                                            else{
+                                                                $output .= '<td class="text-center">'.$totaltarget.'</td>';
+                                                            }
+                                                            if($totalaccomplish == 0){
+                                                                $output .= '<td class="text-center">-</td>';
+                                                            }
+                                                            else{
+                                                                $output .= '<td class="text-center">'.$totalaccomplish.'</td>';
+                                                            }
+                                                        }
+                                                        $output .= '</tr>';
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -670,6 +747,8 @@
     if($action == "quarter"){
         $year = mysql_escape_string($_POST['year']);
         $quarter = mysql_escape_string($_POST['value']);
+        $reportid = mysql_escape_string($_POST['report']);
+        $region = $_SESSION['region'];
         if($quarter == 1){
             $output = '<table class="table table-bordered table-striped">
 					<thead class="mdb-color darken-3 table-striped">
@@ -684,8 +763,8 @@
                     <td class="bg-success">A</td>
                     <td class="bg-danger">T</td>
                     <td class="bg-success">A</td></tr>';
-//            level 1
-            $sql = mysql_query("SELECT programID, title, status FROM program WHERE level = 1 AND state = 1 ORDER BY title ASC");
+            //level 1
+            $sql = mysql_query("SELECT programID, title, status FROM program WHERE level = 1 AND state = 1 AND reportID = '$reportid'");
             while($fetch = mysql_fetch_assoc($sql)){
                 $programid = $fetch['programID'];
                 $title = $fetch['title'];
@@ -697,7 +776,7 @@
                     $output .= '<td colspan="4" class="grey lighten-2"></td>';
                 }
                 else{
-                    $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month <= 3 AND year = '$year' AND program.programID = '$programid'");
+                    $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month = 1 AND year = '$year' AND program.programID = '$programid' AND regionID = '$region'");
                     $get = mysql_fetch_assoc($query);
 					$target = $get['target'];
 					if($target == 0){
@@ -728,8 +807,8 @@
 					}
                 }
                 $output .= '</tr>';
-//                level 2
-                $sql2 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
+                //level 2
+                $sql2 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1");
                 if(mysql_num_rows($sql2) != 0){
                     while($fetch2 = mysql_fetch_assoc($sql2)){
                         $programid = $fetch2['programID'];
@@ -742,7 +821,7 @@
                             $output .= '<td colspan="4" class="grey lighten-2"></td>';
                         }
                         else{
-                            $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month <= 3 AND year = '$year' AND program.programID = '$programid'");
+                            $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month = 1 AND year = '$year' AND program.programID = '$programid' AND regionID = '$region'");
                             $get = mysql_fetch_assoc($query);
                             $target = $get['target'];
                             if($target == 0){
@@ -756,25 +835,25 @@
                                 $output .= '<td class="text-center">-</td>';
                             }
                             else{
-                                $output .= '<td class="text-center">'.$accomplish.'</td>';
+                                    $output .= '<td class="text-center">'.$accomplish.'</td>';
+                                }
+                                if($target == 0){
+                                    $output .= '<td class="text-center">-</td>';
+                                }
+                                else{
+                                    $output .= '<td class="text-center">'.$target.'</td>';;
+                                }
+                                $accomplish = $get['accomplish'];
+                                if($accomplish == 0){
+                                    $output .= '<td class="text-center">-</td>';
+                                }
+                                else{
+                                    $output .= '<td class="text-center">'.$accomplish.'</td>';
+                                }
                             }
-                            if($target == 0){
-                                $output .= '<td class="text-center">-</td>';
-                            }
-                            else{
-                                $output .= '<td class="text-center">'.$target.'</td>';;
-                            }
-                            $accomplish = $get['accomplish'];
-                            if($accomplish == 0){
-                                $output .= '<td class="text-center">-</td>';
-                            }
-                            else{
-                                $output .= '<td class="text-center">'.$accomplish.'</td>';
-                            }
-                        }
-                        $output .= '</tr>';
-//                        level 3
-                        $sql3 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
+                            $output .= '</tr>';
+                            //level 3
+                            $sql3 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1");
                         if(mysql_num_rows($sql3) != 0){
                             while($fetch3 = mysql_fetch_assoc($sql3)){
                                 $programid = $fetch3['programID'];
@@ -787,7 +866,7 @@
                                     $output .= '<td colspan="4" class="grey lighten-2"></td>';
                                 }
                                 else{
-                                    $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month <= 3 AND year = '$year' AND program.programID = '$programid'");
+                                    $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month = 1 AND year = '$year' AND program.programID = '$programid' AND regionID = '$region'");
                                     $get = mysql_fetch_assoc($query);
                                     $target = $get['target'];
                                     if($target == 0){
@@ -820,7 +899,7 @@
                                 
                                 $output .= '</tr>';
 //                                    level 4
-                                $sql4 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
+                                $sql4 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1");
                                 if(mysql_num_rows($sql4) != 0){
                                     while($fetch4 = mysql_fetch_assoc($sql4)){
                                         $programid = $fetch4['programID'];
@@ -833,7 +912,7 @@
                                             $output .= '<td colspan="4" class="grey lighten-2"></td>';
                                         }
                                         else{
-                                            $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month <= 3 AND year = '$year' AND program.programID = '$programid'");
+                                            $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month = 1 AND year = '$year' AND program.programID = '$programid' AND regionID = '$region'");
                                             $get = mysql_fetch_assoc($query);
                                             $target = $get['target'];
                                             if($target == 0){
@@ -864,8 +943,8 @@
                                             }
                                         }
                                         $output .= '</tr>';
-//                                                level 5
-                                        $sql5 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
+                                        //level 5
+                                        $sql5 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1");
                                         if(mysql_num_rows($sql5) != 0){
                                             while($fetch5 = mysql_fetch_assoc($sql5)){
                                                 $programid = $fetch5['programID'];
@@ -878,7 +957,7 @@
                                                     $output .= '<td colspan="4" class="grey lighten-2"></td>';
                                                 }
                                                 else{
-                                                    $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month <= 3 AND year = '$year' AND program.programID = '$programid'");
+                                                    $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month = 1 AND year = '$year' AND program.programID = '$programid' AND regionID = '$region'");
                                                     $get = mysql_fetch_assoc($query);
                                                     $target = $get['target'];
                                                     if($target == 0){
@@ -908,6 +987,53 @@
                                                         $output .= '<td class="text-center">'.$accomplish.'</td>';
                                                     }
                                                     $output .= '</tr>';
+                                                    //level 6
+                                                    $sql6 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1");
+                                                    if(mysql_num_rows($sql6) != 0){
+                                                        while($fetch6 = mysql_fetch_assoc($sql6)){
+                                                            $programid = $fetch6['programID'];
+                                                            $title = $fetch6['title'];
+                                                            $status = $fetch6['status'];
+                                                            $output .= 
+                                                            '<tr>
+                                                                <td style="padding-left: 120px;">'.$title.'</td>';
+                                                            if($status == 0){
+                                                                $output .= '<td colspan="4" class="grey lighten-2"></td>';
+                                                            }
+                                                            else{
+                                                                $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month = 1 AND year = '$year' AND program.programID = '$programid' AND regionID = '$region'");
+                                                                $get = mysql_fetch_assoc($query);
+                                                                $target = $get['target'];
+                                                                if($target == 0){
+                                                                    $output .= '<td class="text-center">-</td>';
+                                                                }
+                                                                else{
+                                                                    $output .= '<td class="text-center">'.$target.'</td>';;
+                                                                }
+                                                                $accomplish = $get['accomplish'];
+                                                                if($accomplish == 0){
+                                                                    $output .= '<td class="text-center">-</td>';
+                                                                }
+                                                                else{
+                                                                    $output .= '<td class="text-center">'.$accomplish.'</td>';
+                                                                }
+                                                                if($target == 0){
+                                                                    $output .= '<td class="text-center">-</td>';
+                                                                }
+                                                                else{
+                                                                    $output .= '<td class="text-center">'.$target.'</td>';;
+                                                                }
+                                                                $accomplish = $get['accomplish'];
+                                                                if($accomplish == 0){
+                                                                    $output .= '<td class="text-center">-</td>';
+                                                                }
+                                                                else{
+                                                                    $output .= '<td class="text-center">'.$accomplish.'</td>';
+                                                                }
+                                                                $output .= '</tr>';
+                                                            }
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -925,7 +1051,7 @@
                 $con = "Quarter 1";
                 $monthlbl = "Quarter 2";
             }
-            else if($month == 3){
+            else if($quarter == 3){
                 $con = "Quarter 1 - 2";
                 $monthlbl = "Quarter 3";
             }
@@ -933,8 +1059,8 @@
                 $con = "Quarter 1 - 3";
                 $monthlbl = "Quarter 4";
             }
-            $before = ($quarter - 1) * 3;
-            $current = $quarter * 3;
+            $before = $quarter - 1;
+            $current = $quarter;
             $output = '<table class="table table-bordered table-striped">
 					<thead class="mdb-color darken-3 table-striped">
 						<tr class="white-text text-center">
@@ -951,8 +1077,8 @@
                     <td class="bg-success">A</td>
                     <td class="bg-danger">T</td>
                     <td class="bg-success">A</td></tr>';
-//            level 1
-            $sql = mysql_query("SELECT programID, title, status FROM program WHERE level = 1 AND state = 1 ORDER BY title ASC");
+            //level 1
+            $sql = mysql_query("SELECT programID, title, status FROM program WHERE level = 1 AND state = 1 AND reportID = '$reportid'");
             while($fetch = mysql_fetch_assoc($sql)){
                 $programid = $fetch['programID'];
                 $title = $fetch['title'];
@@ -966,7 +1092,7 @@
                 else{
                     $totaltarget = 0;
                     $totalaccomplish = 0;
-                    $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month <= '$before' AND year = '$year' AND program.programID = '$programid'");
+                    $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month <= '$before' AND year = '$year' AND program.programID = '$programid' AND regionID = '$region'");
                     $get = mysql_fetch_assoc($query);
                     $target = $get['target'];
                     if($target == 0){
@@ -984,7 +1110,7 @@
                         $output .= '<td class="text-center">'.$accomplish.'</td>';
                         $totalaccomplish += $accomplish;
                     }
-                    $query2 = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month >= '$before' AND month <= '$current' AND year = '$year' AND program.programID = '$programid'");
+                    $query2 = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month >= '$before' AND month <= '$current' AND year = '$year' AND program.programID = '$programid' AND regionID = '$region'");
                     $get2 = mysql_fetch_assoc($query2);
                     $target2 = $get2['target'];
                     if($target2 == 0){
@@ -1016,8 +1142,8 @@
                     }
                 }
                 $output .= '</tr>';
-//                level 2
-                $sql2 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
+                //level 2
+                $sql2 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1");
                 if(mysql_num_rows($sql2) != 0){
                     while($fetch2 = mysql_fetch_assoc($sql2)){
                         $programid = $fetch2['programID'];
@@ -1032,7 +1158,7 @@
                         else{
                             $totaltarget = 0;
                             $totalaccomplish = 0;
-                            $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month <= '$before' AND year = '$year' AND program.programID = '$programid'");
+                            $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month <= '$before' AND year = '$year' AND program.programID = '$programid' AND regionID = '$region'");
                             $get = mysql_fetch_assoc($query);
                             $target = $get['target'];
                             if($target == 0){
@@ -1050,7 +1176,7 @@
                                 $output .= '<td class="text-center">'.$accomplish.'</td>';
                                 $totalaccomplish += $accomplish;
                             }
-                            $query2 = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month > '$before' AND month <= '$current' AND year = '$year' AND program.programID = '$programid'");
+                            $query2 = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month > '$before' AND month <= '$current' AND year = '$year' AND program.programID = '$programid' AND regionID = '$region'");
                             $get2 = mysql_fetch_assoc($query2);
                             $target2 = $get2['target'];
                             if($target2 == 0){
@@ -1082,8 +1208,8 @@
                             }
                         }
                         $output .= '</tr>';
-//                        level 3
-                        $sql3 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
+                        //evel 3
+                        $sql3 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1");
                         if(mysql_num_rows($sql3) != 0){
                             while($fetch3 = mysql_fetch_assoc($sql3)){
                                 $programid = $fetch3['programID'];
@@ -1098,7 +1224,7 @@
                                 else{
                                     $totaltarget = 0;
                                     $totalaccomplish = 0;
-                                    $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month <= '$before' AND year = '$year' AND program.programID = '$programid'");
+                                    $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month <= '$before' AND year = '$year' AND program.programID = '$programid' AND regionID = '$region'");
                                     $get = mysql_fetch_assoc($query);
                                     $target = $get['target'];
                                     if($target == 0){
@@ -1116,7 +1242,7 @@
                                         $output .= '<td class="text-center">'.$accomplish.'</td>';
                                         $totalaccomplish += $accomplish;
                                     }
-                                    $query2 = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month > '$before' AND month <= '$current' AND year = '$year' AND program.programID = '$programid'");
+                                    $query2 = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month > '$before' AND month <= '$current' AND year = '$year' AND program.programID = '$programid' AND regionID ='$region'");
                                     $get2 = mysql_fetch_assoc($query2);
                                     $target2 = $get2['target'];
                                     if($target2 == 0){
@@ -1149,8 +1275,8 @@
                                 }
                                 
                                 $output .= '</tr>';
-//                                    level 4
-                                $sql4 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
+                                //level 4
+                                $sql4 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1");
                                 if(mysql_num_rows($sql4) != 0){
                                     while($fetch4 = mysql_fetch_assoc($sql4)){
                                         $programid = $fetch4['programID'];
@@ -1165,7 +1291,7 @@
                                         else{
                                             $totaltarget = 0;
                                             $totalaccomplish = 0;
-                                            $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month <= '$before' AND year = '$year' AND program.programID = '$programid'");
+                                            $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month <= '$before' AND year = '$year' AND program.programID = '$programid' AND regionID = '$region'");
                                             $get = mysql_fetch_assoc($query);
                                             $target = $get['target'];
                                             if($target == 0){
@@ -1183,7 +1309,7 @@
                                                 $output .= '<td class="text-center">'.$accomplish.'</td>';
                                                 $totalaccomplish += $accomplish;
                                             }
-                                            $query2 = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month > '$before' AND month <= '$current' AND year = '$year' AND program.programID = '$programid'");
+                                            $query2 = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month > '$before' AND month <= '$current' AND year = '$year' AND program.programID = '$programid' AND regionID = '$region'");
                                             $get2 = mysql_fetch_assoc($query2);
                                             $target2 = $get2['target'];
                                             if($target2 == 0){
@@ -1215,8 +1341,8 @@
                                             }
                                         }
                                         $output .= '</tr>';
-//                                                level 5
-                                        $sql5 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
+                                        //level 5
+                                        $sql5 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1");
                                         if(mysql_num_rows($sql5) != 0){
                                             while($fetch5 = mysql_fetch_assoc($sql5)){
                                                 $programid = $fetch5['programID'];
@@ -1231,7 +1357,7 @@
                                                 else{
                                                     $totaltarget = 0;
                                                     $totalaccomplish = 0;
-                                                    $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month <= '$before' AND year = '$year' AND program.programID = '$programid'");
+                                                    $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month <= '$before' AND year = '$year' AND program.programID = '$programid' AND regionID = '$region'");
                                                     $get = mysql_fetch_assoc($query);
                                                     $target = $get['target'];
                                                     if($target == 0){
@@ -1249,7 +1375,7 @@
                                                         $output .= '<td class="text-center">'.$accomplish.'</td>';
                                                         $totalaccomplish += $accomplish;
                                                     }
-                                                    $query2 = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month > '$before' AND month <= '$current' AND year = '$year' AND program.programID = '$programid'");
+                                                    $query2 = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month > '$before' AND month <= '$current' AND year = '$year' AND program.programID = '$programid' AND regionID = '$region'");
                                                     $get2 = mysql_fetch_assoc($query2);
                                                     $target2 = $get2['target'];
                                                     if($target2 == 0){
@@ -1281,6 +1407,74 @@
                                                     }
                                                 }
                                                 $output .= '</tr>';
+                                                //level 6
+                                                $sql6 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1");
+                                                if(mysql_num_rows($sql6) != 0){
+                                                    while($fetch6 = mysql_fetch_assoc($sql6)){
+                                                        $programid = $fetch6['programID'];
+                                                        $title = $fetch6['title'];
+                                                        $status = $fetch6['status'];
+                                                        $output .= 
+                                                        '<tr>
+                                                            <td style="padding-left: 100px;">'.$title.'</td>';
+                                                        if($status == 0){
+                                                            $output .= '<td colspan="6" class="grey lighten-2"></td>';
+                                                        }
+                                                        else{
+                                                            $totaltarget = 0;
+                                                            $totalaccomplish = 0;
+                                                            $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month <= '$before' AND year = '$year' AND program.programID = '$programid' AND regionID = '$region'");
+                                                            $get = mysql_fetch_assoc($query);
+                                                            $target = $get['target'];
+                                                            if($target == 0){
+                                                                $output .= '<td class="text-center">-</td>';
+                                                            }
+                                                            else{
+                                                                $output .= '<td class="text-center">'.$target.'</td>';
+                                                                $totaltarget += $target;
+                                                            }
+                                                            $accomplish = $get['accomplish'];
+                                                            if($accomplish == 0){
+                                                                $output .= '<td class="text-center">-</td>';
+                                                            }
+                                                            else{
+                                                                $output .= '<td class="text-center">'.$accomplish.'</td>';
+                                                                $totalaccomplish += $accomplish;
+                                                            }
+                                                            $query2 = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month > '$before' AND month <= '$current' AND year = '$year' AND program.programID = '$programid' AND regionID = '$region'");
+                                                            $get2 = mysql_fetch_assoc($query2);
+                                                            $target2 = $get2['target'];
+                                                            if($target2 == 0){
+                                                                $output .= '<td class="text-center">-</td>';
+                                                            }
+                                                            else{
+                                                                $output .= '<td class="text-center">'.$target2.'</td>';
+                                                                $totaltarget += $target2;
+                                                            }
+                                                            $accomplish2 = $get2['accomplish'];
+                                                            if($accomplish2 == 0){
+                                                                $output .= '<td class="text-center">-</td>';
+                                                            }
+                                                            else{
+                                                                $output .= '<td class="text-center">'.$accomplish2.'</td>';
+                                                                $totalaccomplish += $accomplish2;
+                                                            }
+                                                            if($totaltarget == 0){
+                                                                $output .= '<td class="text-center">-</td>';
+                                                            }
+                                                            else{
+                                                                $output .= '<td class="text-center">'.$totaltarget.'</td>';
+                                                            }
+                                                            if($totalaccomplish == 0){
+                                                                $output .= '<td class="text-center">-</td>';
+                                                            }
+                                                            else{
+                                                                $output .= '<td class="text-center">'.$totalaccomplish.'</td>';
+                                                            }
+                                                        }
+                                                        $output .= '</tr>';
+                                                    }
+                                                }
                                             }
                                         }
                                     }

@@ -74,7 +74,16 @@ function initreport(){
 }
 function print(){
     var region = $("#slctregion").val();
-    var year = $("#slctyear").val();
-    var mode = $("#slctmode").val();
-    window.open("../home/printable/?print=report&mode=" + mode + "&year=" + year + "&region=" + region);
+	var year = $("#slctyear").val();
+	var report = $("#slctreport").val();
+	if(report == 1){
+		report = "pcar_report.php";
+	}
+	else if(report == 2){
+		report = "ipcr_report.php";
+	}
+	else if(report == 3){
+		report = "dbm_report.php";
+	}
+    window.open("../home/printable/" + report + "?year=" + year + "&region=" + region);
 }

@@ -1,7 +1,7 @@
 <header>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark primary-color">
         <img src="../../../img/custom/chedlogo2.png" style="height: 40px; margin-left: -20px;">
-        <a class="navbar-brand" href="." style="margin-left: -10px;"><strong>CHED PCAR - <?php echo $_SESSION['region_code']; ?> (Director)</strong></a>
+        <a class="navbar-brand" href="." style="margin-left: -10px;"><strong>CHED OPCARS - <?php echo $_SESSION['region_code']; ?> (Director)</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

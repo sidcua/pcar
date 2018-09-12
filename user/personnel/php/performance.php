@@ -45,7 +45,7 @@
 				<tbody>';
 		// level 1
 		if($_SESSION['level'] == 3){
-            $sql = mysql_query("SELECT assignID, program.programID AS programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE assign.accID = '$accid' AND level = 1 AND state = 1 AND reportID = '$reportid' ORDER BY title ASC");
+            $sql = mysql_query("SELECT assignID, program.programID AS programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE assign.accID = '$accid' AND level = 1 AND state = 1 AND reportID = '$reportid'");
         }
         else{
             $sql = mysql_query("SELECT programID, title, status FROM program WHERE level = 1 AND state = 1 ORDER BY title ASC");
@@ -61,10 +61,9 @@
 				$output .= '<td colspan="12" class="grey lighten-2"></td>';
 			}
 			else{
-				$limit = 3;
-				for ($i = 1; $i <= 12 ; $i = $i + 3) { 
+				for ($i = 1; $i <= 4 ; $i++) { 
 					if($_SESSION['level'] == 3){
-                        $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month >= '$i' AND month <= '$limit' AND year = '$year' AND program.programID = '$programid' AND assign.accID = '$accid'");
+                        $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month = '$i' AND year = '$year' AND program.programID = '$programid' AND assign.accID = '$accid'");
                     }
                     else{
                         $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month >= '$i' AND month <= '$limit' AND year = '$year' AND program.programID = '$programid'".$sub);   
@@ -112,13 +111,12 @@
 						<td class="text-center">-</td>
 						<td class="text-center">-</td>';
 					}
-					$limit = $limit + 3;
 				}
 			}
 			$output .= '</tr>';
 			// level 2
 			if($_SESSION['level'] == 3){
-                $sql2 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' AND reportID = '$reportid' ORDER BY title ASC");
+                $sql2 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid'");
             }
             else{
                 $sql2 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
@@ -135,10 +133,9 @@
 						$output .= '<td colspan="12" class="grey lighten-2"></td>';
 					}
 					else{
-						$limit = 3;
-						for ($i = 1; $i <= 12 ; $i = $i + 3) { 
+						for ($i = 1; $i <= 4 ; $i++) { 
 							if($_SESSION['level'] == 3){
-                                $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month >= '$i' AND month <= '$limit' AND year = '$year' AND program.programID = '$programid' AND assign.accID = '$accid'");
+                                $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month = '$i' AND year = '$year' AND program.programID = '$programid' AND assign.accID = '$accid'");
                             }
                             else{
                                 $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month >= '$i' AND month <= '$limit' AND year = '$year' AND program.programID = '$programid'".$sub);   
@@ -192,7 +189,7 @@
 					$output .= '</tr>';
 					// level 3
 					if($_SESSION['level'] == 3){
-                        $sql3 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' AND reportID = '$reportid' ORDER BY title ASC");
+                        $sql3 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' AND reportID = '$reportid'");
                     }
                     else{
                         $sql3 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
@@ -210,9 +207,9 @@
 							}
 							else{
 								$limit = 3;
-								for ($i = 1; $i <= 12 ; $i = $i + 3) { 
+								for ($i = 1; $i <= 4 ; $i++) { 
 									if($_SESSION['level'] == 3){
-                                        $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month >= '$i' AND month <= '$limit' AND year = '$year' AND program.programID = '$programid' AND assign.accID = '$accid'");
+                                        $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month = '$i' AND year = '$year' AND program.programID = '$programid' AND assign.accID = '$accid'");
                                     }
                                     else{
                                         $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month >= '$i' AND month <= '$limit' AND year = '$year' AND program.programID = '$programid'".$sub);   
@@ -260,13 +257,12 @@
 										<td class="text-center">-</td>
 										<td class="text-center">-</td>';
 									}
-									$limit = $limit + 3;
 								}
 							}
 							$output .= '</tr>';
 							// level 4
 							if($_SESSION['level'] == 3){
-                                $sql4 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' AND reportID = '$reportid' ORDER BY title ASC");
+                                $sql4 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' AND reportID = '$reportid'");
                             }
                             else{
                                 $sql4 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
@@ -283,10 +279,9 @@
 										$output .= '<td colspan="12" class="grey lighten-2"></td>';
 									}
 									else{
-										$limit = 3;
-										for ($i = 1; $i <= 12 ; $i = $i + 3) { 
+										for ($i = 1; $i <= 4 ; $i++) { 
 											if($_SESSION['level'] == 3){
-                                                $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month >= '$i' AND month <= '$limit' AND year = '$year' AND program.programID = '$programid' AND assign.accID = '$accid'");
+                                                $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month = '$i' AND year = '$year' AND program.programID = '$programid' AND assign.accID = '$accid'");
                                             }
                                             else{
                                                 $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month >= '$i' AND month <= '$limit' AND year = '$year' AND program.programID = '$programid'".$sub);   
@@ -334,13 +329,12 @@
 												<td class="text-center">-</td>
 												<td class="text-center">-</td>';
 											}
-											$limit = $limit + 3;
 										}
 									}
 									$output .= '</tr>';
 									// level 5
 									if($_SESSION['level'] == 3){
-                                        $sql5 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' AND reportID = '$reportid' ORDER BY title ASC");
+                                        $sql5 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid'");
                                     }
                                     else{
                                         $sql5 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
@@ -357,8 +351,7 @@
 												$output .= '<td colspan="12" class="grey lighten-2"></td>';
 											}
 											else{
-												$limit = 3;
-												for ($i = 1; $i <= 12 ; $i = $i + 3) { 
+												for ($i = 1; $i <= 4 ; $i++) { 
 													if($_SESSION['level'] == 3){
                                                         $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month = '$i' AND year = '$year' AND program.programID = '$programid' AND assign.accID = '$accid'");
                                                     }
@@ -408,10 +401,83 @@
 														<td class="text-center">-</td>
 														<td class="text-center">-</td>';
 													}
-													$limit = $limit + 3;
 												}
 											}
 											$output .= '</tr>';
+											// level 6
+											if($_SESSION['level'] == 3){
+												$sql6 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid'");
+											}
+											else{
+												$sql6 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 ORDER BY title ASC");
+											}
+											if(mysql_num_rows($sql6) != 0){
+												while($fetch6 = mysql_fetch_assoc($sql6)){
+													$programid = $fetch6['programID'];
+													$title = $fetch6['title'];
+													$status = $fetch6['status'];
+													$output .= 
+													'<tr>
+														<td style="padding-left: 100px;">'.$title.'</td>';
+													if($status == 0){
+														$output .= '<td colspan="12" class="grey lighten-2"></td>';
+													}
+													else{
+														for ($i = 1; $i <= 4 ; $i++) { 
+															if($_SESSION['level'] == 3){
+																$query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID WHERE month = '$i' AND year = '$year' AND program.programID = '$programid' AND assign.accID = '$accid'");
+															}
+															else{
+																$query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM program INNER JOIN assign ON program.programID = assign.programID INNER JOIN targetaccomplish ON assign.assignID = targetaccomplish.assignID INNER JOIN account ON assign.accID = account.accID WHERE month = '$i' AND year = '$year' AND program.programID = '$programid'".$sub);    
+															}
+															$get = mysql_fetch_assoc($query);
+															$target = $get['target'];
+															$accomplish = $get['accomplish'];
+															if($target != 0 && $accomplish != 0){	
+																$remark = round((((($accomplish - $target)/$target)*100)+100), 1);
+																if($remark >= 130){
+																	$rating = 5;
+																}
+																else if($remark <= 129 && $remark >= 115){
+																	$rating = 4;
+																}
+																else if($remark <= 114 && $remark >= 100){
+																	$rating = 3;
+																}
+																else if($remark <= 99 && $remark >= 85){
+																	$rating = 2;
+																}
+																else{
+																	$rating = 1;
+																}
+																if($rating >= 4.8){
+																	$adj = "Outstanding";
+																}
+																else if($rating <= 4.79 && $rating >= 4){
+																	$adj = "Very Satisfactory";
+																}
+																else if($rating <= 3.99 && $rating >= 3){
+																	$adj = "Satisfactory";
+																}
+																else if($rating <= 2.99 && $rating >= 0){
+																	$adj = "Unsatisfactory";
+																}
+																$output .= 
+																	'<td class="text-center">'.$remark.'</td>
+																	<td class="text-center">'.$rating.'</td>
+																	<td class="text-center">'.$adj.'</td>';
+															}
+															else{
+																$output .=
+																'<td class="text-center">-</td>
+																<td class="text-center">-</td>
+																<td class="text-center">-</td>';
+															}
+														}
+													}
+													$output .= '</tr>';
+												}
+											}
 										}
 									}
 								}

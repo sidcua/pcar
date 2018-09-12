@@ -1,7 +1,7 @@
 <header>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark primary-color">
         <img src="../../../img/custom/chedlogo2.png" style="height: 40px; margin-left: -20px;">
-        <a class="navbar-brand" href="." style="margin-left: -10px;"><strong>CHED PCAR - Central</strong></a>
+        <a class="navbar-brand" href="." style="margin-left: -10px;"><strong>CHED OPCARS - Central</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -16,9 +16,9 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-book" aria-hidden="true"></i> Programs/Projects</a>  
                     <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink"> 
-                        <a class="dropdown-item" href="./program.php?program=1"><i class="fa fa-circle" aria-hidden="true"></i> PCAR</a>
-                        <a class="dropdown-item" href="./program.php?program=2"><i class="fa fa-circle" aria-hidden="true"></i> IPCR</a>
-                        <a class="dropdown-item" href="./program.php?program=3"><i class="fa fa-circle" aria-hidden="true"></i> DBM</a>
+                        <a class="dropdown-item" href="./program.php?program=1"><i class="fa fa-bookmark" aria-hidden="true"></i> PCAR</a>
+                        <a class="dropdown-item" href="./program.php?program=2"><i class="fa fa-bookmark" aria-hidden="true"></i> IPCR</a>
+                        <a class="dropdown-item" href="./program.php?program=3"><i class="fa fa-bookmark" aria-hidden="true"></i> DBM</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-desktop" aria-hidden="true"></i> Reports</a>  

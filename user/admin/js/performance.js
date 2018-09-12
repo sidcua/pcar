@@ -18,17 +18,18 @@ function inityear(){
 		},
 		complete: function(){
             $("#slctyear").show();
-			change();
+			initreport();
 		}
 	})
 }
 function change(){
     var year = $("#slctyear").val();
-    var region = $("#slctregion").val();
+	var region = $("#slctregion").val();
+	var report = $("#slctreport").val();
 	$.ajax({
 		url: url(),
 		method: "post",
-		data: {region: region, year: year, action: "change"},
+		data: {reportid: report, region: region, year: year, action: "change"},
 		beforeSend: function(){
 			$("#tblperformance").empty();
 			$("#fountainG").show();
@@ -57,6 +58,20 @@ function initregion(){
             inityear();
         }
     })
+}
+function initreport(){
+	$.ajax({
+		url: url(),
+		method: "post",
+		data: {action: "initreport"},
+		success: function(data){
+			data = $.parseJSON(data);
+			$("#slctreport").html(data);
+		},
+		complete: function(){
+			change();
+		}
+	})
 }
 function print(){
     mode = $("#slctmode").val();

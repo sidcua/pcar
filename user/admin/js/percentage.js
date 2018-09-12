@@ -4,11 +4,14 @@ $(document).ready(function(){
 function url(){
     return "../php/percentage.php";
 }
-function fetchdata(year, region){
+function fetchdata(){
+    var region = $("#slctregion").val();
+    var report = $("#slctreport").val();
+    var year = $("#slctyear").val();
     $.ajax({
         url: url(),
         method: "post",
-        data: {year: year, region: region, action: "fetchdata"},
+        data: {report: report, year: year, region: region, action: "fetchdata"},
         beforeSend: function(){
             $("#tblpercentage").empty();
             $("#percentageloader").show();
@@ -54,15 +57,23 @@ function initregion(){
             }
         },
         complete: function(){
-            fetchdata($("#slctyear").val(), $("#slctregion").val());
+            initreport();
         }
     })
 }
-function region(region){
-    fetchdata($("#slctyear").val(), region);
-}
-function year(year){
-    fetchdata(year, $("#slctregion").val());
+function initreport(){
+    $.ajax({
+        url: url(),
+        method: "post",
+        data: {action: "initreport"},
+        success: function(data){
+            data = $.parseJSON(data);
+            $("#slctreport").html(data);
+        },
+        complete: function(){
+            fetchdata();
+        }
+    })
 }
 function print(){
     region = $("#slctregion").val();

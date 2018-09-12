@@ -47,7 +47,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="d-flex justify-content-between">
@@ -70,11 +70,11 @@
 					<thead class="mdb-color darken-3">
 						<tr class="white-text text-center">
 							<th style="width: 300px;">Services Programs/Projects</th>
-							<th>Quarter 1</th>
-							<th>Quarter 2</th>
-							<th>Quarter 3</th>
-							<th>Quarter 4</th>
-							<th style="width: 200px;">Remark</th>
+							<th>1st Quarter</th>
+							<th>2nd Quarter</th>
+							<th>3rd Quarter</th>
+							<th>4th Quarter</th>
+							<th style="width: 600px;">Remark</th>
 							<th>Action</th>
 						</tr>
 					</thead>

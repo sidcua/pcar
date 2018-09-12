@@ -5,6 +5,7 @@
     if($action == "fetchdata"){
         $year = mysql_escape_string($_POST['year']);
         $region = mysql_escape_string($_POST['region']);
+        $reportid = mysql_escape_string($_POST['report']);
         $output = "";
         $totaltarget = 0;
         $totalaccomplish = 0;
@@ -13,8 +14,8 @@
         if($region != 0){
             $sub = " AND regionID = ".$region;
         }
-//        level 1
-        $sql = mysql_query("SELECT title, programID, percentage FROM program WHERE state = 1 AND level = 1 ORDER BY title ASC");
+        //level 1
+        $sql = mysql_query("SELECT title, programID, percentage FROM program WHERE state = 1 AND level = 1 AND reportID = '$reportid'");
         if(mysql_num_rows($sql) != 0){
             while($fetch = mysql_fetch_assoc($sql)){
                 $programid = $fetch['programID'];
@@ -29,7 +30,7 @@
                         $totalaccomplish = $totalaccomplish + $get['accomplish'];
                     }
                 }
-//                level 2
+                //level 2
                 $sql2 = mysql_query("SELECT programID FROM program WHERE under = '$programid'");
                 if(mysql_num_rows($sql2) != 0){
                     while($fetch2 = mysql_fetch_assoc($sql2)){
@@ -41,6 +42,7 @@
                                 $totalaccomplish = $totalaccomplish + $get['accomplish'];
                             }
                         }
+                        //level 3
                         $sql3 = mysql_query("SELECT programID FROM program WHERE under = '$programid'");
                         if(mysql_num_rows($sql3) != 0){
                             while($fetch3 = mysql_fetch_assoc($sql3)){
@@ -52,6 +54,7 @@
                                         $totalaccomplish = $totalaccomplish + $get['accomplish'];
                                     }
                                 }
+                                //levle 4
                                 $sql4 = mysql_query("SELECT programID FROM program WHERE under = '$programid'");
                                 if(mysql_num_rows($sql4) != 0){
                                     while($fetch4 = mysql_fetch_assoc($sql4)){
@@ -63,6 +66,7 @@
                                                 $totalaccomplish = $totalaccomplish + $get['accomplish'];
                                             }
                                         }
+                                        //level 5
                                         $sql5 = mysql_query("SELECT programID FROM program WHERE under = '$programid'");
                                         if(mysql_num_rows($sql5) != 0){
                                             while($fetch5 = mysql_fetch_assoc($sql5)){
@@ -72,6 +76,20 @@
                                                     while($get = mysql_fetch_assoc($query)){
                                                         $totaltarget = $totaltarget + $get['target'];
                                                         $totalaccomplish = $totalaccomplish + $get['accomplish'];
+                                                    }
+                                                }
+                                                //level 6
+                                                $sql5 = mysql_query("SELECT programID FROM program WHERE under = '$programid'");
+                                                if(mysql_num_rows($sql5) != 0){
+                                                    while($fetch5 = mysql_fetch_assoc($sql5)){
+                                                        $programid = $fetch5['programID'];
+                                                        $query = mysql_query("SELECT SUM(target) AS target, SUM(accomplish) AS accomplish FROM targetaccomplish INNER JOIN assign ON targetaccomplish.assignID = assign.assignID INNER JOIN program ON assign.programID = program.programID INNER JOIN account ON assign.accID = account.accID WHERE year = '$year' AND program.programID = '$programid'".$sub);
+                                                        if(mysql_num_rows($query) != 0){
+                                                            while($get = mysql_fetch_assoc($query)){
+                                                                $totaltarget = $totaltarget + $get['target'];
+                                                                $totalaccomplish = $totalaccomplish + $get['accomplish'];
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             }
@@ -127,5 +145,14 @@
             $obj['level'] = false;
         }
         echo json_encode($obj);
+    }
+    if($action == "initreport"){
+        $sql = mysql_query("SELECT * FROM report WHERE status = 1");
+        while($fetch = mysql_fetch_assoc($sql)){
+            $reportid = $fetch['reportID'];
+            $report = $fetch['report'];
+            $output .= '<option value="'.$reportid.'">'.$report.'</option>';
+        }
+        echo json_encode($output);
     }
 ?>

@@ -29,7 +29,7 @@ function change(){
 	$.ajax({
 		url: url(),
 		method: "post",
-		data: {reporid: reportid, region: region, year: year, action: "change"},
+		data: {reportid: reportid, region: region, year: year, action: "change"},
 		beforeSend: function(){
 			$("#tblperformance").empty();
 			$("#fountainG").show();

@@ -34,7 +34,7 @@ function editvalues(td){
 	$("#assign" + td + ">._target").attr("contenteditable", false);
 	$("[for=title]").attr("contenteditable", false);
 	$("[for=action]").attr("contenteditable", false);
-	$("#assign" + td + ">td>").attr("contenteditable", false);
+	// $("#assign" + td + ">td>").attr("contenteditable", false);
     if(!Number.isInteger(parseInt($("#assign" + td).closest('tr').find('.q1-' + td).text())) && $("#assign" + td).closest('tr').find('.q1-' + td).text() != ""){
 		$("#assign" + td + ">.q1-" + td).empty();
 	}

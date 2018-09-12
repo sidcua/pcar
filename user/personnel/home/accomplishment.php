@@ -28,14 +28,26 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="jumbotron grey lighten-5">
-					    <h1 class="h1-responsive">Accomplishment</h1>
+					    <h1 class="h1-responsive">Accomplishment
+							<?php
+								if($_GET['program'] == 1){
+									echo '(PCAR)';
+								}
+								else if($_GET['program'] == 2){
+									echo '(IPCR)';
+								}
+								else if($_GET['program'] == 3){
+									echo '(DBM)';
+								}
+							?>
+						</h1>
 					    <hr class="my-2">
 					    <p><i>Accomplishment Record</i></p>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="d-flex justify-content-between">
@@ -64,14 +76,14 @@
 							<th rowspan="2">Action</th>
 						</tr>
 						<tr class="text-center white-text">
-							<th>Quarter 1</th>
-							<th>Quarter 2</th>
-							<th>Quarter 3</th>
-							<th>Quarter 4</th>
-							<th>Quarter 1</th>
-							<th>Quarter 2</th>
-							<th>Quarter 3</th>
-							<th>Quarter 4</th>
+							<th>1st Quarter</th>
+							<th>2nd Quarter</th>
+							<th>3rd Quarter</th>
+							<th>4th Quarter</th>
+							<th>1st Quarter</th>
+							<th>2nd Quarter</th>
+							<th>3rd Quarter</th>
+							<th>4th Quarter</th>
 						</tr>
 					</thead>
 					<tbody id="tblaccomplish">
