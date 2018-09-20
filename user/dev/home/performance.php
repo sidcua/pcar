@@ -51,12 +51,12 @@
 						}
 					?>
 					<div class="form-group d-flex flex-row">
-						<label for="slctyear" style="margin-right: 15px; margin-top: 10px;">Year</label>
+						<label for="slctyear" style="margin-right: 15px; margin-top: 10px; margin-left: 20px;">Year</label>
 						<select onchange="change();" class="form-control" id="slctyear">
 						</select>
 					</div>
-					<div class="form-group d-flex flex-row" style="margin-left: 20px;">
-						<label for="slctreport" style="margin-right: 15px; margin-top: 10px;">Year</label>
+					<div class="form-group d-flex flex-row">
+						<label for="slctreport" style="margin-right: 15px; margin-top: 10px; margin-left: 20px;">Report</label>
 						<select onchange="change();" class="form-control" id="slctreport">
 						</select>
 					</div>

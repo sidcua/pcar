@@ -25,19 +25,10 @@
                     <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink"> 
                         <a class="dropdown-item" href="./report.php"><i class="fa fa-desktop" aria-hidden="true"></i> Target and Accomplishment<span class="sr-only"></span></a>
                         <a class="dropdown-item" href="./performance.php"><i class="fa fa-dot-circle-o" aria-hidden="true"></i> Performance<span class="sr-only"></span></a>
-                        <?php
-                            if($_SESSION['level'] < 3 || $_SESSION['level'] == 4){
-                                echo '<a class="dropdown-item" href="./assign.php"><i class="fa fa-asterisk" aria-hidden="true"></i> Assigns<span class="sr-only"></span></a>
-                                <a class="dropdown-item" href="./percentage.php"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Percentage Accomplishment<span class="sr-only"></span></a>
-                                <a class="dropdown-item" href="./monthreport.php"><i class="fa fa-line-chart" aria-hidden="true"></i> Monthly Report<span class="sr-only"></span></a>
-                                <a class="dropdown-item" href="./opcr.php"><i class="fa fa-area-chart" aria-hidden="true"></i> OPCR <span class="sr-only"></span></a>';
-                            }
-                            else{
-                                if($_SESSION['level'] != 4){
-                                    echo '<a class="dropdown-item" href="./ipcr.php"><i class="fa fa-area-chart" aria-hidden="true"></i> IPCR <span class="sr-only"></span></a>';   
-                                }
-                            }
-                        ?>
+                        <a class="dropdown-item" href="./assign.php"><i class="fa fa-asterisk" aria-hidden="true"></i> Assigns<span class="sr-only"></span></a>
+                        <a class="dropdown-item" href="./percentage.php"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Percentage Accomplishment<span class="sr-only"></span></a>
+                        <a class="dropdown-item" href="./monthreport.php"><i class="fa fa-line-chart" aria-hidden="true"></i> Quarterly Report<span class="sr-only"></span></a>
+                        <!-- <a class="dropdown-item" href="./opcr.php"><i class="fa fa-area-chart" aria-hidden="true"></i> OPCR <span class="sr-only"></span></a> -->
                     </div>
                 </li>
                 <li class="nav-item dropdown">

@@ -4,7 +4,7 @@ $(document).ready(function(){
 function url(){
     return "../php/monthreport.php";
 }
-function fetchdata(mode, year){
+function fetchdata(mode, year, report){
     if(mode == "month"){
         value = $("#slctmonth").val();
     }
@@ -14,7 +14,7 @@ function fetchdata(mode, year){
     $.ajax({
         url: url(),
         method: "post",
-        data: {value: value, year: year, action: mode},
+        data: {report: report, value: value, year: year, action: mode},
         beforeSend: function(){
             $("#tblmonthreport").empty();
             $("#monthreportloader").show()
@@ -43,7 +43,7 @@ function inityear(){
             $("#slctyear").show();
         },
         complete: function(){
-            mode($("#slctmode").val());
+            initreport();
         }
     })
 }
@@ -54,23 +54,34 @@ function mode(mode){
     else{
         $("#form").html('<label for="slctquarter" style="margin-right: 10px; margin-top: 10px;">Quarter</label><select onchange="change()" class="form-control" id="slctquarter"><option value="1">Quarter 1</option><option value="2">Quarter 2</option><option value="3">Quarter 3</option><option value="4">Quarter 4</option></select>');
     }
-    fetchdata(mode, $("#slctyear").val());
+    fetchdata(mode, $("#slctyear").val(), $("#slctreport").val());
 }
 function change(){
-    fetchdata($("#slctmode").val(), $("#slctyear").val());
+    var mode = $("#slctmode").val();
+    var year = $("#slctyear").val();
+    var report = $("#slctreport").val();
+    fetchdata(mode, year, report);
 }
 function year(year){
     fetchdata($("#slctmode").val(), year);
 }
+function initreport(){
+    $.ajax({
+        url: url(),
+        method: "post",
+        data: {action: "initreport"},
+        success: function(data){
+            data = $.parseJSON(data);
+            $("#slctreport").html(data);
+        },
+        complete: function(){
+            mode("quarter");
+        }
+    })
+}
 function print(){
-    var mode = $("#slctmode").val();
     var year = $("#slctyear").val();
-    if(mode == "month"){
-        var month = $("#slctmonth").val();
-        window.open("../home/printable/?print=monthlyreport&mode=" + mode + "&year=" + year + "&month=" + month);
-    }
-    else{
-        var quarter = $("#slctquarter").val();
-        window.open("../home/printable/?print=monthlyreport&mode=" + mode + "&year=" + year + "&quarter=" + quarter);
-    }
+    var report = $("#slctreport").val();
+    var quarter = $("#slctquarter").val();
+    window.open("../home/printable/monthreport_report.php?year=" + year + "&report=" + report + "&quarter=" + quarter);
 }

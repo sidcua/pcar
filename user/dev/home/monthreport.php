@@ -30,33 +30,36 @@
 					<div class="jumbotron grey lighten-5">
 					    <h1 class="h1-responsive">Report</h1>
 					    <hr class="my-2">
-					    <p><i>Consolidated and current month total by monthly and quarterly</i></p>
+					    <p><i>Consolidated by quarterly</i></p>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
-				<div class="col-sm-12">
-					<div class="d-flex justify-content-between">
-                        <div class="d-flex flex-row">
-                            <div class="form-group d-flex flex-row">
-                                <label for="slctmode" style="margin-right: 10px; margin-top: 10px;">Mode</label>
-                                <select onchange="mode(this.value)" class="form-control" id="slctmode">
-                                    <option value="quarter">Quarterly</option>
-                                </select>
-                            </div>
-                            <div id="form" class="form-group d-flex flex-row" style="margin-right: 20px; margin-left: 20px;">
-                            </div>
-                            <div class="form-group d-flex flex-row">
-                                <label for="slctyear" style="margin-right: 10px; margin-top: 10px;">Year</label>
-                                <select onchange="year(this.value)" class="form-control" id="slctyear">
-                                </select>
-                            </div>
-                        </div>
-					    <div class="form-gruop">
-					        <button onclick="print()" class="btn btn-outline-primary waves-effect"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
-					    </div>
+				<div class="col-sm-10 d-flex justify-content-start">
+					<div class="form-group d-flex flex-row">
+						<label for="slctmode" style="margin-right: 10px; margin-top: 10px;" hidden>Mode</label>
+						<select onchange="mode(this.value)" class="form-control" id="slctmode" hidden>
+							<option value="quarter">Quarterly</option>
+						</select>
+					</div>
+					<div id="form" class="form-group d-flex flex-row" style="margin-right: 20px; margin-left: 20px;">
+					</div>
+					<div class="form-group d-flex flex-row">
+						<label for="slctyear" style="margin-right: 10px; margin-top: 10px;">Year</label>
+						<select onchange="change()" class="form-control" id="slctyear">
+						</select>
+					</div>
+					<div class="form-group d-flex flex-row">
+						<label for="slctreport" style="margin-right: 10px; margin-top: 10px; margin-left: 20px;">Report</label>
+						<select onchange="change()" class="form-control" id="slctreport">
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-2 d-flex justify-content-end">
+				<div class="form-gruop">
+					<button onclick="print()" class="btn btn-outline-primary waves-effect"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
 					</div>
 				</div>
 			</div>

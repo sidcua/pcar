@@ -35,39 +35,27 @@
 				</div>
 			</div>
 		</div>
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
-				<div class="col-sm-12">
-					<div class="d-flex justify-content-between">
-                        <div class="d-flex flex-row">
-                            <?php
-                                if($_SESSION['level'] < 2){
-                                    echo '<div class="form-group d-flex flex-row" style="margin-right: 20px;">
-                                    <label for="slctregion" style="margin-right: 10px; margin-top: 10px;">Region</label>
-                                    <select onchange="region(this.value)" class="form-control" id="slctregion">
-                                    </select>
-                                    </div>';
-                                }
-                                else{
-                                    echo '<div class="form-group d-flex flex-row" style="margin-right: 20px;" hidden>
-                                    <label for="slctregion" style="margin-right: 10px; margin-top: 10px;" hidden>Region</label>
-                                    <select class="form-control" id="slctregion">
-                                    <option value="'.$_SESSION['region'].'"></option>
-                                    </select>
-                                    </div>';
-                                }
-                            ?>
-                            <div class="form-group d-flex flex-row">
-                                <label for="slctyear" style="margin-right: 10px; margin-top: 10px;">Year</label>
-                                <select onchange="year(this.value)" class="form-control" id="slctyear">
-                                </select>
-                            </div>
-                        </div>
-					    <div class="form-gruop">
-					        <button onclick="print()" class="btn btn-outline-primary waves-effect"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
-					    </div>
+				<div class="col-sm-10 d-flex justify-content-start">
+					<div class="form-group d-flex flex-row" style="margin-right: 20px;" hidden>
+						<label for="slctregion" style="margin-right: 10px; margin-top: 10px;" hidden>Region</label>
+						<select class="form-control" id="slctregion" hidden>
+						<option value="<?php echo $_SESSION['region']; ?>"></option>
+						</select>
+					</div>
+					<div class="form-group d-flex flex-row">
+						<label for="slctyear" style="margin-right: 10px; margin-top: 10px;">Year</label>
+						<select onchange="fetchdata()" class="form-control" id="slctyear">
+						</select>
+					</div>
+					<div class="form-group d-flex flex-row">
+						<label for="slctreport" style="margin-right: 10px; margin-top: 10px; margin-left: 20px;">Report</label>
+						<select onchange="fetchdata()" class="form-control" id="slctreport">
+						</select>
 					</div>
 				</div>
+				<div class="col-sm-2 d-flex justify-content-end"></div>
 			</div>
 			<div class="row">
 				<table class="table table-striped">
