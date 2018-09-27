@@ -43,27 +43,23 @@
         if($region != 0){
             $sub = " AND regionID = ".$region;
         }
-		$limit = 3;
-		for ($i = 1; $i <= 12 ; $i = $i + 3) { 
-			$sql = mysql_query("SELECT SUM(target) AS target FROM targetaccomplish INNER JOIN assign ON targetaccomplish.assignID = assign.assignID INNER JOIN account ON assign.accID = account.accID WHERE month >= '$i' AND month <= '$limit' AND year = '$year'".$sub);
+		for ($i = 1; $i <= 4 ; $i++) { 
+			$sql = mysql_query("SELECT SUM(target) AS target FROM targetaccomplish INNER JOIN assign ON targetaccomplish.assignID = assign.assignID INNER JOIN account ON assign.accID = account.accID WHERE month = '$i' AND year = '$year'".$sub);
 			$fetch = mysql_fetch_assoc($sql);
 			$target = $fetch['target'];
 			if($target == ""){
 				$target = 0;
 			}
 			$obj[1][$i] = $target;
-			$limit = $limit + 3;
 		}
-		$limit = 3;
-		for ($i = 1; $i <= 12 ; $i = $i + 3) { 
-			$sql = mysql_query("SELECT SUM(accomplish) AS accomplish FROM targetaccomplish INNER JOIN assign ON targetaccomplish.assignID = assign.assignID INNER JOIN account ON assign.accID = account.accID WHERE month >= '$i' AND month <= '$limit' AND year = '$year'".$sub);
+		for ($i = 1; $i <= 4 ; $i++) { 
+			$sql = mysql_query("SELECT SUM(accomplish) AS accomplish FROM targetaccomplish INNER JOIN assign ON targetaccomplish.assignID = assign.assignID INNER JOIN account ON assign.accID = account.accID WHERE month = '$i' AND year = '$year'".$sub);
 			$fetch = mysql_fetch_assoc($sql);
 			$accomplish = $fetch['accomplish'];
 			if($accomplish == ""){
 				$accomplish = 0;
 			}
 			$obj[2][$i] = $accomplish;
-			$limit = $limit + 3;
 		}
 		echo json_encode($obj);
 	}
