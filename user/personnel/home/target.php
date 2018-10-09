@@ -69,13 +69,13 @@
 				<table class="table table-bordered table-striped">
 					<thead class="mdb-color darken-3">
 						<tr class="white-text text-center">
-							<th style="width: 300px;">Services Programs/Projects</th>
-							<th>1st Quarter</th>
-							<th>2nd Quarter</th>
-							<th>3rd Quarter</th>
-							<th>4th Quarter</th>
-							<th style="width: 600px;">Remark</th>
-							<th>Action</th>
+							<th class="font-weight-bold" style="width: 300px;">Services Programs/Projects</th>
+							<th class="font-weight-bold">1st Quarter</th>
+							<th class="font-weight-bold">2nd Quarter</th>
+							<th class="font-weight-bold">3rd Quarter</th>
+							<th class="font-weight-bold">4th Quarter</th>
+							<!-- <th style="width: 600px;">Remark</th> -->
+							<th class="font-weight-bold" style="width: 200px;">Action</th>
 						</tr>
 					</thead>
 					<tbody id="tbltargets">

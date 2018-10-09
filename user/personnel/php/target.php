@@ -28,7 +28,7 @@
                 $status = $fetch['status'];
 				$output .= 
 				'<tr id="assign'.$assignid.'">
-					<td for="title">'.$title.'</td>';
+					<td for="title" class="title-font">'.$title.'</td>';
 				if($status == 0){
 					$output .= 
 					'<td colspan="13" class="grey lighten-2"></td>';
@@ -37,23 +37,23 @@
 					for ($i = 1; $i <= 12 ; $i++) { 
 						switch($i){
 							case 1:
-								$output .= '<td class="text-center q1-'.$assignid.'">';
+								$output .= '<td class="text-center align-middle number-font q1-'.$assignid.'">';
 								break;
 							case 2:
-								$output .= '<td class="text-center q2-'.$assignid.'">';
+								$output .= '<td class="text-center align-middle number-font q2-'.$assignid.'">';
 								break;
 							case 3:
-								$output .= '<td class="text-center q3-'.$assignid.'">';
+								$output .= '<td class="text-center align-middle number-font q3-'.$assignid.'">';
 								break;
 							case 4:
-								$output .= '<td class="text-center q4-'.$assignid.'">';
+								$output .= '<td class="text-center align-middle number-font q4-'.$assignid.'">';
 								break;
 						}
                         $sql_target = mysql_query("SELECT target FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
 						if(mysql_num_rows($sql_target) != 0){
 							$fetch = mysql_fetch_assoc($sql_target);
 							if($fetch['target'] != 0){
-								$output .= $fetch['target'];
+								$output .= number_format($fetch['target']);
 							}
 							else{
 								$output .= "-";
@@ -63,9 +63,9 @@
                     }
                     $sql_remark = mysql_query("SELECT remark FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
                     $fetch_remark = mysql_fetch_assoc($sql_remark);
-                    $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
+                    // $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
                     if($input == true){
-                        $output .= '<td for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>';
+                        $output .= '<td class="align-middle text-center" for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
                     }
                     else{
                         $output .= '<td></td>';
@@ -82,7 +82,7 @@
                         $status = $fetch2['status'];
                         $output .= 
                         '<tr id="assign'.$assignid.'">
-                            <td for="title" style="padding-left: 20px;">'.$title.'</td>';
+                            <td for="title" class="title-font" style="padding-left: 20px;">'.$title.'</td>';
                         if($status == 0){
                             $output .= 
                             '<td colspan="13" class="grey lighten-2"></td>';
@@ -91,23 +91,23 @@
                             for ($i = 1; $i <= 12 ; $i++) { 
                                 switch($i){
                                     case 1:
-                                        $output .= '<td class="text-center q1-'.$assignid.'">';
+                                        $output .= '<td class="text-center align-middle number-font q1-'.$assignid.'">';
                                         break;
                                     case 2:
-                                        $output .= '<td class="text-center q2-'.$assignid.'">';
+                                        $output .= '<td class="text-center align-middle number-font q2-'.$assignid.'">';
                                         break;
                                     case 3:
-                                        $output .= '<td class="text-center q3-'.$assignid.'">';
+                                        $output .= '<td class="text-center align-middle number-font q3-'.$assignid.'">';
                                         break;
                                     case 4:
-                                        $output .= '<td class="text-center q4-'.$assignid.'">';
+                                        $output .= '<td class="text-center align-middle number-font q4-'.$assignid.'">';
                                         break;
                                 }
                                 $sql_target = mysql_query("SELECT target, remark FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
                                 if(mysql_num_rows($sql_target) != 0){
                                     $fetch = mysql_fetch_assoc($sql_target);
                                     if($fetch['target'] != 0){
-                                        $output .= $fetch['target'];
+                                        $output .= number_format($fetch['target']);
                                     }
                                     else{
                                         $output .= "-";
@@ -117,9 +117,9 @@
                             }
                             $sql_remark = mysql_query("SELECT remark FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
                             $fetch_remark = mysql_fetch_assoc($sql_remark);
-                            $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
+                            // $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
                             if($input == true && $status == 1){
-                                $output .= '<td for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>';
+                                $output .= '<td class="align-middle text-center" for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
                             }
                             else{
                                 $output .= '<td></td>';
@@ -136,7 +136,7 @@
                                 $status = $fetch3['status'];
                                 $output .= 
                                 '<tr id="assign'.$assignid.'">
-                                    <td for="title" style="padding-left: 40px;">'.$title.'</td>';
+                                    <td for="title" class="title-font" style="padding-left: 40px;">'.$title.'</td>';
                                 if($status == 0){
                                     $output .= 
                                     '<td colspan="13" class="grey lighten-2"></td>';
@@ -145,23 +145,23 @@
                                     for ($i = 1; $i <= 12 ; $i++) { 
                                         switch($i){
                                             case 1:
-                                                $output .= '<td class="text-center q1-'.$assignid.'">';
+                                                $output .= '<td class="text-center align-middle number-font q1-'.$assignid.'">';
                                                 break;
                                             case 2:
-                                                $output .= '<td class="text-center q2-'.$assignid.'">';
+                                                $output .= '<td class="text-center align-middle number-font q2-'.$assignid.'">';
                                                 break;
                                             case 3:
-                                                $output .= '<td class="text-center q3-'.$assignid.'">';
+                                                $output .= '<td class="text-center align-middle number-font q3-'.$assignid.'">';
                                                 break;
                                             case 4:
-                                                $output .= '<td class="text-center q4-'.$assignid.'">';
+                                                $output .= '<td class="text-center align-middle number-font q4-'.$assignid.'">';
                                                 break;
                                         }
                                         $sql_target = mysql_query("SELECT target FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
                                         if(mysql_num_rows($sql_target) != 0){
                                             $fetch = mysql_fetch_assoc($sql_target);
                                             if($fetch['target'] != 0){
-                                                $output .= $fetch['target'];
+                                                $output .= number_format($fetch['target']);
                                             }
                                             else{
                                                 $output .= "-";
@@ -171,9 +171,9 @@
                                     }
                                     $sql_remark = mysql_query("SELECT remark FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
                                     $fetch_remark = mysql_fetch_assoc($sql_remark);
-                                    $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
+                                    // $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
                                     if($input == true && $status == 1){
-                                        $output .= '<td for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>';
+                                        $output .= '<td class="align-middle text-center" for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
                                     }		
                                     else{
                                         $output .= '<td></td>';
@@ -190,7 +190,7 @@
                                         $status = $fetch4['status'];
                                         $output .= 
                                         '<tr id="assign'.$assignid.'">
-                                            <td for="title" style="padding-left: 60px;">'.$title.'</td>';
+                                            <td for="title" class="title-font" style="padding-left: 60px;">'.$title.'</td>';
                                         if($status == 0){
                                             $output .= 
                                             '<td colspan="13" class="grey lighten-2"></td>';
@@ -199,23 +199,23 @@
                                             for ($i = 1; $i <= 12 ; $i++) { 
                                                 switch($i){
                                                     case 1:
-                                                        $output .= '<td class="text-center q1-'.$assignid.'">';
+                                                        $output .= '<td class="text-center align-middle number-font q1-'.$assignid.'">';
                                                         break;
                                                     case 2:
-                                                        $output .= '<td class="text-center q2-'.$assignid.'">';
+                                                        $output .= '<td class="text-center align-middle number-font q2-'.$assignid.'">';
                                                         break;
                                                     case 3:
-                                                        $output .= '<td class="text-center q3-'.$assignid.'">';
+                                                        $output .= '<td class="text-center align-middle number-font q3-'.$assignid.'">';
                                                         break;
                                                     case 4:
-                                                        $output .= '<td class="text-center q4-'.$assignid.'">';
+                                                        $output .= '<td class="text-center align-middle number-font q4-'.$assignid.'">';
                                                         break;
                                                 }
                                                 $sql_target = mysql_query("SELECT target FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
                                                 if(mysql_num_rows($sql_target) != 0){
                                                     $fetch = mysql_fetch_assoc($sql_target);
                                                     if($fetch['target'] != 0){
-                                                        $output .= $fetch['target'];
+                                                        $output .= number_format($fetch['target']);
                                                     }
                                                     else{
                                                         $output .= "-";
@@ -225,9 +225,9 @@
                                             }
                                             $sql_remark = mysql_query("SELECT remark FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
                                             $fetch_remark = mysql_fetch_assoc($sql_remark);
-                                            $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
+                                            // $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
                                             if($input == true && $status == 1){
-                                                $output .= '<td for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>';
+                                                $output .= '<td class="align-middle text-center" for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
                                             }		
                                             else{
                                                 $output .= '<td></td>';
@@ -244,7 +244,7 @@
                                                 $status = $fetch5['status'];
                                                 $output .= 
                                                 '<tr id="assign'.$assignid.'">
-                                                    <td for="title" style="padding-left: 80px;">'.$title.'</td>';
+                                                    <td for="title" class="title-font" style="padding-left: 80px;">'.$title.'</td>';
                                                 if($status == 0){
                                                     $output .= 
                                                     '<td colspan="13" class="grey lighten-2"></td>';
@@ -253,23 +253,23 @@
                                                     for ($i = 1; $i <= 12 ; $i++) { 
                                                         switch($i){
                                                             case 1:
-                                                                $output .= '<td class="text-center q1-'.$assignid.'">';
+                                                                $output .= '<td class="text-center align-middle number-font q1-'.$assignid.'">';
                                                                 break;
                                                             case 2:
-                                                                $output .= '<td class="text-center q2-'.$assignid.'">';
+                                                                $output .= '<td class="text-center align-middle number-font q2-'.$assignid.'">';
                                                                 break;
                                                             case 3:
-                                                                $output .= '<td class="text-center q3-'.$assignid.'">';
+                                                                $output .= '<td class="text-center align-middle number-font q3-'.$assignid.'">';
                                                                 break;
                                                             case 4:
-                                                                $output .= '<td class="text-center q4-'.$assignid.'">';
+                                                                $output .= '<td class="text-center align-middle number-font q4-'.$assignid.'">';
                                                                 break;
                                                         }
                                                         $sql_target = mysql_query("SELECT target FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
                                                         if(mysql_num_rows($sql_target) != 0){
                                                             $fetch = mysql_fetch_assoc($sql_target);
                                                             if($fetch['target'] != 0){
-                                                                $output .= $fetch['target'];
+                                                                $output .= number_format($fetch['target']);
                                                             }
                                                             else{
                                                                 $output .= "-";
@@ -279,9 +279,9 @@
                                                     }
                                                     $sql_remark = mysql_query("SELECT remark FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
                                                     $fetch_remark = mysql_fetch_assoc($sql_remark);
-                                                    $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
+                                                    // $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
                                                     if($input == true && $status == 1){
-                                                        $output .= '<td for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>';
+                                                        $output .= '<td class="align-middle text-center" for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
                                                     }		
                                                     else{
                                                         $output .= '<td></td>';
@@ -298,7 +298,7 @@
                                                         $status = $fetch6['status'];
                                                         $output .= 
                                                         '<tr id="assign'.$assignid.'">
-                                                            <td for="title" style="padding-left: 80px;">'.$title.'</td>';
+                                                            <td for="title" class="title-font" style="padding-left: 80px;">'.$title.'</td>';
                                                         if($status == 0){
                                                             $output .= 
                                                             '<td colspan="13" class="grey lighten-2"></td>';
@@ -307,23 +307,23 @@
                                                             for ($i = 1; $i <= 12 ; $i++) { 
                                                                 switch($i){
                                                                     case 1:
-                                                                        $output .= '<td class="text-center q1-'.$assignid.'">';
+                                                                        $output .= '<td class="text-center align-middle number-font q1-'.$assignid.'">';
                                                                         break;
                                                                     case 2:
-                                                                        $output .= '<td class="text-center q2-'.$assignid.'">';
+                                                                        $output .= '<td class="text-center align-middle number-font q2-'.$assignid.'">';
                                                                         break;
                                                                     case 3:
-                                                                        $output .= '<td class="text-center q3-'.$assignid.'">';
+                                                                        $output .= '<td class="text-center align-middle number-font q3-'.$assignid.'">';
                                                                         break;
                                                                     case 4:
-                                                                        $output .= '<td class="text-center q4-'.$assignid.'">';
+                                                                        $output .= '<td class="text-center align-middle number-font q4-'.$assignid.'">';
                                                                         break;
                                                                 }
                                                                 $sql_target = mysql_query("SELECT target FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
                                                                 if(mysql_num_rows($sql_target) != 0){
                                                                     $fetch = mysql_fetch_assoc($sql_target);
                                                                     if($fetch['target'] != 0){
-                                                                        $output .= $fetch['target'];
+                                                                        $output .= number_format($fetch['target']);
                                                                     }
                                                                     else{
                                                                         $output .= "-";
@@ -333,9 +333,9 @@
                                                             }
                                                             $sql_remark = mysql_query("SELECT remark FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
                                                             $fetch_remark = mysql_fetch_assoc($sql_remark);
-                                                            $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
+                                                            // $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
                                                             if($input == true && $status == 1){
-                                                                $output .= '<td for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>';
+                                                                $output .= '<td class="align-middle text-center" for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
                                                             }		
                                                             else{
                                                                 $output .= '<td></td>';
@@ -373,7 +373,7 @@
 		$date_added = date('Y-m-j H:i');
 		$assignid = mysql_escape_string($_POST['assignid']);
         $arrlength = count($values);
-        $remark = mysql_escape_string($_POST['remark']);
+        // $remark = mysql_escape_string($_POST['remark']);
 		$year = mysql_escape_string($_POST['year']);
         $sql = mysql_query("SELECT target FROM locked WHERE year = '$year'");
         $fetch = mysql_fetch_assoc($sql);
@@ -386,16 +386,16 @@
                     $target = intval($target);
                     $sql = mysql_query("SELECT assignID FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
                     if(mysql_num_rows($sql) != 0){
-                        mysql_query("UPDATE targetaccomplish SET target = '$target', target_added = '$date_added', remark = '$remark' WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'"); 
+                        mysql_query("UPDATE targetaccomplish SET target = '$target', target_added = '$date_added' WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'"); 
                     } 
                     else{
-                        mysql_query("INSERT INTO targetaccomplish (assignID, target, month, year, target_added, remark) VALUES ('$assignid', '$target', '$i', '$year', '$date_added', '$remark')");
+                        mysql_query("INSERT INTO targetaccomplish (assignID, target, month, year, target_added) VALUES ('$assignid', '$target', '$i', '$year', '$date_added')");
                     } 
                 }
             }
             $sql = mysql_query("SELECT assignID FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
             if(mysql_num_rows($sql) == 0 && $remark != ""){
-                mysql_query("INSERT INTO targetaccomplish (assignID, target, month, year, target_added, remark) VALUES ('$assignid', '0', '1', '$year', '$date_added', '$remark')");
+                mysql_query("INSERT INTO targetaccomplish (assignID, target, month, year, target_added) VALUES ('$assignid', '0', '1', '$year', '$date_added')");
             }
         }
 	}

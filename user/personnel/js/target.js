@@ -29,7 +29,7 @@ function removebordererror(){
 	})
 }
 function editvalues(td){
-	$("#actionassign" + td).html('<a><span onclick="savevalues(' + td + ')" class="badge badge-success"><i class="fa fa-save fa-2x" aria-hidden="true"></i></a> <a><span onclick="canceledit(' + td + ')" class="badge badge-danger"><i class="fa fa-close fa-2x" aria-hidden="true"></i></a>');
+	$("#actionassign" + td).html('<a><span onclick="savevalues(' + td + ')" class="badge badge-success mr-2"><i class="fa fa-save fa-4x" aria-hidden="true"></i></a> <a><span onclick="canceledit(' + td + ')" class="badge badge-danger ml-2"><i class="fa fa-close fa-4x" aria-hidden="true"></i></a>');
 	$("#assign" + td + ">td").attr("contenteditable", true);
 	$("[for=title]").attr("contenteditable", false);
 	$("[for=action]").attr("contenteditable", false);
@@ -47,7 +47,7 @@ function editvalues(td){
 	}
 }
 function canceledit(td){
-	$("#actionassign" + td).html('<a><span onclick="editvalues(' + td + ')" class="badge badge-default"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>');
+	$("#actionassign" + td).html('<a><span onclick="editvalues(' + td + ')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a>');
 	$("#assign" + td + ">td").attr("contenteditable", false);
 	if(!Number.isInteger(parseInt($("#assign" + td).closest('tr').find('.q1-' + td).text())) && $("#assign" + td).closest('tr').find('.q1-' + td).text() != ""){
 		$("#assign" + td + ">.q1-" + td).empty();
@@ -96,12 +96,12 @@ function savevalues(td){
 			$("#assign" + td).closest('tr').find('.q3-' + td).text(),
 			$("#assign" + td).closest('tr').find('.q4-' + td).text(),
 		];
-		var remark = $("#assign" + td).closest('tr').find('.remark-' + td).text();
+		// var remark = $("#assign" + td).closest('tr').find('.remark-' + td).text();
 		var year = document.getElementById("slctyear");
 		$.ajax({
 			url: url(),
 			method: "post",
-			data: {reportid: program, data: JSON.stringify(data), assignid: assignid, year: year.value, remark: remark, action: "savevalues"},
+			data: {reportid: program, data: JSON.stringify(data), assignid: assignid, year: year.value, action: "savevalues"},
 			beforeSend: function(){
 
 			},

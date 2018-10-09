@@ -8,20 +8,20 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent"> 
             <ul class="navbar-nav nav-flex-icons ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link waves-effect waves-light" href="."><i class="fa fa-home" aria-hidden="true"></i> Home<span class="sr-only"></span></a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bookmark" aria-hidden="true"></i> PCAR</a>    
-                    <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink1">
-                        <a class="dropdown-item" href="./target.php?program=1"><i class="fa fa-calendar-o" aria-hidden="true"></i> Targets<span class="sr-only"></span></a>
-                        <a class="dropdown-item" href="./accomplishment.php?program=1"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Accomplishment<span class="sr-only"></span></a>
-                    </div>
+                    <a class="nav-link waves-effect waves-light bold-text" href="."><i class="fa fa-home" aria-hidden="true"></i> Home<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bookmark" aria-hidden="true"></i> IPCR</a>    
                     <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink2">
                         <a class="dropdown-item" href="./target.php?program=2"><i class="fa fa-calendar-o" aria-hidden="true"></i> Targets<span class="sr-only"></span></a>
                         <a class="dropdown-item" href="./accomplishment.php?program=2"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Accomplishment<span class="sr-only"></span></a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bookmark" aria-hidden="true"></i> PCAR</a>    
+                    <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink1">
+                        <a class="dropdown-item" href="./target.php?program=1"><i class="fa fa-calendar-o" aria-hidden="true"></i> Targets<span class="sr-only"></span></a>
+                        <a class="dropdown-item" href="./accomplishment.php?program=1"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Accomplishment<span class="sr-only"></span></a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">

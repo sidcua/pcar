@@ -28,19 +28,21 @@
 				$status = $fetch['status'];
 				$output .= 
 				'<tr id="assign'.$assignid.'">
-					<td for="title">'.$title.'</td>';
+					<td for="title" class="title-font">'.$title.'</td>';
 				if($status == 0){
 					$output .= 
 					'<td colspan="13" class="grey lighten-2"></td>';
 				}
 				else{
+                    $total_target = 0;
 					for ($i = 1; $i <= 4 ; $i++) {
                         $sql_target = mysql_query("SELECT target FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
-                        $output .= '<td class="text-center _target">';
+                        $output .= '<td class="text-center align-middle number-font _target">';
                         if(mysql_num_rows($sql_target) != 0) {
                             $fetch = mysql_fetch_assoc($sql_target);
                             if($fetch['target'] != 0){
-                                $output .= $fetch['target'];
+                                $output .= number_format($fetch['target']);
+                                $total_target += $fetch['target'];
                             }
                             else{
                                 $output .= "-";
@@ -48,19 +50,21 @@
                         }
                         $output .= '</td>';
                     }
+                    $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_target).'</td>';
+                    $total_accomplish = 0;
                     for ($i = 1; $i <= 4 ; $i++) { 
                         switch($i){
                             case 1:
-                                $output .= '<td class="text-center q1-'.$assignid.'">';
+                                $output .= '<td class="text-center align-middle number-font q1-'.$assignid.'">';
                                 break;
                             case 2:
-                                $output .= '<td class="text-center q2-'.$assignid.'">';
+                                $output .= '<td class="text-center align-middle number-font q2-'.$assignid.'">';
                                 break;
                             case 3:
-                                $output .= '<td class="text-center q3-'.$assignid.'">';
+                                $output .= '<td class="text-center align-middle number-font q3-'.$assignid.'">';
                                 break;
                             case 4:
-                                $output .= '<td class="text-center q4-'.$assignid.'">';
+                                $output .= '<td class="text-center align-middle number-font q4-'.$assignid.'">';
                                 break;
                         }
                         $sql_accomplish = mysql_query("SELECT target, accomplish FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
@@ -69,11 +73,12 @@
                             if($fetch['accomplish'] != 0){
                                 $target = $fetch['target'] * 1.3;
                                 if($target > $fetch['accomplish']){
-                                    $output .= '<p class="red-text">'.$fetch['accomplish'].'</p>';
+                                    $output .= '<span class="red-text">'.number_format($fetch['accomplish']).'</span>';
                                 }
                                 else{
-                                    $output .= $fetch['accomplish'];
+                                    $output .= number_format($fetch['accomplish']);
                                 }
+                                $total_accomplish += $fetch['accomplish'];
                             }
                             else{
                                 $output .= "-";
@@ -81,11 +86,12 @@
                         }
                         $output .= '</td>';
                     }
+                    $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_accomplish).'</td>';
                     $sql_remark = mysql_query("SELECT remark FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
                     $fetch_remark = mysql_fetch_assoc($sql_remark);
-                    $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
+                    $output .= '<td class="remark-'.$assignid.' title-font text-justify title-font">'.$fetch_remark['remark'].'</td>';
                     if($input == true){
-                        $output .= '<td for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>';
+                        $output .= '<td for="action" id="actionassign'.$assignid.'" class="text-center"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
                     }
                     else{
                         $output .= '<td></td>';
@@ -102,19 +108,21 @@
                         $status = $fetch2['status'];
                         $output .= 
                         '<tr id="assign'.$assignid.'">
-                            <td for="title" style="padding-left: 20px;">'.$title.'</td>';
+                            <td for="title" class="title-font" style="padding-left: 20px;">'.$title.'</td>';
                         if($status == 0){
                             $output .= 
                             '<td colspan="13" class="grey lighten-2"></td>';
                         }
                         else{
+                            $total_target = 0;
                             for ($i = 1; $i <= 4 ; $i++) {
                                 $sql_target = mysql_query("SELECT target FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
-                                $output .= '<td class="text-center _target">';
+                                $output .= '<td class="text-center align-middle number-font _target">';
                                 if(mysql_num_rows($sql_target) != 0) {
                                     $fetch = mysql_fetch_assoc($sql_target);
                                     if($fetch['target'] != 0){
-                                        $output .= $fetch['target'];
+                                        $output .= number_format($fetch['target']);
+                                        $total_target += $fetch['target'];
                                     }
                                     else{
                                         $output .= "-";
@@ -122,19 +130,21 @@
                                 }
                                 $output .= '</td>';
                             }
+                            $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_target).'</td>';
+                            $total_accomplish = 0;
                             for ($i = 1; $i <= 4 ; $i++) { 
                                 switch($i){
                                     case 1:
-                                        $output .= '<td class="text-center q1-'.$assignid.'">';
+                                        $output .= '<td class="text-center align-middle number-font q1-'.$assignid.'">';
                                         break;
                                     case 2:
-                                        $output .= '<td class="text-center q2-'.$assignid.'">';
+                                        $output .= '<td class="text-center align-middle number-font q2-'.$assignid.'">';
                                         break;
                                     case 3:
-                                        $output .= '<td class="text-center q3-'.$assignid.'">';
+                                        $output .= '<td class="text-center align-middle number-font q3-'.$assignid.'">';
                                         break;
                                     case 4:
-                                        $output .= '<td class="text-center q4-'.$assignid.'">';
+                                        $output .= '<td class="text-center align-middle number-font q4-'.$assignid.'">';
                                         break;
                                 }
                                 $sql_accomplish = mysql_query("SELECT target, accomplish FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
@@ -143,11 +153,12 @@
                                     if($fetch['accomplish'] != 0){
                                         $target = $fetch['target'] * 1.3;
                                         if($target > $fetch['accomplish']){
-                                            $output .= '<p class="red-text">'.$fetch['accomplish'].'</p>';
+                                            $output .= '<span class="red-text">'.number_format($fetch['accomplish']).'</span>';
                                         }
                                         else{
-                                            $output .= $fetch['accomplish'];
+                                            $output .= number_format($fetch['accomplish']);
                                         }
+                                        $total_accomplish += $fetch['accomplish'];
                                     }
                                     else{
                                         $output .= "-";
@@ -155,11 +166,12 @@
                                 }
                                 $output .= '</td>';
                             }
+                            $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_accomplish).'</td>';
                             $sql_remark = mysql_query("SELECT remark FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
                             $fetch_remark = mysql_fetch_assoc($sql_remark);
-                            $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
+                            $output .= '<td class="remark-'.$assignid.' title-font text-justify">'.$fetch_remark['remark'].'</td>';
                             if($input == true && $status == 1){
-                                $output .= '<td for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>';
+                                $output .= '<td for="action" id="actionassign'.$assignid.'" class="text-center"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
                             }
                             else{
                                 $output .= '<td></td>';
@@ -176,19 +188,21 @@
                                 $status = $fetch3['status'];
                                 $output .= 
                                 '<tr id="assign'.$assignid.'">
-                                    <td for="title" style="padding-left: 40px;">'.$title.'</td>';
+                                    <td for="title" class="title-font" style="padding-left: 40px;">'.$title.'</td>';
                                 if($status == 0){
                                     $output .= 
                                     '<td colspan="13" class="grey lighten-2"></td>';
                                 }
                                 else{
+                                    $total_target = 0;
                                     for ($i = 1; $i <= 4 ; $i++) {
                                         $sql_target = mysql_query("SELECT target FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
-                                        $output .= '<td class="text-center _target">';
+                                        $output .= '<td class="text-center align-middle number-font _target">';
                                         if(mysql_num_rows($sql_target) != 0) {
                                             $fetch = mysql_fetch_assoc($sql_target);
                                             if($fetch['target'] != 0){
-                                                $output .= $fetch['target'];
+                                                $output .= number_format($fetch['target']);
+                                                $total_target += $fetch['target'];
                                             }
                                             else{
                                                 $output .= "-";
@@ -196,19 +210,21 @@
                                         }
                                         $output .= '</td>';
                                     }
+                                    $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_target).'</td>';
+                                    $total_accomplish = 0;
                                     for ($i = 1; $i <= 4 ; $i++) { 
                                         switch($i){
                                             case 1:
-                                                $output .= '<td class="text-center q1-'.$assignid.'">';
+                                                $output .= '<td class="text-center align-middle number-font q1-'.$assignid.'">';
                                                 break;
                                             case 2:
-                                                $output .= '<td class="text-center q2-'.$assignid.'">';
+                                                $output .= '<td class="text-center align-middle number-font q2-'.$assignid.'">';
                                                 break;
                                             case 3:
-                                                $output .= '<td class="text-center q3-'.$assignid.'">';
+                                                $output .= '<td class="text-center align-middle number-font q3-'.$assignid.'">';
                                                 break;
                                             case 4:
-                                                $output .= '<td class="text-center q4-'.$assignid.'">';
+                                                $output .= '<td class="text-center align-middle number-font q4-'.$assignid.'">';
                                                 break;
                                         }
                                         $sql_accomplish = mysql_query("SELECT target, accomplish FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
@@ -217,11 +233,12 @@
                                             if($fetch['accomplish'] != 0){
                                                 $target = $fetch['target'] * 1.3;
                                                 if($target > $fetch['accomplish']){
-                                                    $output .= '<p class="red-text">'.$fetch['accomplish'].'</p>';
+                                                    $output .= '<span class="red-text">'.number_format($fetch['accomplish']).'</span>';
                                                 }
                                                 else{
-                                                    $output .= $fetch['accomplish'];
+                                                    $output .= number_format($fetch['accomplish']);
                                                 }
+                                                $total_accomplish += $fetch['accomplish'];
                                             }
                                             else{
                                                 $output .= "-";
@@ -229,11 +246,12 @@
                                         }
                                         $output .= '</td>';
                                     }
+                                    $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_accomplish).'</td>';
                                     $sql_remark = mysql_query("SELECT remark FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
                                     $fetch_remark = mysql_fetch_assoc($sql_remark);
-                                    $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
+                                    $output .= '<td class="remark-'.$assignid.' title-font text-justify">'.$fetch_remark['remark'].'</td>';
                                     if($input == true && $status == 1){
-                                        $output .= '<td for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>';
+                                        $output .= '<td for="action" id="actionassign'.$assignid.'" class="text-center"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
                                     }		
                                     else{
                                         $output .= '<td></td>';
@@ -250,19 +268,21 @@
                                         $status = $fetch4['status'];
                                         $output .= 
                                         '<tr id="assign'.$assignid.'">
-                                            <td for="title" style="padding-left: 60px;">'.$title.'</td>';
+                                            <td for="title" class="title-font" style="padding-left: 60px;">'.$title.'</td>';
                                         if($status == 0){
                                             $output .= 
                                             '<td colspan="13" class="grey lighten-2"></td>';
                                         }
                                         else{
+                                            $total_target = 0;
                                             for ($i = 1; $i <= 4 ; $i++) {
                                                 $sql_target = mysql_query("SELECT target FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
-                                                $output .= '<td class="text-center _target">';
+                                                $output .= '<td class="text-center align-middle number-font _target">';
                                                 if(mysql_num_rows($sql_target) != 0) {
                                                     $fetch = mysql_fetch_assoc($sql_target);
                                                     if($fetch['target'] != 0){
-                                                        $output .= $fetch['target'];
+                                                        $output .= number_format($fetch['target']);
+                                                        $total_target += $fetch['target'];
                                                     }
                                                     else{
                                                         $output .= "-";
@@ -270,19 +290,21 @@
                                                 }
                                                 $output .= '</td>';
                                             }
+                                            $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_target).'</td>';
+                                            $total_accomplish = 0;
                                             for ($i = 1; $i <= 4 ; $i++) { 
                                                 switch($i){
                                                     case 1:
-                                                        $output .= '<td class="text-center q1-'.$assignid.'">';
+                                                        $output .= '<td class="text-center align-middle number-font q1-'.$assignid.'">';
                                                         break;
                                                     case 2:
-                                                        $output .= '<td class="text-center q2-'.$assignid.'">';
+                                                        $output .= '<td class="text-center align-middle number-font q2-'.$assignid.'">';
                                                         break;
                                                     case 3:
-                                                        $output .= '<td class="text-center q3-'.$assignid.'">';
+                                                        $output .= '<td class="text-center align-middle number-font q3-'.$assignid.'">';
                                                         break;
                                                     case 4:
-                                                        $output .= '<td class="text-center q4-'.$assignid.'">';
+                                                        $output .= '<td class="text-center align-middle number-font q4-'.$assignid.'">';
                                                         break;
                                                 }
                                                 $sql_accomplish = mysql_query("SELECT target, accomplish FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
@@ -291,11 +313,12 @@
                                                     if($fetch['accomplish'] != 0){
                                                         $target = $fetch['target'] * 1.3;
                                                         if($target > $fetch['accomplish']){
-                                                            $output .= '<p class="red-text">'.$fetch['accomplish'].'</p>';
+                                                            $output .= '<span class="red-text">'.number_format($fetch['accomplish']).'</span>';
                                                         }
                                                         else{
-                                                            $output .= $fetch['accomplish'];
+                                                            $output .= number_format($fetch['accomplish']);
                                                         }
+                                                        $total_accomplish += $fetch['accomplish'];
                                                     }
                                                     else{
                                                         $output .= "-";
@@ -303,11 +326,12 @@
                                                 }
                                                 $output .= '</td>';
                                             }
+                                            $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_accomplish).'</td>';
                                             $sql_remark = mysql_query("SELECT remark FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
                                             $fetch_remark = mysql_fetch_assoc($sql_remark);
-                                            $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
+                                            $output .= '<td class="remark-'.$assignid.' title-font text-justify">'.$fetch_remark['remark'].'</td>';
                                             if($input == true && $status == 1){
-                                                $output .= '<td for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>';
+                                                $output .= '<td for="action" id="actionassign'.$assignid.'" class="text-center"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
                                             }		
                                             else{
                                                 $output .= '<td></td>';
@@ -324,19 +348,21 @@
                                                 $status = $fetch5['status'];
                                                 $output .= 
                                                 '<tr id="assign'.$assignid.'">
-                                                    <td for="title" style="padding-left: 80px;">'.$title.'</td>';
+                                                    <td for="title" class="title-font" style="padding-left: 80px;">'.$title.'</td>';
                                                 if($status == 0){
                                                     $output .= 
                                                     '<td colspan="13" class="grey lighten-2"></td>';
                                                 }
                                                 else{
+                                                    $total_target = 0;
                                                     for ($i = 1; $i <= 4 ; $i++) {
                                                         $sql_target = mysql_query("SELECT target FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
-                                                        $output .= '<td class="text-center _target">';
+                                                        $output .= '<td class="text-center align-middle number-font _target">';
                                                         if(mysql_num_rows($sql_target) != 0) {
                                                             $fetch = mysql_fetch_assoc($sql_target);
                                                             if($fetch['target'] != 0){
-                                                                $output .= $fetch['target'];
+                                                                $output .= number_format($fetch['target']);
+                                                                $total_target += $fetch['target'];
                                                             }
                                                             else{
                                                                 $output .= "-";
@@ -344,19 +370,21 @@
                                                         }
                                                         $output .= '</td>';
                                                     }
+                                                    $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_target).'</td>';
+                                                    $total_accomplish = 0;
                                                     for ($i = 1; $i <= 4 ; $i++) { 
                                                         switch($i){
                                                             case 1:
-                                                                $output .= '<td class="text-center q1-'.$assignid.'">';
+                                                                $output .= '<td class="text-center align-middle number-font q1-'.$assignid.'">';
                                                                 break;
                                                             case 2:
-                                                                $output .= '<td class="text-center q2-'.$assignid.'">';
+                                                                $output .= '<td class="text-center align-middle number-font q2-'.$assignid.'">';
                                                                 break;
                                                             case 3:
-                                                                $output .= '<td class="text-center q3-'.$assignid.'">';
+                                                                $output .= '<td class="text-center align-middle number-font q3-'.$assignid.'">';
                                                                 break;
                                                             case 4:
-                                                                $output .= '<td class="text-center q4-'.$assignid.'">';
+                                                                $output .= '<td class="text-center align-middle number-font q4-'.$assignid.'">';
                                                                 break;
                                                         }
                                                         $sql_accomplish = mysql_query("SELECT target, accomplish FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
@@ -365,11 +393,12 @@
                                                             if($fetch['accomplish'] != 0){
                                                                 $target = $fetch['target'] * 1.3;
                                                                 if($target > $fetch['accomplish']){
-                                                                    $output .= '<p class="red-text">'.$fetch['accomplish'].'</p>';
+                                                                    $output .= '<span class="red-text">'.number_format($fetch['accomplish']).'</span>';
                                                                 }
                                                                 else{
-                                                                    $output .= $fetch['accomplish'];
+                                                                    $output .= number_format($fetch['accomplish']);
                                                                 }
+                                                                $total_accomplish += $fetch['accomplish'];
                                                             }
                                                             else{
                                                                 $output .= "-";
@@ -377,11 +406,12 @@
                                                         }
                                                         $output .= '</td>';
                                                     }
+                                                    $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_accomplish).'</td>';
                                                     $sql_remark = mysql_query("SELECT remark FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
                                                     $fetch_remark = mysql_fetch_assoc($sql_remark);
-                                                    $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
+                                                    $output .= '<td class="remark-'.$assignid.' title-font text-justify">'.$fetch_remark['remark'].'</td>';
                                                     if($input == true && $status == 1){
-                                                        $output .= '<td for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>';
+                                                        $output .= '<td for="action" id="actionassign'.$assignid.'" class="text-center"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
                                                     }		
                                                     else{
                                                         $output .= '<td></td>';
@@ -398,19 +428,21 @@
                                                         $status = $fetch6['status'];
                                                         $output .= 
                                                         '<tr id="assign'.$assignid.'">
-                                                            <td for="title" style="padding-left: 80px;">'.$title.'</td>';
+                                                            <td for="title" class="title-font" style="padding-left: 80px;">'.$title.'</td>';
                                                         if($status == 0){
                                                             $output .= 
                                                             '<td colspan="13" class="grey lighten-2"></td>';
                                                         }
                                                         else{
+                                                            $total_target = 0;
                                                             for ($i = 1; $i <= 4 ; $i++) {
                                                                 $sql_target = mysql_query("SELECT target FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
-                                                                $output .= '<td class="text-center _target">';
+                                                                $output .= '<td class="text-center align-middle number-font _target">';
                                                                 if(mysql_num_rows($sql_target) != 0) {
                                                                     $fetch = mysql_fetch_assoc($sql_target);
                                                                     if($fetch['target'] != 0){
-                                                                        $output .= $fetch['target'];
+                                                                        $output .= number_format($fetch['target']);
+                                                                        $total_target += $fetch['target'];
                                                                     }
                                                                     else{
                                                                         $output .= "-";
@@ -418,19 +450,21 @@
                                                                 }
                                                                 $output .= '</td>';
                                                             }
+                                                            $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_accomplish).'</td>';
+                                                            $total_accomplish = 0;
                                                             for ($i = 1; $i <= 4 ; $i++) { 
                                                                 switch($i){
                                                                     case 1:
-                                                                        $output .= '<td class="text-center q1-'.$assignid.'">';
+                                                                        $output .= '<td class="text-center align-middle number-font q1-'.$assignid.'">';
                                                                         break;
                                                                     case 2:
-                                                                        $output .= '<td class="text-center q2-'.$assignid.'">';
+                                                                        $output .= '<td class="text-center align-middle number-font q2-'.$assignid.'">';
                                                                         break;
                                                                     case 3:
-                                                                        $output .= '<td class="text-center q3-'.$assignid.'">';
+                                                                        $output .= '<td class="text-center align-middle number-font q3-'.$assignid.'">';
                                                                         break;
                                                                     case 4:
-                                                                        $output .= '<td class="text-center q4-'.$assignid.'">';
+                                                                        $output .= '<td class="text-center align-middle number-font q4-'.$assignid.'">';
                                                                         break;
                                                                 }
                                                                 $sql_accomplish = mysql_query("SELECT target, accomplish FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
@@ -439,11 +473,12 @@
                                                                     if($fetch['accomplish'] != 0){
                                                                         $target = $fetch['target'] * 1.3;
                                                                         if($target > $fetch['accomplish']){
-                                                                            $output .= '<p class="red-text">'.$fetch['accomplish'].'</p>';
+                                                                            $output .= '<span class="red-text">'.number_format($fetch['accomplish']).'</span>';
                                                                         }
                                                                         else{
-                                                                            $output .= $fetch['accomplish'];
+                                                                            $output .= number_format($fetch['accomplish']);
                                                                         }
+                                                                        $total_accomplish += $fetch['accomplish'];
                                                                     }
                                                                     else{
                                                                         $output .= "-";
@@ -451,11 +486,12 @@
                                                                 }
                                                                 $output .= '</td>';
                                                             }
+                                                            $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_accomplish).'</td>';
                                                             $sql_remark = mysql_query("SELECT remark FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
                                                             $fetch_remark = mysql_fetch_assoc($sql_remark);
-                                                            $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
+                                                            $output .= '<td class="remark-'.$assignid.' title-font text-justify">'.$fetch_remark['remark'].'</td>';
                                                             if($input == true && $status == 1){
-                                                                $output .= '<td for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>';
+                                                                $output .= '<td for="action" id="actionassign'.$assignid.'" class="text-center"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
                                                             }		
                                                             else{
                                                                 $output .= '<td></td>';
