@@ -31,7 +31,7 @@
 					<td for="title" class="title-font">'.$title.'</td>';
 				if($status == 0){
 					$output .= 
-					'<td colspan="13" class="grey lighten-2"></td>';
+					'<td colspan="13" class="grey lighten-3"></td>';
 				}
 				else{
 					for ($i = 1; $i <= 12 ; $i++) { 
@@ -66,9 +66,9 @@
                     // $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
                     if($input == true){
                         $output .= '<td class="align-middle text-center" for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
-                    }
+                    }	
                     else{
-                        $output .= '<td></td>';
+                        $output .= '<td class="number-font align-middle text-center"><i class="fa fa-lock red-text" aria-hidden="true"></i> Locked</td>';
                     }
                 }
                 $output .= '</tr>';
@@ -85,7 +85,7 @@
                             <td for="title" class="title-font" style="padding-left: 20px;">'.$title.'</td>';
                         if($status == 0){
                             $output .= 
-                            '<td colspan="13" class="grey lighten-2"></td>';
+                            '<td colspan="13" class="grey lighten-3"></td>';
                         }
                         else{
                             for ($i = 1; $i <= 12 ; $i++) { 
@@ -120,9 +120,9 @@
                             // $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
                             if($input == true && $status == 1){
                                 $output .= '<td class="align-middle text-center" for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
-                            }
+                            }	
                             else{
-                                $output .= '<td></td>';
+                                $output .= '<td class="number-font align-middle text-center"><i class="fa fa-lock red-text" aria-hidden="true"></i> Locked</td>';
                             }
                         }
                         $output .= '</tr>';
@@ -139,7 +139,7 @@
                                     <td for="title" class="title-font" style="padding-left: 40px;">'.$title.'</td>';
                                 if($status == 0){
                                     $output .= 
-                                    '<td colspan="13" class="grey lighten-2"></td>';
+                                    '<td colspan="13" class="grey lighten-3"></td>';
                                 }
                                 else{
                                     for ($i = 1; $i <= 12 ; $i++) { 
@@ -174,9 +174,9 @@
                                     // $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
                                     if($input == true && $status == 1){
                                         $output .= '<td class="align-middle text-center" for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
-                                    }		
+                                    }	
                                     else{
-                                        $output .= '<td></td>';
+                                        $output .= '<td class="number-font align-middle text-center"><i class="fa fa-lock red-text" aria-hidden="true"></i> Locked</td>';
                                     }
                                 }
                                 $output .= '</tr>';
@@ -193,7 +193,7 @@
                                             <td for="title" class="title-font" style="padding-left: 60px;">'.$title.'</td>';
                                         if($status == 0){
                                             $output .= 
-                                            '<td colspan="13" class="grey lighten-2"></td>';
+                                            '<td colspan="13" class="grey lighten-3"></td>';
                                         }
                                         else{
                                             for ($i = 1; $i <= 12 ; $i++) { 
@@ -228,9 +228,9 @@
                                             // $output .= '<td class="remark-'.$assignid.'">'.$fetch_remark['remark'].'</td>';
                                             if($input == true && $status == 1){
                                                 $output .= '<td class="align-middle text-center" for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
-                                            }		
+                                            }	
                                             else{
-                                                $output .= '<td></td>';
+                                                $output .= '<td class="number-font align-middle text-center"><i class="fa fa-lock red-text" aria-hidden="true"></i> Locked</td>';
                                             }
                                         }
                                         $output .= '</tr>';
@@ -247,7 +247,7 @@
                                                     <td for="title" class="title-font" style="padding-left: 80px;">'.$title.'</td>';
                                                 if($status == 0){
                                                     $output .= 
-                                                    '<td colspan="13" class="grey lighten-2"></td>';
+                                                    '<td colspan="13" class="grey lighten-3"></td>';
                                                 }
                                                 else{
                                                     for ($i = 1; $i <= 12 ; $i++) { 
@@ -284,7 +284,7 @@
                                                         $output .= '<td class="align-middle text-center" for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
                                                     }		
                                                     else{
-                                                        $output .= '<td></td>';
+                                                        $output .= '<td class="number-font align-middle text-center"><i class="fa fa-lock red-text" aria-hidden="true"></i> Locked</td>';
                                                     }
                                                 }
                                                 $output .= '</tr>';
@@ -301,7 +301,7 @@
                                                             <td for="title" class="title-font" style="padding-left: 80px;">'.$title.'</td>';
                                                         if($status == 0){
                                                             $output .= 
-                                                            '<td colspan="13" class="grey lighten-2"></td>';
+                                                            '<td colspan="13" class="grey lighten-3"></td>';
                                                         }
                                                         else{
                                                             for ($i = 1; $i <= 12 ; $i++) { 
@@ -338,7 +338,7 @@
                                                                 $output .= '<td class="align-middle text-center" for="action" id="actionassign'.$assignid.'"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
                                                             }		
                                                             else{
-                                                                $output .= '<td></td>';
+                                                                $output .= '<td class="number-font align-middle text-center"><i class="fa fa-lock red-text" aria-hidden="true"></i> Locked</td>';
                                                             }
                                                         }
                                                         $output .= '</tr>';
@@ -386,17 +386,17 @@
                     $target = intval($target);
                     $sql = mysql_query("SELECT assignID FROM targetaccomplish WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
                     if(mysql_num_rows($sql) != 0){
-                        mysql_query("UPDATE targetaccomplish SET target = '$target', target_added = '$date_added' WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'"); 
+                        mysql_query("UPDATE targetaccomplish SET target = '$target', target_added = '$date_added' WHERE assignID = '$assignid' AND month = '$i' AND year = '$year'");
                     } 
                     else{
-                        mysql_query("INSERT INTO targetaccomplish (assignID, target, month, year, target_added) VALUES ('$assignid', '$target', '$i', '$year', '$date_added')");
+                        mysql_query("INSERT INTO targetaccomplish (assignID, target, month, year, target_added, remark) VALUES ('$assignid', '$target', '$i', '$year', '$date_added', '')");
                     } 
                 }
             }
-            $sql = mysql_query("SELECT assignID FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
-            if(mysql_num_rows($sql) == 0 && $remark != ""){
-                mysql_query("INSERT INTO targetaccomplish (assignID, target, month, year, target_added) VALUES ('$assignid', '0', '1', '$year', '$date_added')");
-            }
+            // $sql = mysql_query("SELECT assignID FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
+            // if(mysql_num_rows($sql) == 0 && $remark != ""){
+            //     mysql_query("INSERT INTO targetaccomplish (assignID, target, month, year, target_added) VALUES ('$assignid', '0', '1', '$year', '$date_added')");
+            // }
         }
 	}
 	if($action == "inityear"){

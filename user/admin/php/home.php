@@ -5,7 +5,8 @@
 	if($action == "quarterlygraph"){
 		$accid = $_SESSION['accID'];
 		$year = mysql_escape_string($_POST['year']);
-        $region = mysql_escape_string($_POST['region']);
+		$region = mysql_escape_string($_POST['region']);
+		$reportid = mysql_escape_string($_POST['reportid']);
 		$position = $_SESSION['position'];
 		$limit = 3;
 		if($_SESSION['level'] == 3){
@@ -39,12 +40,13 @@
 	}
 	if($action == "quarterlygraph_office"){
 		$year = mysql_escape_string($_POST['year']);
+		$reportid = mysql_escape_string($_POST['reportid']);
         $region = mysql_escape_string($_POST['region']);
         if($region != 0){
             $sub = " AND regionID = ".$region;
         }
 		for ($i = 1; $i <= 4 ; $i++) { 
-			$sql = mysql_query("SELECT SUM(target) AS target FROM targetaccomplish INNER JOIN assign ON targetaccomplish.assignID = assign.assignID INNER JOIN account ON assign.accID = account.accID WHERE month = '$i' AND year = '$year'".$sub);
+			$sql = mysql_query("SELECT SUM(target) AS target FROM targetaccomplish INNER JOIN assign ON targetaccomplish.assignID = assign.assignID INNER JOIN account ON assign.accID = account.accID INNER JOIN program ON assign.programID = program.programID WHERE month = '$i' AND year = '$year' AND reportID = '$reportid'".$sub);
 			$fetch = mysql_fetch_assoc($sql);
 			$target = $fetch['target'];
 			if($target == ""){
@@ -53,7 +55,7 @@
 			$obj[1][$i] = $target;
 		}
 		for ($i = 1; $i <= 4 ; $i++) { 
-			$sql = mysql_query("SELECT SUM(accomplish) AS accomplish FROM targetaccomplish INNER JOIN assign ON targetaccomplish.assignID = assign.assignID INNER JOIN account ON assign.accID = account.accID WHERE month = '$i' AND year = '$year'".$sub);
+			$sql = mysql_query("SELECT SUM(accomplish) AS accomplish FROM targetaccomplish INNER JOIN assign ON targetaccomplish.assignID = assign.assignID INNER JOIN account ON assign.accID = account.accID INNER JOIN program ON assign.programID = program.programID WHERE month = '$i' AND year = '$year' AND reportID = '$reportid'".$sub);
 			$fetch = mysql_fetch_assoc($sql);
 			$accomplish = $fetch['accomplish'];
 			if($accomplish == ""){
@@ -85,5 +87,14 @@
             $obj['level'] = false;
         }
         echo json_encode($obj);
-    }
+	}
+	if($action == "initreport"){
+		$sql = mysql_query("SELECT * FROM report WHERE status = 1");
+		while($fetch = mysql_fetch_assoc($sql)){
+			$reportid = $fetch['reportID'];
+			$report = $fetch['report'];
+			$output .= '<option value="'.$reportid.'">'.$report.'</option>';
+		}
+		echo json_encode($output);
+	}
 ?>

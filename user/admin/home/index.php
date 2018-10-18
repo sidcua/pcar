@@ -55,6 +55,9 @@
                                     </select>';
                                 }
                             ?>
+							<label for="slctreport" style="margin-right: 10px; margin-top: 10px; margin-left: 50px;">Report</label>
+							<select onchange="forreport(this.value)" class="form-control" id="slctreport" style="width: 100px;">
+							</select>
 							<label for="slctyear" style="margin-right: 10px; margin-top: 10px; margin-left: 50px;">Year</label>
 							<select onchange="foryear(this.value)" class="form-control" id="slctyear" style="width: 100px;">
 							</select>
@@ -80,7 +83,7 @@
 			<div class="divspace"></div>
 			<div class="row">
 				<div class="col-sm-12">
-					<label for="targetaccomplish_quarter_office" class="h1-responsive"><i class="fa fa-building" aria-hidden="true"></i> Quarterly Graph - Office</label>
+					<label for="targetaccomplish_quarter_office" class="h1-responsive"><i class="fa fa-building" aria-hidden="true"></i> <span class="display-graph">PCAR</span> Quarterly Graph - Office</label>
 					<canvas id="targetaccomplish_quarter_office"></canvas>
 					<div id="loading_targetaccomplish_quarter_office" class="text-center" style="margin-top: 50px;">
 						<img src="../../../css/loading/loading.gif">

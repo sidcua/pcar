@@ -53,8 +53,8 @@
 						}
 					?>
 					<div class="form-group d-flex flex-row">
-						<label for="slctmode" style="margin: 10px 15px 0px 0px;">Mode</label>
-						<select onchange="changemode();" class="form-control" id="slctmode">
+						<label for="slctmode" style="margin: 10px 15px 0px 0px;" hidden>Mode</label>
+						<select onchange="changemode();" class="form-control" id="slctmode" hidden>
 							<option value="quarterly">Quarterly</option>
 						</select>
 					</div>
@@ -89,7 +89,7 @@
 					<div id="fountainG_7" class="fountainG"></div>
 					<div id="fountainG_8" class="fountainG"></div>
 				</div>
-				<table id="tblreport" class="table table-striped">
+				<table id="tblreport" class="table table-bordered">
 					
 				</table>
 			</div>

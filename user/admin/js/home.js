@@ -22,7 +22,7 @@ function quarterlygraph(data){
                     pointRadius : 4,
                     pointHoverBackgroundColor : "#fff",
                     pointHoverBorderColor : "rgba(220,220,220,1)",
-                    data: [0, data[1][1], data[1][4], data[1][7], data[1][10]]
+                    data: [0, data[1][1], data[1][2], data[1][3], data[1][4]]
                 },
                 {
                     label: "Accomplishment",
@@ -35,7 +35,7 @@ function quarterlygraph(data){
                     pointRadius : 4,
                     pointHoverBackgroundColor : "#fff",
                     pointHoverBorderColor : "rgba(220,220,220,1)",
-                    data: [0, data[2][1], data[2][4], data[2][7], data[2][10]]
+                    data: [0, data[2][1], data[2][2], data[2][3], data[2][4]]
                 }
             ]
         },
@@ -62,7 +62,7 @@ function quarterlygraph_office(data){
                     pointRadius : 4,
                     pointHoverBackgroundColor : "#fff",
                     pointHoverBorderColor : "rgba(220,220,220,1)",
-                    data: [0, data[1][1], data[1][4], data[1][7], data[1][10]]
+                    data: [0, data[1][1], data[1][2], data[1][3], data[1][4]]
                 },
                 {
                     label: "Accomplishment",
@@ -75,7 +75,7 @@ function quarterlygraph_office(data){
                     pointRadius : 4,
                     pointHoverBackgroundColor : "#fff",
                     pointHoverBorderColor : "rgba(220,220,220,1)",
-                    data: [0, data[2][1], data[2][4], data[2][7], data[2][10]]
+                    data: [0, data[2][1], data[2][2], data[2][3], data[2][4]]
                 }
             ]
         },
@@ -84,11 +84,11 @@ function quarterlygraph_office(data){
         }    
     });
 }
-function initquarterlygraph(year, region){
+function initquarterlygraph(year, region, report){
     $.ajax({
         url: url(),
         method: "post",
-        data: {year: year, region: region, action: "quarterlygraph"},
+        data: {reportid: report, year: year, region: region, action: "quarterlygraph"},
         beforeSend: function(){
             $("#targetaccomplish_quarter").empty();
             $("#loading_targetaccomplish_quarter").show();
@@ -105,11 +105,11 @@ function initquarterlygraph(year, region){
         }
     })
 }
-function initquarterlygraph_office(year, region){
+function initquarterlygraph_office(year, region, report){
     $.ajax({
         url: url(),
         method: "post",
-        data: {year: year, region: region, action: "quarterlygraph_office"},
+        data: {reportid: report, year: year, region: region, action: "quarterlygraph_office"},
         beforeSend: function(){
             $("#targetaccomplish_quarter_office").empty();
             $("#loading_targetaccomplish_quarter_office").show();
@@ -135,13 +135,13 @@ function inityear(){
         },
         complete: function(){
             $("#slctyear").show();
-            loadgraphs($("#slctyear").val(), $("#slctregion").val());
+            initreport();
         }
     })
 }
-function loadgraphs(year, region){
-    initquarterlygraph(year, region);
-    initquarterlygraph_office(year, region);
+function loadgraphs(year, region, report){
+    initquarterlygraph(year, region, report);
+    initquarterlygraph_office(year, region, report);
 }
 function initregion(){
     $.ajax({
@@ -163,11 +163,40 @@ function initregion(){
         }
     })
 }
+function initreport(){
+    $.ajax({
+        url: url(),
+        method: "post",
+        data: {action: "initreport"},
+        success: function(data){
+            data = $.parseJSON(data);
+            $("#slctreport").html(data);
+            loadgraphs($("#slctyear").val(), $("#slctregion").val(), $("#slctreport").val());
+        }
+    })
+}
 function foryear(year){
     var region = $("#slctregion").val();
-    loadgraphs(year, region);
+    var report = $("#slctreport").val();
+    loadgraphs(year, region, report);
 }
 function forregion(region){
     var year = $("#slctyear").val();
-    loadgraphs(year, region);
+    var report = $("#slctreport").val();
+    loadgraphs(year, region, report);
+}
+function forreport(){
+    var region = $("#slctregion").val();
+    var year = $("#slctyear").val();
+    var report = $("#slctreport").val();
+    if(report == 1){
+        $(".display-graph").html("PCAR");
+    }
+    else if(report == 2){
+        $(".display-graph").html("IPCR");
+    }
+    else if(report == 3){
+        $(".display-graph").html("DBM");
+    }
+    loadgraphs(year, region, report);
 }

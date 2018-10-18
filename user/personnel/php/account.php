@@ -14,7 +14,7 @@
 			$sql = mysql_query("SELECT * FROM account INNER JOIN region ON account.regionID = region.regionID WHERE levelID = 2 AND acciD != '$accid' ORDER BY name ASC");
 		}
 		else if($_SESSION['level'] == 2){
-			$sql = mysql_query("SELECT * FROM account WHERE regionID = '$region' AND accID != '$accid' AND (levelID = 3 OR levelID = 4) ORDER BY name ASC");
+			$sql = mysql_query("SELECT * FROM account WHERE regionID = '$region' AND accID != '$accid' AND levelID = 3 OR levelID = 4 ORDER BY name ASC");
 		}
 		if(mysql_num_rows($sql) == 0){
 			$output .= 

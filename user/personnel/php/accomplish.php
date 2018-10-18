@@ -31,7 +31,7 @@
 					<td for="title" class="title-font">'.$title.'</td>';
 				if($status == 0){
 					$output .= 
-					'<td colspan="13" class="grey lighten-2"></td>';
+					'<td colspan="13" class="grey lighten-3"></td>';
 				}
 				else{
                     $total_target = 0;
@@ -50,7 +50,7 @@
                         }
                         $output .= '</td>';
                     }
-                    $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_target).'</td>';
+                    $output .= '<td class="text-center align-middle number-font _target text-primary">'.number_format($total_target).'</td>';
                     $total_accomplish = 0;
                     for ($i = 1; $i <= 4 ; $i++) { 
                         switch($i){
@@ -86,15 +86,15 @@
                         }
                         $output .= '</td>';
                     }
-                    $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_accomplish).'</td>';
+                    $output .= '<td class="text-center align-middle number-font _target text-primary">'.number_format($total_accomplish).'</td>';
                     $sql_remark = mysql_query("SELECT remark FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
                     $fetch_remark = mysql_fetch_assoc($sql_remark);
                     $output .= '<td class="remark-'.$assignid.' title-font text-justify title-font">'.$fetch_remark['remark'].'</td>';
                     if($input == true){
                         $output .= '<td for="action" id="actionassign'.$assignid.'" class="text-center"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
-                    }
+                    }		
                     else{
-                        $output .= '<td></td>';
+                        $output .= '<td class="number-font align-middle text-center"><i class="fa fa-lock red-text" aria-hidden="true"></i> Locked</td>';
                     }
                 }
                 $output .= '</tr>';
@@ -111,7 +111,7 @@
                             <td for="title" class="title-font" style="padding-left: 20px;">'.$title.'</td>';
                         if($status == 0){
                             $output .= 
-                            '<td colspan="13" class="grey lighten-2"></td>';
+                            '<td colspan="13" class="grey lighten-3"></td>';
                         }
                         else{
                             $total_target = 0;
@@ -130,7 +130,7 @@
                                 }
                                 $output .= '</td>';
                             }
-                            $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_target).'</td>';
+                            $output .= '<td class="text-center align-middle number-font _target text-primary">'.number_format($total_target).'</td>';
                             $total_accomplish = 0;
                             for ($i = 1; $i <= 4 ; $i++) { 
                                 switch($i){
@@ -166,15 +166,15 @@
                                 }
                                 $output .= '</td>';
                             }
-                            $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_accomplish).'</td>';
+                            $output .= '<td class="text-center align-middle number-font _target text-primary">'.number_format($total_accomplish).'</td>';
                             $sql_remark = mysql_query("SELECT remark FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
                             $fetch_remark = mysql_fetch_assoc($sql_remark);
                             $output .= '<td class="remark-'.$assignid.' title-font text-justify">'.$fetch_remark['remark'].'</td>';
                             if($input == true && $status == 1){
                                 $output .= '<td for="action" id="actionassign'.$assignid.'" class="text-center"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
-                            }
+                            }		
                             else{
-                                $output .= '<td></td>';
+                                $output .= '<td class="number-font align-middle text-center"><i class="fa fa-lock red-text" aria-hidden="true"></i> Locked</td>';
                             }
                         }
                         $output .= '</tr>';
@@ -191,7 +191,7 @@
                                     <td for="title" class="title-font" style="padding-left: 40px;">'.$title.'</td>';
                                 if($status == 0){
                                     $output .= 
-                                    '<td colspan="13" class="grey lighten-2"></td>';
+                                    '<td colspan="13" class="grey lighten-3"></td>';
                                 }
                                 else{
                                     $total_target = 0;
@@ -210,7 +210,7 @@
                                         }
                                         $output .= '</td>';
                                     }
-                                    $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_target).'</td>';
+                                    $output .= '<td class="text-center align-middle number-font _target text-primary">'.number_format($total_target).'</td>';
                                     $total_accomplish = 0;
                                     for ($i = 1; $i <= 4 ; $i++) { 
                                         switch($i){
@@ -246,7 +246,7 @@
                                         }
                                         $output .= '</td>';
                                     }
-                                    $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_accomplish).'</td>';
+                                    $output .= '<td class="text-center align-middle number-font _target text-primary">'.number_format($total_accomplish).'</td>';
                                     $sql_remark = mysql_query("SELECT remark FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
                                     $fetch_remark = mysql_fetch_assoc($sql_remark);
                                     $output .= '<td class="remark-'.$assignid.' title-font text-justify">'.$fetch_remark['remark'].'</td>';
@@ -254,7 +254,7 @@
                                         $output .= '<td for="action" id="actionassign'.$assignid.'" class="text-center"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
                                     }		
                                     else{
-                                        $output .= '<td></td>';
+                                        $output .= '<td class="number-font align-middle text-center"><i class="fa fa-lock red-text" aria-hidden="true"></i> Locked</td>';
                                     }
                                 }
                                 $output .= '</tr>';
@@ -271,7 +271,7 @@
                                             <td for="title" class="title-font" style="padding-left: 60px;">'.$title.'</td>';
                                         if($status == 0){
                                             $output .= 
-                                            '<td colspan="13" class="grey lighten-2"></td>';
+                                            '<td colspan="13" class="grey lighten-3"></td>';
                                         }
                                         else{
                                             $total_target = 0;
@@ -290,7 +290,7 @@
                                                 }
                                                 $output .= '</td>';
                                             }
-                                            $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_target).'</td>';
+                                            $output .= '<td class="text-center align-middle number-font _target text-primary">'.number_format($total_target).'</td>';
                                             $total_accomplish = 0;
                                             for ($i = 1; $i <= 4 ; $i++) { 
                                                 switch($i){
@@ -326,15 +326,15 @@
                                                 }
                                                 $output .= '</td>';
                                             }
-                                            $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_accomplish).'</td>';
+                                            $output .= '<td class="text-center align-middle number-font _target text-primary">'.number_format($total_accomplish).'</td>';
                                             $sql_remark = mysql_query("SELECT remark FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
                                             $fetch_remark = mysql_fetch_assoc($sql_remark);
                                             $output .= '<td class="remark-'.$assignid.' title-font text-justify">'.$fetch_remark['remark'].'</td>';
                                             if($input == true && $status == 1){
                                                 $output .= '<td for="action" id="actionassign'.$assignid.'" class="text-center"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
-                                            }		
+                                            }			
                                             else{
-                                                $output .= '<td></td>';
+                                                $output .= '<td class="number-font align-middle text-center"><i class="fa fa-lock red-text" aria-hidden="true"></i> Locked</td>';
                                             }
                                         }
                                         $output .= '</tr>';
@@ -351,7 +351,7 @@
                                                     <td for="title" class="title-font" style="padding-left: 80px;">'.$title.'</td>';
                                                 if($status == 0){
                                                     $output .= 
-                                                    '<td colspan="13" class="grey lighten-2"></td>';
+                                                    '<td colspan="13" class="grey lighten-3"></td>';
                                                 }
                                                 else{
                                                     $total_target = 0;
@@ -370,7 +370,7 @@
                                                         }
                                                         $output .= '</td>';
                                                     }
-                                                    $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_target).'</td>';
+                                                    $output .= '<td class="text-center align-middle number-font _target text-primary">'.number_format($total_target).'</td>';
                                                     $total_accomplish = 0;
                                                     for ($i = 1; $i <= 4 ; $i++) { 
                                                         switch($i){
@@ -406,7 +406,7 @@
                                                         }
                                                         $output .= '</td>';
                                                     }
-                                                    $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_accomplish).'</td>';
+                                                    $output .= '<td class="text-center align-middle number-font _target text-primary">'.number_format($total_accomplish).'</td>';
                                                     $sql_remark = mysql_query("SELECT remark FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
                                                     $fetch_remark = mysql_fetch_assoc($sql_remark);
                                                     $output .= '<td class="remark-'.$assignid.' title-font text-justify">'.$fetch_remark['remark'].'</td>';
@@ -414,7 +414,7 @@
                                                         $output .= '<td for="action" id="actionassign'.$assignid.'" class="text-center"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
                                                     }		
                                                     else{
-                                                        $output .= '<td></td>';
+                                                        $output .= '<td class="number-font align-middle text-center"><i class="fa fa-lock red-text" aria-hidden="true"></i> Locked</td>';
                                                     }
                                                 }
                                                 $output .= '</tr>';
@@ -431,7 +431,7 @@
                                                             <td for="title" class="title-font" style="padding-left: 80px;">'.$title.'</td>';
                                                         if($status == 0){
                                                             $output .= 
-                                                            '<td colspan="13" class="grey lighten-2"></td>';
+                                                            '<td colspan="13" class="grey lighten-3"></td>';
                                                         }
                                                         else{
                                                             $total_target = 0;
@@ -450,7 +450,7 @@
                                                                 }
                                                                 $output .= '</td>';
                                                             }
-                                                            $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_accomplish).'</td>';
+                                                            $output .= '<td class="text-center align-middle number-font _target text-primary">'.number_format($total_accomplish).'</td>';
                                                             $total_accomplish = 0;
                                                             for ($i = 1; $i <= 4 ; $i++) { 
                                                                 switch($i){
@@ -486,7 +486,7 @@
                                                                 }
                                                                 $output .= '</td>';
                                                             }
-                                                            $output .= '<td class="text-center align-middle number-font _target">'.number_format($total_accomplish).'</td>';
+                                                            $output .= '<td class="text-center align-middle number-font _target text-primary">'.number_format($total_accomplish).'</td>';
                                                             $sql_remark = mysql_query("SELECT remark FROM targetaccomplish WHERE assignID = '$assignid' AND year = '$year'");
                                                             $fetch_remark = mysql_fetch_assoc($sql_remark);
                                                             $output .= '<td class="remark-'.$assignid.' title-font text-justify">'.$fetch_remark['remark'].'</td>';
@@ -494,7 +494,7 @@
                                                                 $output .= '<td for="action" id="actionassign'.$assignid.'" class="text-center"><a><span onclick="editvalues('.$assignid.')" class="badge badge-default"><i class="fa fa-pencil fa-4x" aria-hidden="true"></i></a></td>';
                                                             }		
                                                             else{
-                                                                $output .= '<td></td>';
+                                                                $output .= '<td class="number-font align-middle text-center"><i class="fa fa-lock red-text" aria-hidden="true"></i> Locked</td>';
                                                             }
                                                         }
                                                         $output .= '</tr>';

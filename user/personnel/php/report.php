@@ -22,11 +22,11 @@
 		$status = $fetch['status'];
 		$output .= 
 		'<tr>
-			<td style="padding-left: 20px;">'.$title.'</td>';
+			<td class="title-font" style="padding-left: 20px;">'.$title.'</td>';
 		if($mode == "monthly"){
 			if($status == 0){
 				$output .= 
-				'<td colspan="24" class="grey lighten-2"></td>';
+				'<td colspan="24" class="grey lighten-3"></td>';
 			}
 			else{
 				for ($i=1; $i <= 12; $i++) { 
@@ -39,17 +39,17 @@
 					$get = mysql_fetch_assoc($query);
 					$target = $get['target'];
 					if($target == 0){
-						$output .= '<td class="text-center">-</td>';
+						$output .= '<td class="text-center number-font">-</td>';
 					}
 					else{
-						$output .= '<td class="text-center red-text">'.$target.'</td>';;
+						$output .= '<td class="text-center red-text number-font">'.number_format($target).'</td>';;
 					}
 					$accomplish = $get['accomplish'];
 					if($accomplish == 0){
-						$output .= '<td class="text-center">-</td>';
+						$output .= '<td class="text-center number-font">-</td>';
 					}
 					else{
-						$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+						$output .= '<td class="text-center green-text number-font">'.number_format($accomplish).'</td>';
 					}
 				}
 			}
@@ -57,7 +57,7 @@
 		else if($mode == "quarterly"){
 			if($status == 0){
 				$output .= 
-				'<td colspan="24" class="grey lighten-2"></td>';
+				'<td colspan="24" class="grey lighten-3"></td>';
 			}
 			else{
 				for ($i = 1; $i <= 4 ; $i++) { 
@@ -70,17 +70,17 @@
 					$get = mysql_fetch_assoc($query);
 					$target = $get['target'];
 					if($target == 0){
-						$output .= '<td class="text-center">-</td>';
+						$output .= '<td class="text-center number-font">-</td>';
 					}
 					else{
-						$output .= '<td class="text-center red-text">'.$target.'</td>';
+						$output .= '<td class="text-center red-text number-font">'.number_format($target).'</td>';
 					}
 					$accomplish = $get['accomplish'];
 					if($accomplish == 0){
-						$output .= '<td class="text-center">-</td>';
+						$output .= '<td class="text-center number-font">-</td>';
 					}
 					else{
-						$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+						$output .= '<td class="text-center green-text number-font">'.number_format($accomplish).'</td>';
 					}
 				}
 			}
@@ -100,11 +100,11 @@
 				$status = $fetch2['status'];
 				$output .= 
 				'<tr>
-					<td style="padding-left: 40px;">'.$title.'</td>';
+					<td class="title-font" style="padding-left: 40px;">'.$title.'</td>';
 				if($mode == "monthly"){
 					if($status == 0){
 						$output .= 
-						'<td colspan="24" class="grey lighten-2"></td>';
+						'<td colspan="24" class="grey lighten-3"></td>';
 					}
 					else{
 						for ($i=1; $i <= 12; $i++) { 
@@ -117,17 +117,17 @@
 							$get = mysql_fetch_assoc($query);
 							$target = $get['target'];
 							if($target == 0){
-								$output .= '<td class="text-center">-</td>';
+								$output .= '<td class="text-center number-font">-</td>';
 							}
 							else{
-								$output .= '<td class="text-center red-text">'.$target.'</td>';
+								$output .= '<td class="text-center red-text number-font">'.number_format($target).'</td>';
 							}
 							$accomplish = $get['accomplish'];
 							if($accomplish == 0){
-								$output .= '<td class="text-center">-</td>';
+								$output .= '<td class="text-center number-font">-</td>';
 							}
 							else{
-								$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+								$output .= '<td class="text-center green-text number-font">'.number_format($accomplish).'</td>';
 							}
 						}
 					}
@@ -135,7 +135,7 @@
 				else if($mode == "quarterly"){
 					if($status == 0){
 						$output .= 
-						'<td colspan="24" class="grey lighten-2"></td>';
+						'<td colspan="24" class="grey lighten-3"></td>';
 					}
 					else{
 						for ($i = 1; $i <= 4 ; $i++) { 
@@ -148,17 +148,17 @@
 							$get = mysql_fetch_assoc($query);
 							$target = $get['target'];
 							if($target == 0){
-								$output .= '<td class="text-center">-</td>';
+								$output .= '<td class="text-center number-font">-</td>';
 							}
 							else{
-								$output .= '<td class="text-center red-text">'.$target.'</td>';
+								$output .= '<td class="text-center red-text number-font">'.number_format($target).'</td>';
 							}
 							$accomplish = $get['accomplish'];
 							if($accomplish == 0){
-								$output .= '<td class="text-center">-</td>';
+								$output .= '<td class="text-center number-font">-</td>';
 							}
 							else{
-								$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+								$output .= '<td class="text-center green-text number-font">'.number_format($accomplish).'</td>';
 							}
 						}
 					}
@@ -178,11 +178,11 @@
 						$status = $fetch3['status'];
 						$output .= 
 						'<tr>
-							<td style="padding-left: 60px;">'.$title.'</td>';
+							<td class="title-font" style="padding-left: 60px;">'.$title.'</td>';
 						if($mode == "monthly"){
 							if($status == 0){
 								$output .= 
-								'<td colspan="24" class="grey lighten-2"></td>';
+								'<td colspan="24" class="grey lighten-3"></td>';
 							}
 							else{
 								for ($i=1; $i <= 12; $i++) {
@@ -195,17 +195,17 @@
 									$get = mysql_fetch_assoc($query);
 									$target = $get['target'];
 									if($target == 0){
-										$output .= '<td class="text-center">-</td>';
+										$output .= '<td class="text-center number-font">-</td>';
 									}
 									else{
-										$output .= '<td class="text-center red-text">'.$target.'</td>';
+										$output .= '<td class="text-center red-text number-font">'.number_format($target).'</td>';
 									}
 									$accomplish = $get['accomplish'];
 									if($accomplish == 0){
-										$output .= '<td class="text-center">-</td>';
+										$output .= '<td class="text-center number-font">-</td>';
 									}
 									else{
-										$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+										$output .= '<td class="text-center green-text number-font">'.number_format($accomplish).'</td>';
 									}
 								}
 							}
@@ -213,7 +213,7 @@
 						else if($mode == "quarterly"){
 							if($status == 0){
 								$output .= 
-								'<td colspan="24" class="grey lighten-2"></td>';
+								'<td colspan="24" class="grey lighten-3"></td>';
 							}
 							else{
 								for ($i = 1; $i <= 4 ; $i++) { 
@@ -226,17 +226,17 @@
 									$get = mysql_fetch_assoc($query);
 									$target = $get['target'];
 									if($target == 0){
-										$output .= '<td class="text-center">-</td>';
+										$output .= '<td class="text-center number-font">-</td>';
 									}
 									else{
-										$output .= '<td class="text-center red-text">'.$target.'</td>';
+										$output .= '<td class="text-center red-text number-font">'.number_format($target).'</td>';
 									}
 									$accomplish = $get['accomplish'];
 									if($accomplish == 0){
-										$output .= '<td class="text-center">-</td>';
+										$output .= '<td class="text-center number-font">-</td>';
 									}
 									else{
-										$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+										$output .= '<td class="text-center green-text number-font">'.number_format($accomplish).'</td>';
 									}
 									$limit = $limit + 3;
 								}
@@ -257,11 +257,11 @@
 								$status = $fetch4['status'];
 								$output .= 
 								'<tr>
-									<td style="padding-left: 80px;">'.$title.'</td>';
+									<td class="title-font" style="padding-left: 80px;">'.$title.'</td>';
 								if($mode == "monthly"){
 									if($status == 0){
 										$output .= 
-										'<td colspan="24" class="grey lighten-2"></td>';
+										'<td colspan="24" class="grey lighten-3"></td>';
 									}
 									else{
 										for ($i=1; $i <= 12; $i++) { 
@@ -274,17 +274,17 @@
 											$get = mysql_fetch_assoc($query);
 											$target = $get['target'];
 											if($target == 0){
-												$output .= '<td class="text-center">-</td>';
+												$output .= '<td class="text-center number-font">-</td>';
 											}
 											else{
-												$output .= '<td class="text-center red-text">'.$target.'</td>';
+												$output .= '<td class="text-center red-text number-font">'.number_format($target).'</td>';
 											}
 											$accomplish = $get['accomplish'];
 											if($accomplish == 0){
-												$output .= '<td class="text-center">-</td>';
+												$output .= '<td class="text-center number-font">-</td>';
 											}
 											else{
-												$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+												$output .= '<td class="text-center green-text number-font">'.number_format($accomplish).'</td>';
 											}
 										}
 									}
@@ -292,7 +292,7 @@
 								else if($mode == "quarterly"){
 									if($status == 0){
 										$output .= 
-										'<td colspan="24" class="grey lighten-2"></td>';
+										'<td colspan="24" class="grey lighten-3"></td>';
 									}
 									else{
 										for ($i = 1; $i <= 4 ; $i++) { 
@@ -305,17 +305,17 @@
 											$get = mysql_fetch_assoc($query);
 											$target = $get['target'];
 											if($target == 0){
-												$output .= '<td class="text-center">-</td>';
+												$output .= '<td class="text-center number-font">-</td>';
 											}
 											else{
-												$output .= '<td class="text-center red-text">'.$target.'</td>';
+												$output .= '<td class="text-center red-text number-font">'.number_format($target).'</td>';
 											}
 											$accomplish = $get['accomplish'];
 											if($accomplish == 0){
-												$output .= '<td class="text-center">-</td>';
+												$output .= '<td class="text-center number-font">-</td>';
 											}
 											else{
-												$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+												$output .= '<td class="text-center green-text number-font">'.number_format($accomplish).'</td>';
 											}
 										}
 									}
@@ -335,11 +335,11 @@
 										$status = $fetch5['status'];
 										$output .= 
 										'<tr>
-											<td style="padding-left: 100px;">'.$title.'</td>';
+											<td  class="title-font"style="padding-left: 100px;">'.$title.'</td>';
 										if($mode == "monthly"){
 											if($status == 0){
 												$output .= 
-												'<td colspan="24" class="grey lighten-2"></td>';
+												'<td colspan="24" class="grey lighten-3"></td>';
 											}
 											else{
 												for ($i=1; $i <= 12; $i++) { 
@@ -352,17 +352,17 @@
 													$get = mysql_fetch_assoc($query);
 													$target = $get['target'];
 													if($target == 0){
-														$output .= '<td class="text-center">-</td>';
+														$output .= '<td class="text-center number-font">-</td>';
 													}
 													else{
-														$output .= '<td class="text-center red-text">'.$target.'</td>';
+														$output .= '<td class="text-center red-text number-font">'.number_format($target).'</td>';
 													}
 													$accomplish = $get['accomplish'];
 													if($accomplish == 0){
-														$output .= '<td class="text-center">-</td>';
+														$output .= '<td class="text-center number-font">-</td>';
 													}
 													else{
-														$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+														$output .= '<td class="text-center green-text number-font">'.number_format($accomplish).'</td>';
 													}
 												}
 											}
@@ -370,7 +370,7 @@
 										else if($mode == "quarterly"){
 											if($status == 0){
 												$output .= 
-												'<td colspan="24" class="grey lighten-2"></td>';
+												'<td colspan="24" class="grey lighten-3"></td>';
 											}
 											else{
 												for ($i = 1; $i <= 4 ; $i++) { 
@@ -383,17 +383,17 @@
 													$get = mysql_fetch_assoc($query);
 													$target = $get['target'];
 													if($target == 0){
-														$output .= '<td class="text-center">-</td>';
+														$output .= '<td class="text-center number-font">-</td>';
 													}
 													else{
-														$output .= '<td class="text-center red-text">'.$target.'</td>';
+														$output .= '<td class="text-center red-text number-font">'.number_format($target).'</td>';
 													}
 													$accomplish = $get['accomplish'];
 													if($accomplish == 0){
-														$output .= '<td class="text-center">-</td>';
+														$output .= '<td class="text-center number-font">-</td>';
 													}
 													else{
-														$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+														$output .= '<td class="text-center green-text number-font">'.number_format($accomplish).'</td>';
 													}
 												}
 											}
@@ -413,11 +413,11 @@
 												$status = $fetch5['status'];
 												$output .= 
 												'<tr>
-													<td style="padding-left: 100px;">'.$title.'</td>';
+													<td  class="title-font"style="padding-left: 100px;">'.$title.'</td>';
 												if($mode == "monthly"){
 													if($status == 0){
 														$output .= 
-														'<td colspan="24" class="grey lighten-2"></td>';
+														'<td colspan="24" class="grey lighten-3"></td>';
 													}
 													else{
 														for ($i=1; $i <= 12; $i++) { 
@@ -430,17 +430,17 @@
 															$get = mysql_fetch_assoc($query);
 															$target = $get['target'];
 															if($target == 0){
-																$output .= '<td class="text-center">-</td>';
+																$output .= '<td class="text-center number-font">-</td>';
 															}
 															else{
-																$output .= '<td class="text-center red-text">'.$target.'</td>';
+																$output .= '<td class="text-center red-text number-font">'.number_format($target).'</td>';
 															}
 															$accomplish = $get['accomplish'];
 															if($accomplish == 0){
-																$output .= '<td class="text-center">-</td>';
+																$output .= '<td class="text-center number-font">-</td>';
 															}
 															else{
-																$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+																$output .= '<td class="text-center green-text number-font">'.number_format($accomplish).'</td>';
 															}
 														}
 													}
@@ -448,7 +448,7 @@
 												else if($mode == "quarterly"){
 													if($status == 0){
 														$output .= 
-														'<td colspan="24" class="grey lighten-2"></td>';
+														'<td colspan="24" class="grey lighten-3"></td>';
 													}
 													else{
 														for ($i = 1; $i <= 4 ; $i++) { 
@@ -461,17 +461,17 @@
 															$get = mysql_fetch_assoc($query);
 															$target = $get['target'];
 															if($target == 0){
-																$output .= '<td class="text-center">-</td>';
+																$output .= '<td class="text-center number-font">-</td>';
 															}
 															else{
-																$output .= '<td class="text-center red-text">'.$target.'</td>';
+																$output .= '<td class="text-center red-text number-font">'.number_format($target).'</td>';
 															}
 															$accomplish = $get['accomplish'];
 															if($accomplish == 0){
-																$output .= '<td class="text-center">-</td>';
+																$output .= '<td class="text-center number-font">-</td>';
 															}
 															else{
-																$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+																$output .= '<td class="text-center green-text number-font">'.number_format($accomplish).'</td>';
 															}
 														}
 													}
@@ -550,11 +550,11 @@
 			$output .= 
 			'<thead class="mdb-color darken-3">
 						<tr class="text-center white-text">
-							<th style="width: 300px;">Services Programs/Projects</th>
-							<th colspan="2">Quarter 1</th>
-							<th colspan="2">Quarter 2</th>
-							<th colspan="2">Quarter 3</th>
-							<th colspan="2">Quarter 4</th>
+							<th class="font-weight-bold" style="width: 300px;">Services Programs/Projects</th>
+							<th class="font-weight-bold" colspan="2">Quarter 1</th>
+							<th class="font-weight-bold" colspan="2">Quarter 2</th>
+							<th class="font-weight-bold" colspan="2">Quarter 3</th>
+							<th class="font-weight-bold" colspan="2">Quarter 4</th>
 						</tr>
 					</thead>
 					<tbody>

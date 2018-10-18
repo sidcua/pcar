@@ -21,25 +21,25 @@
 		$output .= 
 		'<thead class="mdb-color darken-3">
 					<tr class="text-center white-text">
-						<th style="width: 300px;" rowspan="2">Services Programs/Projects</th>
-						<th colspan="3">Quarter 1</th>
-						<th colspan="3">Quarter 2</th>
-						<th colspan="3">Quarter 3</th>
-						<th colspan="3">Quarter 4</th>
+						<th class="font-weight-bold align-middle" style="width: 300px;" rowspan="2">Services Programs/Projects</th>
+						<th class="font-weight-bold" colspan="3">Quarter 1</th>
+						<th class="font-weight-bold" colspan="3">Quarter 2</th>
+						<th class="font-weight-bold" colspan="3">Quarter 3</th>
+						<th class="font-weight-bold" colspan="3">Quarter 4</th>
 					</tr>
                     <tr class="text-center white-text">
-						<th>Remarks</th>
-						<th>Rating</th>
-						<th>Adjective Rating</th>
-						<th>Remarks</th>
-						<th>Rating</th>
-						<th>Adjective Rating</th>
-						<th>Remarks</th>
-						<th>Rating</th>
-						<th>Adjective Rating</th>
-						<th>Remarks</th>
-						<th>Rating</th>
-						<th>Adjective Rating</th>
+						<th class="font-weight-bold">Remarks</th>
+						<th class="font-weight-bold">Rating</th>
+						<th class="font-weight-bold">Adjective Rating</th>
+						<th class="font-weight-bold">Remarks</th>
+						<th class="font-weight-bold">Rating</th>
+						<th class="font-weight-bold">Adjective Rating</th>
+						<th class="font-weight-bold">Remarks</th>
+						<th class="font-weight-bold">Rating</th>
+						<th class="font-weight-bold">Adjective Rating</th>
+						<th class="font-weight-bold">Remarks</th>
+						<th class="font-weight-bold">Rating</th>
+						<th class="font-weight-bold">Adjective Rating</th>
 					</tr>
 				</thead>
 				<tbody>';
@@ -56,9 +56,9 @@
 			$status = $fetch['status'];
 			$output .= 
 			'<tr>
-				<td style="padding-left: 20px;">'.$title.'</td>';
+				<td class="title-font" style="padding-left: 20px;">'.$title.'</td>';
 			if($status == 0){
-				$output .= '<td colspan="12" class="grey lighten-2"></td>';
+				$output .= '<td colspan="12" class="grey lighten-3"></td>';
 			}
 			else{
 				for ($i = 1; $i <= 4 ; $i++) { 
@@ -101,15 +101,15 @@
 							$adj = "Unsatisfactory";
 						}
 						$output .= 
-							'<td class="text-center">'.$remark.'</td>
-							<td class="text-center">'.$rating.'</td>
-							<td class="text-center">'.$adj.'</td>';
+							'<td class="text-center align-middle number-font">'.$remark.'</td>
+							<td class="text-center align-middle number-font">'.$rating.'</td>
+							<td class="text-center align-middle title-font">'.$adj.'</td>';
 					}
 					else{
 						$output .=
-						'<td class="text-center">-</td>
-						<td class="text-center">-</td>
-						<td class="text-center">-</td>';
+						'<td class="text-center align-middle number-font">-</td>
+						<td class="text-center align-middle number-font">-</td>
+						<td class="text-center align-middle number-font">-</td>';
 					}
 				}
 			}
@@ -128,9 +128,9 @@
 					$status = $fetch2['status'];
 					$output .= 
 					'<tr>
-						<td style="padding-left: 40px;">'.$title.'</td>';
+						<td class="title-font" style="padding-left: 40px;">'.$title.'</td>';
 					if($status == 0){
-						$output .= '<td colspan="12" class="grey lighten-2"></td>';
+						$output .= '<td colspan="12" class="grey lighten-3"></td>';
 					}
 					else{
 						for ($i = 1; $i <= 4 ; $i++) { 
@@ -173,15 +173,15 @@
 									$adj = "Unsatisfactory";
 								}
 								$output .= 
-									'<td class="text-center">'.$remark.'</td>
-									<td class="text-center">'.$rating.'</td>
-									<td class="text-center">'.$adj.'</td>';
+									'<td class="text-center align-middle number-font">'.$remark.'</td>
+									<td class="text-center align-middle number-font">'.$rating.'</td>
+									<td class="text-center align-middle title-font">'.$adj.'</td>';
 							}
 							else{
 								$output .=
-								'<td class="text-center">-</td>
-								<td class="text-center">-</td>
-								<td class="text-center">-</td>';
+								'<td class="text-center align-middle number-font">-</td>
+								<td class="text-center align-middle number-font">-</td>
+								<td class="text-center align-middle number-font">-</td>';
 							}
 							$limit = $limit + 3;
 						}
@@ -201,9 +201,9 @@
 							$status = $fetch3['status'];
 							$output .= 
 							'<tr>
-								<td style="padding-left: 60px;">'.$title.'</td>';
+								<td class="title-font" style="padding-left: 60px;">'.$title.'</td>';
 							if($status == 0){
-								$output .= '<td colspan="12" class="grey lighten-2"></td>';
+								$output .= '<td colspan="12" class="grey lighten-3"></td>';
 							}
 							else{
 								$limit = 3;
@@ -247,15 +247,15 @@
 											$adj = "Unsatisfactory";
 										}
 										$output .= 
-											'<td class="text-center">'.$remark.'</td>
-											<td class="text-center">'.$rating.'</td>
-											<td class="text-center">'.$adj.'</td>';
+											'<td class="text-center align-middle number-font">'.$remark.'</td>
+											<td class="text-center align-middle number-font">'.$rating.'</td>
+											<td class="text-center align-middle title-font">'.$adj.'</td>';
 									}
 									else{
 										$output .=
-										'<td class="text-center">-</td>
-										<td class="text-center">-</td>
-										<td class="text-center">-</td>';
+										'<td class="text-center align-middle number-font">-</td>
+										<td class="text-center align-middle number-font">-</td>
+										<td class="text-center align-middle number-font">-</td>';
 									}
 								}
 							}
@@ -274,9 +274,9 @@
 									$status = $fetch4['status'];
 									$output .= 
 									'<tr>
-										<td style="padding-left: 80px;">'.$title.'</td>';
+										<td class="title-font" style="padding-left: 80px;">'.$title.'</td>';
 									if($status == 0){
-										$output .= '<td colspan="12" class="grey lighten-2"></td>';
+										$output .= '<td colspan="12" class="grey lighten-3"></td>';
 									}
 									else{
 										for ($i = 1; $i <= 4 ; $i++) { 
@@ -319,15 +319,15 @@
 													$adj = "Unsatisfactory";
 												}
 												$output .= 
-													'<td class="text-center">'.$remark.'</td>
-													<td class="text-center">'.$rating.'</td>
-													<td class="text-center">'.$adj.'</td>';
+													'<td class="text-center align-middle number-font">'.$remark.'</td>
+													<td class="text-center align-middle number-font">'.$rating.'</td>
+													<td class="text-center align-middle title-font">'.$adj.'</td>';
 											}
 											else{
 												$output .=
-												'<td class="text-center">-</td>
-												<td class="text-center">-</td>
-												<td class="text-center">-</td>';
+												'<td class="text-center align-middle number-font">-</td>
+												<td class="text-center align-middle number-font">-</td>
+												<td class="text-center align-middle number-font">-</td>';
 											}
 										}
 									}
@@ -346,9 +346,9 @@
 											$status = $fetch5['status'];
 											$output .= 
 											'<tr>
-												<td style="padding-left: 100px;">'.$title.'</td>';
+												<td  class="title-font"style="padding-left: 100px;">'.$title.'</td>';
 											if($status == 0){
-												$output .= '<td colspan="12" class="grey lighten-2"></td>';
+												$output .= '<td colspan="12" class="grey lighten-3"></td>';
 											}
 											else{
 												for ($i = 1; $i <= 4 ; $i++) { 
@@ -391,15 +391,15 @@
 															$adj = "Unsatisfactory";
 														}
 														$output .= 
-															'<td class="text-center">'.$remark.'</td>
-															<td class="text-center">'.$rating.'</td>
-															<td class="text-center">'.$adj.'</td>';
+															'<td class="text-center align-middle number-font">'.$remark.'</td>
+															<td class="text-center align-middle number-font">'.$rating.'</td>
+															<td class="text-center align-middle title-font">'.$adj.'</td>';
 													}
 													else{
 														$output .=
-														'<td class="text-center">-</td>
-														<td class="text-center">-</td>
-														<td class="text-center">-</td>';
+														'<td class="text-center align-middle number-font">-</td>
+														<td class="text-center align-middle number-font">-</td>
+														<td class="text-center align-middle number-font">-</td>';
 													}
 												}
 											}
@@ -418,9 +418,9 @@
 													$status = $fetch6['status'];
 													$output .= 
 													'<tr>
-														<td style="padding-left: 100px;">'.$title.'</td>';
+														<td  class="title-font"style="padding-left: 100px;">'.$title.'</td>';
 													if($status == 0){
-														$output .= '<td colspan="12" class="grey lighten-2"></td>';
+														$output .= '<td colspan="12" class="grey lighten-3"></td>';
 													}
 													else{
 														for ($i = 1; $i <= 4 ; $i++) { 
@@ -463,15 +463,15 @@
 																	$adj = "Unsatisfactory";
 																}
 																$output .= 
-																	'<td class="text-center">'.$remark.'</td>
-																	<td class="text-center">'.$rating.'</td>
-																	<td class="text-center">'.$adj.'</td>';
+																	'<td class="text-center align-middle number-font">'.$remark.'</td>
+																	<td class="text-center align-middle number-font">'.$rating.'</td>
+																	<td class="text-center align-middle title-font">'.$adj.'</td>';
 															}
 															else{
 																$output .=
-																'<td class="text-center">-</td>
-																<td class="text-center">-</td>
-																<td class="text-center">-</td>';
+																'<td class="text-center align-middle number-font">-</td>
+																<td class="text-center align-middle number-font">-</td>
+																<td class="text-center align-middle number-font">-</td>';
 															}
 														}
 													}

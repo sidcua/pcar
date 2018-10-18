@@ -78,7 +78,7 @@
 					<div id="fountainG_7" class="fountainG"></div>
 					<div id="fountainG_8" class="fountainG"></div>
 				</div>
-				<table id="tblperformance" class="table table-striped">
+				<table id="tblperformance" class="table table-bordered">
 					
 				</table>
 			</div>

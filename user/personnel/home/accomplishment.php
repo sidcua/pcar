@@ -23,6 +23,9 @@
 		<div>
 			<?php include '../view/header.php'; ?>
 		</div>
+		<div class="container-fluid">
+			<?php include '../view/accomplish_guide.php'; ?>
+		</div>
 		<div class="divspace"></div>
 		<div class="container-fluid">
 			<div class="row">
@@ -66,7 +69,7 @@
             </div>
 			<input type="hidden" id="programholder" value="<?php echo $_GET['program']; ?>">
 			<div class="row">
-				<table class="table table-bordered table-striped">
+				<table class="table table-bordered">
 					<thead class="mdb-color darken-3">
 						<tr class="text-center white-text">
 							<th class="font-weight-bold align-middle" style="width: 300px;" rowspan="2">Services Programs/Projects</th>
