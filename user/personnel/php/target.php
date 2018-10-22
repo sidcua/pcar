@@ -400,6 +400,7 @@
         }
 	}
 	if($action == "inityear"){
+        $output = "";
 		$latest = date('Y');
 		for ($i = $latest; $i >= 2014 ; $i--) { 
 			$output .= '<option value="'.$i.'">'.$i.'</option>';

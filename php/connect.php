@@ -17,4 +17,7 @@ $db = "pcar";
 
 	@$con = mysql_connect($host,$user,$pass);
 		@mysql_select_db($db);
+
+	// $con = mysqli_connect("localhost", "root", "");
+	// $db = mysqli_select_db($con, "pcar");
 ?>
