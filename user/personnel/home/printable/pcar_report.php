@@ -17,7 +17,7 @@
         $status = $fetch['status'];
         $target_total = 0;
         $accom_total = 0;
-        $output .= '<tr><td style="padding-left: 20px;">'.$title.'</td>';
+        $output .= '<tr><td style="padding-left: 20px;" class="title-font">'.$title.'</td>';
         if($status == 0){
             $output .= '<td colspan="12" class="grey lighten-2"></td>';
         }
@@ -104,16 +104,16 @@
             if($accom_total == 0){
                 $accom_total = "-";
             }
-            $output .= '<td class="text-center">'.$target_total.'</td>
-            <td class="text-center">'.$target_q1.'</td>
-            <td class="text-center">'.$target_q2.'</td>
-            <td class="text-center">'.$target_q3.'</td>
-            <td class="text-center">'.$target_q4.'</td>
-            <td class="text-center">'.$accom_q1.'</td>
-            <td class="text-center">'.$accom_q2.'</td>
-            <td class="text-center">'.$accom_q3.'</td>
-            <td class="text-center">'.$accom_q4.'</td>
-            <td class="text-center">'.$accom_total.'</td>
+            $output .= '<td class="text-center number-font blue-text">'.$target_total.'</td>
+            <td class="text-center number-font">'.$target_q1.'</td>
+            <td class="text-center number-font">'.$target_q2.'</td>
+            <td class="text-center number-font">'.$target_q3.'</td>
+            <td class="text-center number-font">'.$target_q4.'</td>
+            <td class="text-center number-font">'.$accom_q1.'</td>
+            <td class="text-center number-font">'.$accom_q2.'</td>
+            <td class="text-center number-font">'.$accom_q3.'</td>
+            <td class="text-center number-font">'.$accom_q4.'</td>
+            <td class="text-center number-font blue-text">'.$accom_total.'</td>
             <td></td>';
         }
         $output .= '</tr>';
@@ -126,7 +126,7 @@
                 $status = $fetch2['status'];
                 $target_total = 0;
                 $accom_total = 0;
-                $output .= '<tr><td style="padding-left: 40px;">'.$title.'</td>';
+                $output .= '<tr><td style="padding-left: 40px;" class="title-font">'.$title.'</td>';
                 if($status == 0){
                     $output .= '<td colspan="12" class="grey lighten-2"></td>';
                 }
@@ -213,16 +213,16 @@
                     if($accom_total == 0){
                         $accom_total = "-";
                     }
-                    $output .= '<td class="text-center">'.$target_total.'</td>
-                    <td class="text-center">'.$target_q1.'</td>
-                    <td class="text-center">'.$target_q2.'</td>
-                    <td class="text-center">'.$target_q3.'</td>
-                    <td class="text-center">'.$target_q4.'</td>
-                    <td class="text-center">'.$accom_q1.'</td>
-                    <td class="text-center">'.$accom_q2.'</td>
-                    <td class="text-center">'.$accom_q3.'</td>
-                    <td class="text-center">'.$accom_q4.'</td>
-                    <td class="text-center">'.$accom_total.'</td>
+                    $output .= '<td class="text-center number-font blue-text">'.$target_total.'</td>
+                    <td class="text-center number-font">'.$target_q1.'</td>
+                    <td class="text-center number-font">'.$target_q2.'</td>
+                    <td class="text-center number-font">'.$target_q3.'</td>
+                    <td class="text-center number-font">'.$target_q4.'</td>
+                    <td class="text-center number-font">'.$accom_q1.'</td>
+                    <td class="text-center number-font">'.$accom_q2.'</td>
+                    <td class="text-center number-font">'.$accom_q3.'</td>
+                    <td class="text-center number-font">'.$accom_q4.'</td>
+                    <td class="text-center number-font blue-text">'.$accom_total.'</td>
                     <td></td>';
                 }
                 $output .= '</tr>';
@@ -235,7 +235,7 @@
                         $status = $fetch3['status'];
                         $target_total = 0;
                         $accom_total = 0;
-                        $output .= '<tr><td style="padding-left: 60px;">'.$title.'</td>';
+                        $output .= '<tr><td style="padding-left: 60px;" class="title-font">'.$title.'</td>';
                         if($status == 0){
                             $output .= '<td colspan="12" class="grey lighten-2"></td>';
                         }
@@ -322,16 +322,16 @@
                             if($accom_total == 0){
                                 $accom_total = "-";
                             }
-                            $output .= '<td class="text-center">'.$target_total.'</td>
-                            <td class="text-center">'.$target_q1.'</td>
-                            <td class="text-center">'.$target_q2.'</td>
-                            <td class="text-center">'.$target_q3.'</td>
-                            <td class="text-center">'.$target_q4.'</td>
-                            <td class="text-center">'.$accom_q1.'</td>
-                            <td class="text-center">'.$accom_q2.'</td>
-                            <td class="text-center">'.$accom_q3.'</td>
-                            <td class="text-center">'.$accom_q4.'</td>
-                            <td class="text-center">'.$accom_total.'</td>
+                            $output .= '<td class="text-center number-font blue-text">'.$target_total.'</td>
+                            <td class="text-center number-font">'.$target_q1.'</td>
+                            <td class="text-center number-font">'.$target_q2.'</td>
+                            <td class="text-center number-font">'.$target_q3.'</td>
+                            <td class="text-center number-font">'.$target_q4.'</td>
+                            <td class="text-center number-font">'.$accom_q1.'</td>
+                            <td class="text-center number-font">'.$accom_q2.'</td>
+                            <td class="text-center number-font">'.$accom_q3.'</td>
+                            <td class="text-center number-font">'.$accom_q4.'</td>
+                            <td class="text-center number-font blue-text">'.$accom_total.'</td>
                             <td></td>';
                         }
                         $output .= '</tr>';
@@ -344,7 +344,7 @@
                                 $status = $fetch4['status'];
                                 $target_total = 0;
                                 $accom_total = 0;
-                                $output .= '<tr><td style="padding-left: 80px;">'.$title.'</td>';
+                                $output .= '<tr><td style="padding-left: 80px;" class="title-font">'.$title.'</td>';
                                 if($status == 0){
                                     $output .= '<td colspan="12" class="grey lighten-2"></td>';
                                 }
@@ -431,16 +431,16 @@
                                     if($accom_total == 0){
                                         $accom_total = "-";
                                     }
-                                    $output .= '<td class="text-center">'.$target_total.'</td>
-                                    <td class="text-center">'.$target_q1.'</td>
-                                    <td class="text-center">'.$target_q2.'</td>
-                                    <td class="text-center">'.$target_q3.'</td>
-                                    <td class="text-center">'.$target_q4.'</td>
-                                    <td class="text-center">'.$accom_q1.'</td>
-                                    <td class="text-center">'.$accom_q2.'</td>
-                                    <td class="text-center">'.$accom_q3.'</td>
-                                    <td class="text-center">'.$accom_q4.'</td>
-                                    <td class="text-center">'.$accom_total.'</td>
+                                    $output .= '<td class="text-center number-font blue-text">'.$target_total.'</td>
+                                    <td class="text-center number-font">'.$target_q1.'</td>
+                                    <td class="text-center number-font">'.$target_q2.'</td>
+                                    <td class="text-center number-font">'.$target_q3.'</td>
+                                    <td class="text-center number-font">'.$target_q4.'</td>
+                                    <td class="text-center number-font">'.$accom_q1.'</td>
+                                    <td class="text-center number-font">'.$accom_q2.'</td>
+                                    <td class="text-center number-font">'.$accom_q3.'</td>
+                                    <td class="text-center number-font">'.$accom_q4.'</td>
+                                    <td class="text-center number-font blue-text">'.$accom_total.'</td>
                                     <td></td>';
                                 }
                                 $output .= '</tr>';
@@ -453,7 +453,7 @@
                                         $status = $fetch5['status'];
                                         $target_total = 0;
                                         $accom_total = 0;
-                                        $output .= '<tr><td style="padding-left: 100px;">'.$title.'</td>';
+                                        $output .= '<tr><td style="padding-left: 100px;" class="title-font">'.$title.'</td>';
                                         if($status == 0){
                                             $output .= '<td colspan="12" class="grey lighten-2"></td>';
                                         }
@@ -540,16 +540,16 @@
                                             if($accom_total == 0){
                                                 $accom_total = "-";
                                             }
-                                            $output .= '<td class="text-center">'.$target_total.'</td>
-                                            <td class="text-center">'.$target_q1.'</td>
-                                            <td class="text-center">'.$target_q2.'</td>
-                                            <td class="text-center">'.$target_q3.'</td>
-                                            <td class="text-center">'.$target_q4.'</td>
-                                            <td class="text-center">'.$accom_q1.'</td>
-                                            <td class="text-center">'.$accom_q2.'</td>
-                                            <td class="text-center">'.$accom_q3.'</td>
-                                            <td class="text-center">'.$accom_q4.'</td>
-                                            <td class="text-center">'.$accom_total.'</td>
+                                            $output .= '<td class="text-center number-font blue-text">'.$target_total.'</td>
+                                            <td class="text-center number-font">'.$target_q1.'</td>
+                                            <td class="text-center number-font">'.$target_q2.'</td>
+                                            <td class="text-center number-font">'.$target_q3.'</td>
+                                            <td class="text-center number-font">'.$target_q4.'</td>
+                                            <td class="text-center number-font">'.$accom_q1.'</td>
+                                            <td class="text-center number-font">'.$accom_q2.'</td>
+                                            <td class="text-center number-font">'.$accom_q3.'</td>
+                                            <td class="text-center number-font">'.$accom_q4.'</td>
+                                            <td class="text-center number-font blue-text">'.$accom_total.'</td>
                                             <td></td>';
                                         }
                                         $output .= '</tr>';
@@ -562,7 +562,7 @@
                                                 $status = $fetch6['status'];
                                                 $target_total = 0;
                                                 $accom_total = 0;
-                                                $output .= '<tr><td style="padding-left: 120px;">'.$title.'</td>';
+                                                $output .= '<tr><td style="padding-left: 120px;" class="title-font">'.$title.'</td>';
                                                 if($status == 0){
                                                     $output .= '<td colspan="12" class="grey lighten-2"></td>';
                                                 }
@@ -649,16 +649,16 @@
                                                     if($accom_total == 0){
                                                         $accom_total = "-";
                                                     }
-                                                    $output .= '<td class="text-center">'.$target_total.'</td>
-                                                    <td class="text-center">'.$target_q1.'</td>
-                                                    <td class="text-center">'.$target_q2.'</td>
-                                                    <td class="text-center">'.$target_q3.'</td>
-                                                    <td class="text-center">'.$target_q4.'</td>
-                                                    <td class="text-center">'.$accom_q1.'</td>
-                                                    <td class="text-center">'.$accom_q2.'</td>
-                                                    <td class="text-center">'.$accom_q3.'</td>
-                                                    <td class="text-center">'.$accom_q4.'</td>
-                                                    <td class="text-center">'.$accom_total.'</td>
+                                                    $output .= '<td class="text-center number-font blue-text">'.$target_total.'</td>
+                                                    <td class="text-center number-font">'.$target_q1.'</td>
+                                                    <td class="text-center number-font">'.$target_q2.'</td>
+                                                    <td class="text-center number-font">'.$target_q3.'</td>
+                                                    <td class="text-center number-font">'.$target_q4.'</td>
+                                                    <td class="text-center number-font">'.$accom_q1.'</td>
+                                                    <td class="text-center number-font">'.$accom_q2.'</td>
+                                                    <td class="text-center number-font">'.$accom_q3.'</td>
+                                                    <td class="text-center number-font">'.$accom_q4.'</td>
+                                                    <td class="text-center number-font blue-text">'.$accom_total.'</td>
                                                     <td></td>';
                                                 }
                                                 $output .= '</tr>';

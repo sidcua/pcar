@@ -11,10 +11,10 @@
     }
 	// level 1
     if($_SESSION['level'] == 3){
-        $sql = mysql_query("SELECT assignID, program.programID AS programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE assign.accID = '$accid' AND level = 1 AND state = 1 ORDER BY title ASC");
+        $sql = mysql_query("SELECT assignID, program.programID AS programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE assign.accID = '$accid' AND level = 1 AND state = 1");
     }
 	else{
-        $sql = mysql_query("SELECT programID, title, status FROM program WHERE level = 1 AND state = 1 AND reportID = '$report' ORDER BY title ASC");
+        $sql = mysql_query("SELECT programID, title, status FROM program WHERE level = 1 AND state = 1 AND reportID = '$report'");
     }
 	while($fetch = mysql_fetch_assoc($sql)){
 		$programid = $fetch['programID'];
@@ -22,11 +22,11 @@
 		$status = $fetch['status'];
 		$output .= 
 		'<tr>
-			<td style="padding-left: 20px;">'.$title.'</td>';
+			<td style="padding-left: 20px;" class="title-font">'.$title.'</td>';
 		if($mode == "monthly"){
 			if($status == 0){
 				$output .= 
-				'<td colspan="24" class="grey lighten-2"></td>';
+				'<td colspan="24" class="grey lighten-3"></td>';
 			}
 			else{
 				for ($i=1; $i <= 12; $i++) { 
@@ -39,17 +39,17 @@
 					$get = mysql_fetch_assoc($query);
 					$target = $get['target'];
 					if($target == 0){
-						$output .= '<td class="text-center">-</td>';
+						$output .= '<td class="text-center number-font">-</td>';
 					}
 					else{
-						$output .= '<td class="text-center red-text">'.$target.'</td>';;
+						$output .= '<td class="text-center red-text number-font">'.$target.'</td>';;
 					}
 					$accomplish = $get['accomplish'];
 					if($accomplish == 0){
-						$output .= '<td class="text-center">-</td>';
+						$output .= '<td class="text-center number-font">-</td>';
 					}
 					else{
-						$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+						$output .= '<td class="text-center green-text number-font">'.$accomplish.'</td>';
 					}
 				}
 			}
@@ -57,7 +57,7 @@
 		else if($mode == "quarterly"){
 			if($status == 0){
 				$output .= 
-				'<td colspan="24" class="grey lighten-2"></td>';
+				'<td colspan="24" class="grey lighten-3"></td>';
 			}
 			else{
 				for ($i = 1; $i <= 4 ; $i++) { 
@@ -70,17 +70,17 @@
 					$get = mysql_fetch_assoc($query);
 					$target = $get['target'];
 					if($target == 0){
-						$output .= '<td class="text-center">-</td>';
+						$output .= '<td class="text-center number-font">-</td>';
 					}
 					else{
-						$output .= '<td class="text-center red-text">'.$target.'</td>';
+						$output .= '<td class="text-center red-text number-font">'.$target.'</td>';
 					}
 					$accomplish = $get['accomplish'];
 					if($accomplish == 0){
-						$output .= '<td class="text-center">-</td>';
+						$output .= '<td class="text-center number-font">-</td>';
 					}
 					else{
-						$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+						$output .= '<td class="text-center green-text number-font">'.$accomplish.'</td>';
 					}
 				}
 			}
@@ -88,10 +88,10 @@
 		$output .= '</tr>';
 		// level 2
         if($_SESSION['level'] == 3){
-            $sql2 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' ORDER BY title ASC");
+            $sql2 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid'");
         }
         else{
-            $sql2 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 AND reportID = '$report' ORDER BY title ASC");
+            $sql2 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 AND reportID = '$report'");
         }
 		if(mysql_num_rows($sql2) != 0){
 			while($fetch2 = mysql_fetch_assoc($sql2)){
@@ -100,11 +100,11 @@
 				$status = $fetch2['status'];
 				$output .= 
 				'<tr>
-					<td style="padding-left: 40px;">'.$title.'</td>';
+					<td style="padding-left: 40px;" class="title-font">'.$title.'</td>';
 				if($mode == "monthly"){
 					if($status == 0){
 						$output .= 
-						'<td colspan="24" class="grey lighten-2"></td>';
+						'<td colspan="24" class="grey lighten-3"></td>';
 					}
 					else{
 						for ($i=1; $i <= 12; $i++) { 
@@ -117,17 +117,17 @@
 							$get = mysql_fetch_assoc($query);
 							$target = $get['target'];
 							if($target == 0){
-								$output .= '<td class="text-center">-</td>';
+								$output .= '<td class="text-center number-font">-</td>';
 							}
 							else{
-								$output .= '<td class="text-center red-text">'.$target.'</td>';
+								$output .= '<td class="text-center red-text number-font">'.$target.'</td>';
 							}
 							$accomplish = $get['accomplish'];
 							if($accomplish == 0){
-								$output .= '<td class="text-center">-</td>';
+								$output .= '<td class="text-center number-font">-</td>';
 							}
 							else{
-								$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+								$output .= '<td class="text-center green-text number-font">'.$accomplish.'</td>';
 							}
 						}
 					}
@@ -135,7 +135,7 @@
 				else if($mode == "quarterly"){
 					if($status == 0){
 						$output .= 
-						'<td colspan="24" class="grey lighten-2"></td>';
+						'<td colspan="24" class="grey lighten-3"></td>';
 					}
 					else{
 						for ($i = 1; $i <= 4 ;$i++) { 
@@ -148,17 +148,17 @@
 							$get = mysql_fetch_assoc($query);
 							$target = $get['target'];
 							if($target == 0){
-								$output .= '<td class="text-center">-</td>';
+								$output .= '<td class="text-center number-font">-</td>';
 							}
 							else{
-								$output .= '<td class="text-center red-text">'.$target.'</td>';
+								$output .= '<td class="text-center red-text number-font">'.$target.'</td>';
 							}
 							$accomplish = $get['accomplish'];
 							if($accomplish == 0){
-								$output .= '<td class="text-center">-</td>';
+								$output .= '<td class="text-center number-font">-</td>';
 							}
 							else{
-								$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+								$output .= '<td class="text-center green-text number-font">'.$accomplish.'</td>';
 							}
 						}
 					}
@@ -166,10 +166,10 @@
 				$output .= '</tr>';
 				// level 3
 				if($_SESSION['level'] == 3){
-                    $sql3 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' ORDER BY title ASC");
+                    $sql3 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid'");
                 }
                 else{
-                    $sql3 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 AND reportID = '$report' ORDER BY title ASC");
+                    $sql3 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 AND reportID = '$report'");
                 }
 				if(mysql_num_rows($sql3) != 0){
 						while($fetch3 = mysql_fetch_assoc($sql3)){
@@ -178,11 +178,11 @@
 						$status = $fetch3['status'];
 						$output .= 
 						'<tr>
-							<td style="padding-left: 60px;">'.$title.'</td>';
+							<td style="padding-left: 60px;" class="title-font">'.$title.'</td>';
 						if($mode == "monthly"){
 							if($status == 0){
 								$output .= 
-								'<td colspan="24" class="grey lighten-2"></td>';
+								'<td colspan="24" class="grey lighten-3"></td>';
 							}
 							else{
 								for ($i=1; $i <= 12; $i++) {
@@ -195,17 +195,17 @@
 									$get = mysql_fetch_assoc($query);
 									$target = $get['target'];
 									if($target == 0){
-										$output .= '<td class="text-center">-</td>';
+										$output .= '<td class="text-center number-font">-</td>';
 									}
 									else{
-										$output .= '<td class="text-center red-text">'.$target.'</td>';
+										$output .= '<td class="text-center red-text number-font">'.$target.'</td>';
 									}
 									$accomplish = $get['accomplish'];
 									if($accomplish == 0){
-										$output .= '<td class="text-center">-</td>';
+										$output .= '<td class="text-center number-font">-</td>';
 									}
 									else{
-										$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+										$output .= '<td class="text-center green-text number-font">'.$accomplish.'</td>';
 									}
 								}
 							}
@@ -213,7 +213,7 @@
 						else if($mode == "quarterly"){
 							if($status == 0){
 								$output .= 
-								'<td colspan="24" class="grey lighten-2"></td>';
+								'<td colspan="24" class="grey lighten-3"></td>';
 							}
 							else{
 								for ($i = 1; $i <= 4 ; $i++) { 
@@ -226,17 +226,17 @@
 									$get = mysql_fetch_assoc($query);
 									$target = $get['target'];
 									if($target == 0){
-										$output .= '<td class="text-center">-</td>';
+										$output .= '<td class="text-center number-font">-</td>';
 									}
 									else{
-										$output .= '<td class="text-center red-text">'.$target.'</td>';
+										$output .= '<td class="text-center red-text number-font">'.$target.'</td>';
 									}
 									$accomplish = $get['accomplish'];
 									if($accomplish == 0){
-										$output .= '<td class="text-center">-</td>';
+										$output .= '<td class="text-center number-font">-</td>';
 									}
 									else{
-										$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+										$output .= '<td class="text-center green-text number-font">'.$accomplish.'</td>';
 									}
 								}
 							}
@@ -244,10 +244,10 @@
 						$output .= '</tr>';
 						// level 4
 						if($_SESSION['level'] == 3){
-                            $sql4 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' ORDER BY title ASC");
+                            $sql4 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid'");
                         }
                         else{
-                            $sql4 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 AND reportID = '$report' ORDER BY title ASC");
+                            $sql4 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 AND reportID = '$report'");
                         }
 						if(mysql_num_rows($sql4) != 0){
 							while($fetch4 = mysql_fetch_assoc($sql4)){
@@ -256,11 +256,11 @@
 								$status = $fetch4['status'];
 								$output .= 
 								'<tr>
-									<td style="padding-left: 80px;">'.$title.'</td>';
+									<td style="padding-left: 80px;" class="title-font">'.$title.'</td>';
 								if($mode == "monthly"){
 									if($status == 0){
 										$output .= 
-										'<td colspan="24" class="grey lighten-2"></td>';
+										'<td colspan="24" class="grey lighten-3"></td>';
 									}
 									else{
 										for ($i=1; $i <= 12; $i++) { 
@@ -273,17 +273,17 @@
 											$get = mysql_fetch_assoc($query);
 											$target = $get['target'];
 											if($target == 0){
-												$output .= '<td class="text-center">-</td>';
+												$output .= '<td class="text-center number-font">-</td>';
 											}
 											else{
-												$output .= '<td class="text-center red-text">'.$target.'</td>';
+												$output .= '<td class="text-center red-text number-font">'.$target.'</td>';
 											}
 											$accomplish = $get['accomplish'];
 											if($accomplish == 0){
-												$output .= '<td class="text-center">-</td>';
+												$output .= '<td class="text-center number-font">-</td>';
 											}
 											else{
-												$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+												$output .= '<td class="text-center green-text number-font">'.$accomplish.'</td>';
 											}
 										}
 									}
@@ -291,7 +291,7 @@
 								else if($mode == "quarterly"){
 									if($status == 0){
 										$output .= 
-										'<td colspan="24" class="grey lighten-2"></td>';
+										'<td colspan="24" class="grey lighten-3"></td>';
 									}
 									else{
 										for ($i = 1; $i <= 4 ; $i++) { 
@@ -304,17 +304,17 @@
 											$get = mysql_fetch_assoc($query);
 											$target = $get['target'];
 											if($target == 0){
-												$output .= '<td class="text-center">-</td>';
+												$output .= '<td class="text-center number-font">-</td>';
 											}
 											else{
-												$output .= '<td class="text-center red-text">'.$target.'</td>';
+												$output .= '<td class="text-center red-text number-font">'.$target.'</td>';
 											}
 											$accomplish = $get['accomplish'];
 											if($accomplish == 0){
-												$output .= '<td class="text-center">-</td>';
+												$output .= '<td class="text-center number-font">-</td>';
 											}
 											else{
-												$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+												$output .= '<td class="text-center green-text number-font">'.$accomplish.'</td>';
 											}
 										}
 									}
@@ -322,10 +322,10 @@
 								$output .= '</tr>';
 //                                level 5
 								if($_SESSION['level'] == 3){
-                                    $sql5 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' ORDER BY title ASC");
+                                    $sql5 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid'");
                                 }
                                 else{
-                                    $sql5 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 AND reportID = '$report' ORDER BY title ASC");
+                                    $sql5 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 AND reportID = '$report'");
                                 }
 								if(mysql_num_rows($sql5) != 0){
 									while($fetch5 = mysql_fetch_assoc($sql5)){
@@ -334,11 +334,11 @@
 										$status = $fetch5['status'];
 										$output .= 
 										'<tr>
-											<td style="padding-left: 100px;">'.$title.'</td>';
+											<td style="padding-left: 100px;" class="title-font">'.$title.'</td>';
 										if($mode == "monthly"){
 											if($status == 0){
 												$output .= 
-												'<td colspan="24" class="grey lighten-2"></td>';
+												'<td colspan="24" class="grey lighten-3"></td>';
 											}
 											else{
 												for ($i=1; $i <= 12; $i++) { 
@@ -351,17 +351,17 @@
 													$get = mysql_fetch_assoc($query);
 													$target = $get['target'];
 													if($target == 0){
-														$output .= '<td class="text-center">-</td>';
+														$output .= '<td class="text-center number-font">-</td>';
 													}
 													else{
-														$output .= '<td class="text-center red-text">'.$target.'</td>';
+														$output .= '<td class="text-center red-text number-font">'.$target.'</td>';
 													}
 													$accomplish = $get['accomplish'];
 													if($accomplish == 0){
-														$output .= '<td class="text-center">-</td>';
+														$output .= '<td class="text-center number-font">-</td>';
 													}
 													else{
-														$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+														$output .= '<td class="text-center green-text number-font">'.$accomplish.'</td>';
 													}
 												}
 											}
@@ -369,7 +369,7 @@
 										else if($mode == "quarterly"){
 											if($status == 0){
 												$output .= 
-												'<td colspan="24" class="grey lighten-2"></td>';
+												'<td colspan="24" class="grey lighten-3"></td>';
 											}
 											else{
 												for ($i = 1; $i <= 4 ; $i++) { 
@@ -382,17 +382,17 @@
 													$get = mysql_fetch_assoc($query);
 													$target = $get['target'];
 													if($target == 0){
-														$output .= '<td class="text-center">-</td>';
+														$output .= '<td class="text-center number-font">-</td>';
 													}
 													else{
-														$output .= '<td class="text-center red-text">'.$target.'</td>';
+														$output .= '<td class="text-center red-text number-font">'.$target.'</td>';
 													}
 													$accomplish = $get['accomplish'];
 													if($accomplish == 0){
-														$output .= '<td class="text-center">-</td>';
+														$output .= '<td class="text-center number-font">-</td>';
 													}
 													else{
-														$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+														$output .= '<td class="text-center green-text number-font">'.$accomplish.'</td>';
 													}
 												}
 											}
@@ -400,10 +400,10 @@
 										$output .= '</tr>';
 										// level 6
 										if($_SESSION['level'] == 3){
-											$sql6 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid' ORDER BY title ASC");
+											$sql6 = mysql_query("SELECT program.programID, title, status FROM program INNER JOIN assign ON program.programID = assign.programID WHERE under = '$programid' AND state = 1 AND accID = '$accid'");
 										}
 										else{
-											$sql6 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 AND reportID = '$report' ORDER BY title ASC");
+											$sql6 = mysql_query("SELECT programID, title, status FROM program WHERE under = '$programid' AND state = 1 AND reportID = '$report'");
 										}
 										if(mysql_num_rows($sql6) != 0){
 											while($fetch6 = mysql_fetch_assoc($sql6)){
@@ -412,11 +412,11 @@
 												$status = $fetch6['status'];
 												$output .= 
 												'<tr>
-													<td style="padding-left: 120px;">'.$title.'</td>';
+													<td style="padding-left: 120px;" class="title-font">'.$title.'</td>';
 												if($mode == "monthly"){
 													if($status == 0){
 														$output .= 
-														'<td colspan="24" class="grey lighten-2"></td>';
+														'<td colspan="24" class="grey lighten-3"></td>';
 													}
 													else{
 														for ($i=1; $i <= 12; $i++) { 
@@ -429,17 +429,17 @@
 															$get = mysql_fetch_assoc($query);
 															$target = $get['target'];
 															if($target == 0){
-																$output .= '<td class="text-center">-</td>';
+																$output .= '<td class="text-center number-font">-</td>';
 															}
 															else{
-																$output .= '<td class="text-center red-text">'.$target.'</td>';
+																$output .= '<td class="text-center red-text number-font">'.$target.'</td>';
 															}
 															$accomplish = $get['accomplish'];
 															if($accomplish == 0){
-																$output .= '<td class="text-center">-</td>';
+																$output .= '<td class="text-center number-font">-</td>';
 															}
 															else{
-																$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+																$output .= '<td class="text-center green-text number-font">'.$accomplish.'</td>';
 															}
 														}
 													}
@@ -447,7 +447,7 @@
 												else if($mode == "quarterly"){
 													if($status == 0){
 														$output .= 
-														'<td colspan="24" class="grey lighten-2"></td>';
+														'<td colspan="24" class="grey lighten-3"></td>';
 													}
 													else{
 														for ($i = 1; $i <= 4 ; $i++) { 
@@ -460,17 +460,17 @@
 															$get = mysql_fetch_assoc($query);
 															$target = $get['target'];
 															if($target == 0){
-																$output .= '<td class="text-center">-</td>';
+																$output .= '<td class="text-center number-font">-</td>';
 															}
 															else{
-																$output .= '<td class="text-center red-text">'.$target.'</td>';
+																$output .= '<td class="text-center red-text number-font">'.$target.'</td>';
 															}
 															$accomplish = $get['accomplish'];
 															if($accomplish == 0){
-																$output .= '<td class="text-center">-</td>';
+																$output .= '<td class="text-center number-font">-</td>';
 															}
 															else{
-																$output .= '<td class="text-center green-text">'.$accomplish.'</td>';
+																$output .= '<td class="text-center green-text number-font">'.$accomplish.'</td>';
 															}
 														}
 													}
@@ -517,29 +517,29 @@
 					<tbody>
 						<tr class="white-text text-center">
 							<td></td>
-							<td class="bg-danger">T</td>
+							<td class="bg-danger font-weight-bold">T</td>
 							<td class="bg-success">A</td>
-							<td class="bg-danger">T</td>
+							<td class="bg-danger font-weight-bold">T</td>
 							<td class="bg-success">A</td>
-							<td class="bg-danger">T</td>
+							<td class="bg-danger font-weight-bold">T</td>
 							<td class="bg-success">A</td>
-							<td class="bg-danger">T</td>
+							<td class="bg-danger font-weight-bold">T</td>
 							<td class="bg-success">A</td>
-							<td class="bg-danger">T</td>
+							<td class="bg-danger font-weight-bold">T</td>
 							<td class="bg-success">A</td>
-							<td class="bg-danger">T</td>
+							<td class="bg-danger font-weight-bold">T</td>
 							<td class="bg-success">A</td>
-							<td class="bg-danger">T</td>
+							<td class="bg-danger font-weight-bold">T</td>
 							<td class="bg-success">A</td>
-							<td class="bg-danger">T</td>
+							<td class="bg-danger font-weight-bold">T</td>
 							<td class="bg-success">A</td>
-							<td class="bg-danger">T</td>
+							<td class="bg-danger font-weight-bold">T</td>
 							<td class="bg-success">A</td>
-							<td class="bg-danger">T</td>
+							<td class="bg-danger font-weight-bold">T</td>
 							<td class="bg-success">A</td>
-							<td class="bg-danger">T</td>
+							<td class="bg-danger font-weight-bold">T</td>
 							<td class="bg-success">A</td>
-							<td class="bg-danger">T</td>
+							<td class="bg-danger font-weight-bold">T</td>
 							<td class="bg-success">A</td>
 						</tr>';
 			$output .= arrangeprogram($mode, $year, $region);
@@ -549,24 +549,24 @@
 			$output .= 
 			'<thead class="mdb-color darken-3">
 						<tr class="text-center white-text">
-							<th style="width: 300px;">Services Programs/Projects</th>
-							<th colspan="2">Quarter 1</th>
-							<th colspan="2">Quarter 2</th>
-							<th colspan="2">Quarter 3</th>
-							<th colspan="2">Quarter 4</th>
+							<th style="width: 300px;" class="font-weight-bold">Services Programs/Projects</th>
+							<th colspan="2" class="font-weight-bold">Quarter 1</th>
+							<th colspan="2" class="font-weight-bold">Quarter 2</th>
+							<th colspan="2" class="font-weight-bold">Quarter 3</th>
+							<th colspan="2" class="font-weight-bold">Quarter 4</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr class="white-text text-center">
 							<td></td>
-							<td class="bg-danger">T</td>
-							<td class="bg-success">A</td>
-							<td class="bg-danger">T</td>
-							<td class="bg-success">A</td>
-							<td class="bg-danger">T</td>
-							<td class="bg-success">A</td>
-							<td class="bg-danger">T</td>
-							<td class="bg-success">A</td>
+							<td class="bg-danger font-weight-bold">T</td>
+							<td class="bg-success font-weight-bold">A</td>
+							<td class="bg-danger font-weight-bold">T</td>
+							<td class="bg-success font-weight-bold">A</td>
+							<td class="bg-danger font-weight-bold">T</td>
+							<td class="bg-success font-weight-bold">A</td>
+							<td class="bg-danger font-weight-bold">T</td>
+							<td class="bg-success font-weight-bold">A</td>
 						</tr>';
 			$output .= arrangeprogram($mode, $year, $region, $report);
 			$output .= '</tbody>';
