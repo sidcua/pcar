@@ -720,8 +720,8 @@
             </div>
             <div class="divspace"></div>
             <div class="row">
-                <table class="table table-striped">
-                    <thead class="mdb-color darken-3 table-striped">
+                <table class="table table-bordered">
+                    <thead class="mdb-color darken-3 table-bordered">
                         <tr class="white-text text-center">
                             <th rowspan="2" style="width: 23%">Services Programs/Projects</th>
                             <th rowspan="2">Total Targets</th>
