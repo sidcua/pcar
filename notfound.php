@@ -62,7 +62,7 @@
                 <a href="."> pcar.chedro9.com</a>
             </div>
         </div>
-        <!--/.Copyright-->
+        <!--/.Copyrightss-->
 
         </footer>
 	<script type="text/javascript" src="/pcar/js/mdb/jquery-3.3.1.min.js"></script>
