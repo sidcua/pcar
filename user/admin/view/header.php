@@ -41,7 +41,8 @@
                                 */
                                 echo '<a class="dropdown-item" href="./assign.php"><i class="fa fa-asterisk" aria-hidden="true"></i> Assigns<span class="sr-only"></span></a>
                                 <a class="dropdown-item" href="./percentage.php"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Percentage Accomplishment<span class="sr-only"></span></a>
-                                <a class="dropdown-item" href="./monthreport.php"><i class="fa fa-line-chart" aria-hidden="true"></i> Quarterly Report<span class="sr-only"></span></a>';
+                                <a class="dropdown-item" href="./monthreport.php"><i class="fa fa-line-chart" aria-hidden="true"></i> Quarterly Report<span class="sr-only"></span></a>
+                                <a class="dropdown-item" href="./opcr_view.php"><i class="fa fa-area-chart" aria-hidden="true"></i> OPCR <span class="sr-only"></span></a>';
                             }
                             else{
                                 if($_SESSION['level'] != 4){
