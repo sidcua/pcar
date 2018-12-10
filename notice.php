@@ -82,7 +82,6 @@
             </div>
         </div>
         <!--/.Copyright-->
-
         </footer>
 	<script type="text/javascript" src="js/mdb/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="js/mdb/mdb.js"></script>
