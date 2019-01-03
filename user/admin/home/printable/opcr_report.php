@@ -21,9 +21,6 @@
 		<link rel="stylesheet" type="text/css" href="../../../../css/font-awesome.css" />
 		<link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
 	</head>
-    <style>
-        
-    </style>
 	<body class="grey lighten-4">
 	    <div class="container-fluid">
             <div class="divspace"></div>
@@ -88,6 +85,19 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <tr><td style="level1">mother 1</td><tr>
+                        <tr><td style="level2">mother 2</td><tr>
+                        <tr><td style="level3">mother 3</td><tr>
+                        <tr><td style="level4">mother 4</td><tr>
+                        <tr><td style="level5">mother 5</td><tr>
+                        <tr><td style="level6">mother 6</td><tr>
+                        <tr><td style="level1">MFO1. HIGHER EDUCATION POLICY SERVICES</td><tr>
+                        <tr><td style="level2">PAP1: Formulation of HE plans and policies on research and planning for systematic documentation and information</td><tr>
+                        <tr><td style="level3">No. of curricula /policy / program and research initiated, processed, reviewed and developed </td><tr>
+                        <tr><td style="level1">MFO 2.  HIGHER EDUCATION DEVELOPMENT SERVICES</td><tr>
+                        <tr><td style="level2">PAP 1:  Provision of assistance to HEIS </td><tr>
+                        <tr><td style="level3">No. of activities conducted (e.g. Amalgamation, Typology, STUFAPs, GAD, Research and Extension, PSgs/CMOs dialogue, etc)</td><tr>
+                        <tr><td style="level3">Number of HEIs/stakeholders assisted/facilitated from the activities conducted as experts or resource persons</td><tr>
                     </tbody>
                 </table>
             </div>

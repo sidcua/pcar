@@ -45,7 +45,7 @@
             $output .= 'data-id="'.$programid.'">
             <td class="under" hidden>'.$under.'</td>
             <td class="level" hidden>'.$level.'</td>
-            <td width="70%" class="title">'.$title.'</td>
+            <td width="70%" class="title">'.$title.' ('.$programid.')</td>
             <td class="status">'.$status.'</td>
             <td class="state">'.$state.'</td>'; 
             if($_SESSION['level'] < 2){
@@ -84,7 +84,7 @@
                     $output .= 'data-id="'.$programid.'">
                     <td class="under" hidden>'.$under.'</td>
                     <td class="level" hidden>'.$level.'</td>
-                    <td width="70%" class="title" style="padding-left: 20px;">'.$title.'</td>
+                    <td width="70%" class="title" style="padding-left: 20px;">'.$title.' ('.$programid.')</td>
                     <td class="status">'.$status.'</td>
                     <td class="state">'.$state.'</td>'; 
                     if($_SESSION['level'] < 2){
@@ -123,7 +123,7 @@
                             $output .= 'data-id="'.$programid.'">
                             <td class="under" hidden>'.$under.'</td>
                             <td class="level" hidden>'.$level.'</td>
-                            <td width="70%" class="title" style="padding-left: 40px;">'.$title.'</td>
+                            <td width="70%" class="title" style="padding-left: 40px;">'.$title.' ('.$programid.')</td>
                             <td class="status">'.$status.'</td>
                             <td class="state">'.$state.'</td>'; 
                             if($_SESSION['level'] < 2){
@@ -162,7 +162,7 @@
                                     $output .= 'data-id="'.$programid.'">
                                     <td class="under" hidden>'.$under.'</td>
                                     <td class="level" hidden>'.$level.'</td>
-                                    <td width="70%" class="title" style="padding-left: 60px;">'.$title.'</
+                                    <td width="70%" class="title" style="padding-left: 60px;">'.$title.' ('.$programid.')</
                                     <td></td>
                                     <td class="status">'.$status.'</td>
                                     <td class="state">'.$state.'</td>'; 
@@ -202,7 +202,7 @@
                                             $output .= 'data-id="'.$programid.'">
                                             <td class="under" hidden>'.$under.'</td>
                                             <td class="level" hidden>'.$level.'</td>
-                                            <td width="70%" class="title" style="padding-left: 80px;">'.$title.'</td>
+                                            <td width="70%" class="title" style="padding-left: 80px;">'.$title.' ('.$programid.')</td>
                                             <td class="status">'.$status.'</td>
                                             <td class="state">'.$state.'</td>'; 
                                             if($_SESSION['level'] < 2){
@@ -241,7 +241,7 @@
                                                     $output .= 'data-id="'.$programid.'">
                                                     <td class="under" hidden>'.$under.'</td>
                                                     <td class="level" hidden>'.$level.'</td>
-                                                    <td width="70%" class="title" style="padding-left: 100px;">'.$title.'</td>
+                                                    <td width="70%" class="title" style="padding-left: 100px;">'.$title.' ('.$programid.')</td>
                                                     <td class="status">'.$status.'</td>
                                                     <td class="state">'.$state.'</td>'; 
                                                     if($_SESSION['level'] < 2){
