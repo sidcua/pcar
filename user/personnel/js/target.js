@@ -120,7 +120,6 @@ function inityear(){
             $("#slctyear").hide();
 		},
 		success: function(data){
-			alert(data)
 			data = $.parseJSON(data);
 			$("#slctyear").html(data)
 			fetchdata($("#slctyear").val());
